@@ -1,16 +1,17 @@
 export default {
+  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
-    REGION: "us-east-2",
-    BUCKET: "gg-app-uploads"
+    REGION: "us-east-1",
+    BUCKET: "goodglobe-uploads"
   },
   apiGateway: {
-    REGION: "us-east-2",
-    URL: "https://qt2u5n3zyd.execute-api.us-east-2.amazonaws.com/dev/"
+    REGION: "us-east-1",
+    URL: "https://8u9wea898a.execute-api.us-east-1.amazonaws.com/prod"
   },
   cognito: {
-    REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_wtb6TzgVG",
-    APP_CLIENT_ID: "7tket775lopks5tkqoee3fr0tb",
-    IDENTITY_POOL_ID: "s-east-2:21ddb891-42d4-42ef-b048-4aded2d9cf13"
+    REGION: "us-east-1",
+    USER_POOL_ID: "us-east-1_jmMvb4mfg",
+    APP_CLIENT_ID: "2ai2qbsjiof3l1m6iggn92olfn",
+    IDENTITY_POOL_ID: "us-east-1:eeacd6ad-cbd4-4d52-b920-a0c955365252"
   }
 };
