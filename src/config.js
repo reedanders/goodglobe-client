@@ -1,5 +1,6 @@
 export default {
   MAX_ATTACHMENT_SIZE: 5000000,
+  STRIPE_KEY: "pk_test_IkEk1d6pYbKDsXnVqdtcTRFp",
   s3: {
     REGION: "us-east-1",
     BUCKET: "goodglobe-uploads"
