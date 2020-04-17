@@ -7,6 +7,7 @@ import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";
 import "./App.css";
 import Routes from "./Routes";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
 
