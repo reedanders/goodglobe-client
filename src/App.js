@@ -8,6 +8,7 @@ import { onError } from "./libs/errorLib";
 import "./App.css";
 import Routes from "./Routes";
 import ErrorBoundary from "./components/ErrorBoundary";
+import logo from './assets/images/logo_full.png'
 
 function App() {
 
@@ -45,7 +46,7 @@ function App() {
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">GoodGlobe</Link>
+              <Link to="/"><img src={logo} alt="Logo" width="200"/></Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
