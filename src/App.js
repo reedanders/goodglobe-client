@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Nav, Navbar, NavItem, Grid, Col, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
@@ -42,11 +42,14 @@ function App() {
 
   return (
     !isAuthenticating && (
-      <div className="App container">
+      <Grid className="App">
+      <Col md={10} mdOffset={1} lg={10} lgOffset={1}>
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/"><img src={logo} alt="Logo" width="200"/></Link>
+              <LinkContainer to="/">
+                <Image src={logo} alt="Logo"/>
+              </LinkContainer>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -77,7 +80,8 @@ function App() {
             <Routes />
           </AppContext.Provider>
         </ErrorBoundary>
-      </div>
+        </Col>
+      </Grid>
     )
   );
 }

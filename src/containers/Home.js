@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
+import { PageHeader, ListGroup, ListGroupItem, Jumbotron, Button } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
@@ -57,10 +57,16 @@ export default function Home() {
 
   function renderLander() {
     return (
-      <div className="lander">
-        <h1>Scratch</h1>
-        <p>A simple project taking app</p>
-      </div>
+	  	<Jumbotron>
+		  <h1>Hello, world!</h1>
+		  <p>
+		    This is a simple hero unit, a simple jumbotron-style component for calling
+		    extra attention to featured content or information.
+		  </p>
+		  <p>
+		    <Button bsStyle="primary">Learn more</Button>
+		  </p>
+		</Jumbotron>
     );
   }
 
