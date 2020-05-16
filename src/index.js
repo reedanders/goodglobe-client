@@ -8,6 +8,8 @@ import { Amplify } from 'aws-amplify';
 import config from './config';
 import { initSentry } from './libs/errorLib';
 
+import "./assets/scss/material-kit-react.scss";
+
 initSentry();
 
 Amplify.configure({

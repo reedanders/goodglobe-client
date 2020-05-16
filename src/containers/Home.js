@@ -6,6 +6,11 @@ import { API } from "aws-amplify";
 import { LinkContainer } from "react-router-bootstrap";
 import "./Home.css";
 
+import Card from "../components/Card/Card.js";
+import CardHeader from "../components/Card/CardHeader.js";
+import CardBody from "../components/Card/CardBody.js";
+
+import { cardTitle } from "../assets/jss/material-kit-react.js";
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -77,6 +82,13 @@ export default function Home() {
         <ListGroup>
           {!isLoading && renderProjectsList(projects)}
         </ListGroup>
+        <Card>
+          <CardHeader color="danger">Featured</CardHeader>
+		  <CardBody>
+		  <h4 className={cardTitle}>Card Title</h4>
+		    <p>This is some text within a card body.</p>
+		  </CardBody>
+		</Card>
       </div>
     );
   }
