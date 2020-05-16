@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup, ListGroupItem, Jumbotron, Button } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 import { LinkContainer } from "react-router-bootstrap";
 import "./Home.css";
+
+import { 
+	MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol,
+	MDBListGroupItem, MDBListGroup, MDBJumbotron } from 'mdbreact';
 
 
 export default function Home() {
@@ -39,17 +42,20 @@ export default function Home() {
 	  return [{}].concat(projects).map((project, i) =>
 	    i !== 0 ? (
 	      <LinkContainer key={project.projectId} to={`/projects/${project.projectId}`}>
-	        <ListGroupItem header={project.content.trim().split("\n")[0]}>
+	        <MDBListGroupItem>
+	          <div className="d-flex w-100 justify-content-between">
+		        <h5 className="mb-1">{project.content.trim().split("\n")[0]}</h5>
+		      </div>
 	          {"Created: " + new Date(project.createdAt).toLocaleString()}
-	        </ListGroupItem>
+	        </MDBListGroupItem>
 	      </LinkContainer>
 	    ) : (
 	      <LinkContainer key="new" to="/projects/new">
-	        <ListGroupItem>
+	        <MDBListGroupItem>
 	          <h4>
 	            <b>{"\uFF0B"}</b> Create a new project
 	          </h4>
-	        </ListGroupItem>
+	        </MDBListGroupItem>
 	      </LinkContainer>
 	    )
 	  );
@@ -57,26 +63,26 @@ export default function Home() {
 
   function renderLander() {
     return (
-	  	<Jumbotron>
+	  	<MDBJumbotron>
 		  <h1>Hello, world!</h1>
 		  <p>
 		    This is a simple hero unit, a simple jumbotron-style component for calling
 		    extra attention to featured content or information.
 		  </p>
 		  <p>
-		    <Button bsStyle="primary">Learn more</Button>
+		    <MDBBtn bsStyle="primary">Learn more</MDBBtn>
 		  </p>
-		</Jumbotron>
+		</MDBJumbotron>
     );
   }
 
   function renderProjects() {
     return (
       <div className="projects">
-        <PageHeader>Your Projects</PageHeader>
-        <ListGroup>
+        <h1>Your Projects</h1>
+        <MDBListGroup>
           {!isLoading && renderProjectsList(projects)}
-        </ListGroup>
+        </MDBListGroup>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Nav, Navbar, NavItem, Grid, Col, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
@@ -9,6 +8,12 @@ import "./App.css";
 import Routes from "./Routes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import logo from './assets/images/logo_full.png'
+
+import { 
+  MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, 
+  MDBNavItem, MDBNavLink, MDBContainer, MDBView, MDBMask 
+} from 'mdbreact';
+
 
 function App() {
 
@@ -42,46 +47,35 @@ function App() {
 
   return (
     !isAuthenticating && (
-      <Grid className="App">
-      <Col md={10} mdOffset={1} lg={10} lgOffset={1}>
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <LinkContainer to="/">
-                <Image src={logo} alt="Logo"/>
-              </LinkContainer>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
-              {isAuthenticated ? (
-                <>
-                  <LinkContainer to="/settings">
-                    <NavItem>Settings</NavItem>
-                  </LinkContainer>
-                  <NavItem onClick={handleLogout}>Logout</NavItem>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <ErrorBoundary>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-            <Routes />
-          </AppContext.Provider>
-        </ErrorBoundary>
-        </Col>
-      </Grid>
+      <div className="App">
+        <header>
+          <MDBNavbar color="black" fixed="top" dark expand="md">
+            <MDBContainer>
+              <MDBNavbarBrand href="/">
+                <strong>Navbar</strong>
+              </MDBNavbarBrand>
+              <MDBNavbarToggler />
+              <MDBCollapse navbar>
+                <MDBNavbarNav right>
+                  <MDBNavItem active>
+                    <MDBNavLink to="settings">Settings</MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
+                    <MDBNavLink to="#">Sign Out</MDBNavLink>
+                  </MDBNavItem>
+                </MDBNavbarNav>
+              </MDBCollapse>
+            </MDBContainer>
+          </MDBNavbar>
+        </header>
+          <MDBContainer className="mt-5 pt-5">
+            <ErrorBoundary>
+              <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+                <Routes />
+              </AppContext.Provider>
+            </ErrorBoundary>
+          </MDBContainer>
+      </div>
     )
   );
 }

@@ -5,6 +5,8 @@ import LoaderButton from "./LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./BillingForm.css";
 
+import { MDBBtn, MDBInput } from "mdbreact";
+
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const [fields, handleFieldChange] = useFormFields({
     name: "",
@@ -65,7 +67,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
           base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
         }}
       />
-      <LoaderButton
+      <MDBBtn
         block
         type="submit"
         bsSize="large"
@@ -73,7 +75,14 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
         disabled={!validateForm()}
       >
         Purchase
-      </LoaderButton>
+      </MDBBtn>
+          <MDBInput label="Your name" icon="user" group type="text" validate error="wrong"
+            success="right" />
+          <MDBInput label="Your email" icon="envelope" group type="email" validate error="wrong"
+            success="right" />
+          <MDBInput label="Confirm your email" icon="exclamation-triangle" group type="text" validate
+            error="wrong" success="right" />
+          <MDBInput label="Your password" icon="lock" group type="password" validate />
     </form>
   );
 }
