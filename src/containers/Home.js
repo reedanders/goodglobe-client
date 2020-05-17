@@ -4,8 +4,17 @@ import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 import { LinkContainer } from "react-router-bootstrap";
+import { NavLink } from "react-router-dom"
 import "./Home.css";
 
+import { 
+	Grid, CircularProgress, Link, List, ListItem, Divider,
+	ListItemText, ListItemAvatar, Avatar, Typography, ListItemIcon,
+	Card, CardActionArea, CardActions, CardContent
+	} 
+	from '@material-ui/core';
+
+import InboxIcon from '@material-ui/icons/Inbox';
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -38,35 +47,64 @@ export default function Home() {
   function renderProjectsList(projects) {
 	  return [{}].concat(projects).map((project, i) =>
 	    i !== 0 ? (
-	      <LinkContainer key={project.projectId} to={`/projects/${project.projectId}`}>
-	        <ListGroupItem header={project.content.trim().split("\n")[0]}>
-	          {"Created: " + new Date(project.createdAt).toLocaleString()}
-	        </ListGroupItem>
-	      </LinkContainer>
+	      <NavLink key={project.projectId} to={`/projects/${project.projectId}`}>
+	       <List component="nav" aria-label="main mailbox folders">
+	      	<ListItem alignItems="flex-start">
+	      	<ListItemAvatar>
+	          <Avatar alt="Remy Sharp" />
+	        </ListItemAvatar>
+	        <ListItemText
+	          primary={project.content.trim().split("\n")[0]}
+	          secondary={
+	            <React.Fragment>
+	              <Typography
+	                component="span"
+	                color="textPrimary"
+	              >
+	                Ali Connors
+	              </Typography>
+	              {"Created: " + new Date(project.createdAt).toLocaleString()}
+	            </React.Fragment>
+	          }
+	        />
+	      </ListItem>
+	      </List>
+	      </NavLink> 
 	    ) : (
-	      <LinkContainer key="new" to="/projects/new">
-	        <ListGroupItem>
-	          <h4>
-	            <b>{"\uFF0B"}</b> Create a new project
-	          </h4>
-	        </ListGroupItem>
-	      </LinkContainer>
+	      <NavLink key="new" to="/projects/new">
+	      <List component="nav" aria-label="main mailbox folders">
+	        <ListItem button>
+	          <ListItemIcon>
+	          	<InboxIcon />
+	          </ListItemIcon>
+	          <ListItemText primary="New Project" />
+	        </ListItem>
+	      </List>
+	      </NavLink>
 	    )
 	  );
 	}
 
   function renderLander() {
     return (
-	  	<Jumbotron>
-		  <h1>Hello, world!</h1>
-		  <p>
-		    This is a simple hero unit, a simple jumbotron-style component for calling
-		    extra attention to featured content or information.
-		  </p>
-		  <p>
-		    <Button bsStyle="primary">Learn more</Button>
-		  </p>
-		</Jumbotron>
+    	<Card>
+	      <CardActionArea>
+	        <CardContent>
+	          <Typography gutterBottom variant="h5" component="h2">
+	            Lizard
+	          </Typography>
+	          <Typography variant="body2" color="textSecondary" component="p">
+	            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+	            across all continents except Antarctica
+	          </Typography>
+	        </CardContent>
+	      </CardActionArea>
+	      <CardActions>
+	        <Button href="Login" size="small" color="primary">
+	          Share
+	        </Button>
+	      </CardActions>
+	    </Card>
     );
   }
 
@@ -74,6 +112,10 @@ export default function Home() {
     return (
       <div className="projects">
         <PageHeader>Your Projects</PageHeader>
+        <Grid container justify="center">
+          {isLoading ? <CircularProgress /> : ''}
+        </Grid>
+        
         <ListGroup>
           {!isLoading && renderProjectsList(projects)}
         </ListGroup>
