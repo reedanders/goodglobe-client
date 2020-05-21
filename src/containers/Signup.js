@@ -1,19 +1,48 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  HelpBlock,
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
 import { Auth } from "aws-amplify";
-import "./Signup.css";
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 
 export default function Signup() {
+  const classes = useStyles();
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
@@ -74,74 +103,100 @@ export default function Signup() {
 
   function renderConfirmationForm() {
     return (
-      <form onSubmit={handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
-          <ControlLabel>Confirmation Code</ControlLabel>
-          <FormControl
-            autoFocus
-            type="tel"
-            onChange={handleFieldChange}
-            value={fields.confirmationCode}
-          />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
-        </FormGroup>
-        <LoaderButton
-          block
+      <form className={classes.form} onSubmit={handleConfirmationSubmit}>
+        <TextField
+          value={fields.confirmationCode}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="confirmationCode"
+          label="Confirmation Code"
+          name="confirmationCode"
+          type="tel"
+          autoFocus
+        />
+        <Button
           type="submit"
-          bsSize="large"
-          isLoading={isLoading}
-          disabled={!validateConfirmationForm()}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          disabled={!validateForm()}
         >
           Verify
-        </LoaderButton>
+        </Button>
       </form>
     );
   }
 
   function renderForm() {
     return (
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
+      <div>
+      <Typography component="h1" variant="h5">
+        Login
+      </Typography>
+
+      <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        <TextField
             value={fields.email}
             onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
           />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
-          <FormControl
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </FormGroup>
-        <LoaderButton
-          block
+        <TextField
+          value={fields.password}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+        />
+        <TextField
+          value={fields.confirmPassword}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="confirmPassword"
+          label="Confirm Password"
+          type="password"
+          id="confirmPassword"
+        />
+        <Button
           type="submit"
-          bsSize="large"
-          isLoading={isLoading}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
           disabled={!validateForm()}
         >
           Signup
-        </LoaderButton>
+        </Button>
       </form>
+      </div>
     );
   }
 
   return (
-    <div className="Signup">
+    <Container className="Signup" className={classes.paper} maxWidth="xs">
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
       {newUser === null ? renderForm() : renderConfirmationForm()}
-    </div>
+    </Container>
   );
 }

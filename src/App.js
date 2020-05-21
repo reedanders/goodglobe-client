@@ -51,7 +51,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://www.goodglobe.org">
         GoodGlobe
       </Link>{' '}
       {new Date().getFullYear()}
@@ -126,13 +126,13 @@ function App() {
                   <Button href="/settings">
                     Settings
                   </Button>
-                  <Button href="/settings" onClick={handleLogout}>
+                  <Button onClick={handleLogout}>
                     Logout
                   </Button>
                 </div>
               ) : (
                 <div>
-                  <Button href="/signup" onClick={handleLogout}>
+                  <Button href="/signup">
                     Signup
                   </Button>
                   <Button href="/login">
