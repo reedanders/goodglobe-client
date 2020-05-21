@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import Image from 'material-ui-image'
-
 import  idea_bulbs_SMALL  from "../assets/images/drawings/idea_bulbs_SMALL.png"
 import  face_thought_SMALL  from "../assets/images/drawings/face_thought_SMALL.png"
 import  trumpet_social_SMALL  from "../assets/images/drawings/trumpet_social_SMALL.png"

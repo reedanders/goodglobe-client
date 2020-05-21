@@ -48,6 +48,7 @@ export default function MainFeaturedAlbum() {
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
+      <Typography component="h2" variant="h4" align="center" color="textPrimary" gutterBottom>Just Launched</Typography>
       <Grid container spacing={4}>
         {cards.map((card) => (
           <Grid item key={card} xs={12} sm={6} md={4}>
