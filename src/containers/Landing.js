@@ -5,6 +5,8 @@ import { API } from "aws-amplify";
 import { NavLink } from "react-router-dom"
 
 import MainFeaturedProject from './MainFeaturedProject';
+import MainQuickAbout from './MainQuickAbout';
+import MainFeaturedAlbum from './MainFeaturedAlbum';
 import featured_image from "../assets/images/featured_image.jpg"
 
 const mainFeaturedProject = {
@@ -20,6 +22,8 @@ export default function Landing() {
 	return (
     <div className="Landing">
       <MainFeaturedProject post={mainFeaturedProject} />
+      <MainQuickAbout/>
+      <MainFeaturedAlbum/>
     </div>
   );
 }

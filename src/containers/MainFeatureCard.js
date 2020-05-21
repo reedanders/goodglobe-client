@@ -27,7 +27,7 @@ export default function MainFeatureCard() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5" component="h2">
+        <Typography gutterBottom variant="h5" component="h2">
           Fund Conservation Projects
         </Typography>
         <Typography variant="body2" component="p" color="textSecondary">
