@@ -4,6 +4,7 @@ import Landing from "./containers/Landing";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewProject from "./containers/NewProject";
+import Project from "./containers/Project";
 import Projects from "./containers/Projects";
 import Settings from "./containers/Settings";
 import NotFound from "./containers/NotFound";
@@ -15,6 +16,9 @@ export default function Routes() {
     <Switch>
       <Route exact path="/">
         <Landing />
+      </Route>
+      <Route exact path="/project">
+        <Project />
       </Route>
       <UnauthenticatedRoute exact path="/login">
         <Login />
