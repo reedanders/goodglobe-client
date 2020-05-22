@@ -85,7 +85,7 @@ export default function Landing() {
 		        </Grid>
 	      	</Grid>
 	      	<Grid item md={5}>
-	      		<img src={idea_plant} className={classes.media}/>
+	      		<img src={idea_plant} alt="idea watering plant" className={classes.media}/>
 	      	</Grid>
 	      </Grid>
       </Container>

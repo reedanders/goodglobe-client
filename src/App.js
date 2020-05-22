@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Nav, Navbar, NavItem, Grid, Col, Image } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
 import { onError } from "./libs/errorLib";
@@ -11,13 +9,12 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import logo from './assets/images/logo_full.png'
 
 import { 
-  AppBar, Container, Toolbar, Typography, Link, Button, IconButton,
-  Box
+  AppBar, Container, Toolbar, Typography, Link, Button,
+  Grid
   } 
   from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,24 +64,6 @@ function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   const classes = useStyles();
-  const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
 
   useEffect(() => {
     onLoad();

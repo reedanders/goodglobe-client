@@ -1,9 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,7 +74,7 @@ export default function MainFeaturedAlbum() {
                 <Grid container alignItems='center' justify='center'>
                   <Grid item></Grid>
                   <Grid item>
-                    <img src={card.image} title="Image title" className={classes.cardMedia}/>
+                    <img src={card.image} alt="Project" className={classes.cardMedia}/>
                   </Grid>
                   <Grid item></Grid>
                 </Grid>
