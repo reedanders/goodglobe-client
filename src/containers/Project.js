@@ -1,110 +1,116 @@
-import React, { useState, useEffect } from "react";
-import { useAppContext } from "../libs/contextLib";
-import { onError } from "../libs/errorLib";
-import { API } from "aws-amplify";
-import { NavLink } from "react-router-dom"
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
-import { 
-  Grid, Typography, Container, Button, Paper, LinearProgress
-  } 
-  from '@material-ui/core';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
+import ProjectCall from './ProjectCall';
+import FeaturedPost from './FeaturedPost';
+import Sidebar from './Sidebar';
 import ProjectStepper from './ProjectStepper';
-import ProgressFunding from './ProgressFunding';
-import PersonCard from './PersonCard';
 
-import Image from 'material-ui-image'
-
- const useStyles = makeStyles((theme) => ({
- 	donateButtons : {
-      margin: theme.spacing(1),
-    },
-    progressTemp : {
-      width: '100%',
-      margin: theme.spacing(2),
-    },
-
+const useStyles = makeStyles((theme) => ({
+  mainGrid: {
+    marginTop: theme.spacing(3),
+  },
 }));
 
- export default function Landing() {
-	const classes = useStyles();
+const sections = [
+  { title: 'Technology', url: '#' },
+  { title: 'Design', url: '#' },
+  { title: 'Culture', url: '#' },
+  { title: 'Business', url: '#' },
+  { title: 'Politics', url: '#' },
+  { title: 'Opinion', url: '#' },
+  { title: 'Science', url: '#' },
+  { title: 'Health', url: '#' },
+  { title: 'Style', url: '#' },
+  { title: 'Travel', url: '#' },
+];
 
-	return (
-    <div className="Landing">
-    	<Paper>
-    	<Grid container>
-    		<Grid container item direction="row" >
-    			<Grid item md={6}>
-    				<Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>
-    					Project Name
-    				</Typography>
-    				<Typography component="p" variant="body1" align="left" color="textPrimary" gutterBottom>
-		      		Project pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch 
-		      		pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch 
-		      		pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch pitch 
-		      		</Typography>
-    			</Grid>
-    			<Grid item md={6}>
-    				<Image aspectRatio="1.5" src='https://source.unsplash.com/random' />
-    			</Grid>
-    		</Grid>
-    	</Grid>
-    	<Grid container>
-    		<Grid container item direction="row" alignItems="flex-end">
-    			<Grid container item md={6} spacing={2} justify="center">
-    				<Button className={classes.donateButtons}  variant="contained" color="primary">Primary</Button>
-    				<Button className={classes.donateButtons}  variant="contained" color="primary">Primary</Button>
-    				<Button className={classes.donateButtons} variant="contained" color="primary">Primary</Button>
-    				<Button className={classes.donateButtons}  variant="contained" color="primary">Primary</Button>
-    				<Button className={classes.donateButtons}  variant="contained" color="primary">Primary</Button>
-    				<Button className={classes.donateButtons}  variant="contained" color="primary">Primary</Button>
-    			</Grid>
-    			<Grid item md={6}>
-    				<ProgressFunding/>
-    			</Grid>
-    		</Grid>
-    	</Grid>
-    	</Paper>
-    	<Grid container>
-    		<Grid container item md={3} direction="column" spacing={2}>
-    			<Grid item><PersonCard/></Grid>
-    			<Grid item><PersonCard/></Grid>
-    			<Grid item><PersonCard/></Grid>
-    		</Grid>
-    		<Grid container item md={9} direction="column">
-    			<Grid item>
-    			<Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>
-					Background
-				</Typography>
-				</Grid>
-				<Grid item>
-				<Typography component="p" variant="body1" align="left" color="textPrimary" gutterBottom>
-	      		In Estonia, half of the mainland territory is covered by forests and about one fourth 
-	      		is covered by agricultural land. About half of the protected EU habitats and species in Estonia, 
-	      		based on the last Article 17 report of the Habitats Directive, are considered to be in 
-	      		favourable conservation status. With regards to bird species, in the EU, almost 50% of 
-	      		grassland-related bird species are declining or are in unfavourable status, and the situation 
-	      		is the same in Estonia. The assessments also show a declining number of pollinators. 
-	      		The main pressures and threats to forest and farmland species and habitats have been changing 
-	      		forestry and agricultural practices, the decline of traditional and extensive land-use, 
-	      		climate change, changes to natural hydrological regimes, and urbanisation. More and more 
-	      		people have moved to the bigger cities and rural areas are sparsely populated, mainly by 
-	      		elderly people who are relatively inactive. Farmlands are used by bigger companies or 
-	      		farmers who are using large areas for growing monocultures that are managed intensively 
-	      		with the goal of making as much profit as possible. Small farming is not so popular and 
-	      		necessary any more. </Typography>
-	      		</Grid>
-	      		<Grid item>
-	      		<Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>
-					Objectives
-				</Typography>
-				</Grid>
-				<Grid item>
-    			<ProjectStepper/>
-    			</Grid>
-    		</Grid>
-    	</Grid>
-    </div>
+const projectCall = {
+  title: 'Placeholder for ProjectCall',
+  description:
+    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+  image: 'https://source.unsplash.com/random',
+  imgText: 'main image description',
+  linkText: 'Continue reading…',
+};
+
+const featuredPosts = [
+  {
+    title: 'Featured post',
+    date: 'Nov 12',
+    description:
+      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    image: 'https://source.unsplash.com/random',
+    imageText: 'Image Text',
+  },
+  {
+    title: 'Post title',
+    date: 'Nov 11',
+    description:
+      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    image: 'https://source.unsplash.com/random',
+    imageText: 'Image Text',
+  },
+];
+
+const sidebar = {
+  title: 'About',
+  description:
+    'Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
+  archives: [
+    { title: 'March 2020', url: '#' },
+    { title: 'February 2020', url: '#' },
+    { title: 'January 2020', url: '#' },
+    { title: 'November 1999', url: '#' },
+    { title: 'October 1999', url: '#' },
+    { title: 'September 1999', url: '#' },
+    { title: 'August 1999', url: '#' },
+    { title: 'July 1999', url: '#' },
+    { title: 'June 1999', url: '#' },
+    { title: 'May 1999', url: '#' },
+    { title: 'April 1999', url: '#' },
+  ],
+  social: [
+    { name: 'GitHub', icon: GitHubIcon },
+    { name: 'Twitter', icon: TwitterIcon },
+    { name: 'Facebook', icon: FacebookIcon },
+  ],
+};
+
+export default function Blog() {
+  const classes = useStyles();
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <main>
+          <ProjectCall post={projectCall} />
+          <Grid container spacing={5} className={classes.mainGrid}>
+            <Grid item xs={12} md={8}>
+              <Typography variant="h6" gutterBottom>
+                Here is a title
+              </Typography>
+              <Divider />
+            </Grid>
+            <Sidebar
+              title={sidebar.title}
+              description={sidebar.description}
+              archives={sidebar.archives}
+              social={sidebar.social}
+            />
+          </Grid>
+        </main>
+      </Container>
+    </React.Fragment>
   );
 }

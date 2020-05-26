@@ -13,6 +13,7 @@ import {
 import MainFeaturedProject from './MainFeaturedProject';
 import MainQuickAbout from './MainQuickAbout';
 import MainFeaturedAlbum from './MainFeaturedAlbum';
+
 import featured_image from "../assets/images/featured_image.jpg"
 import idea_plant from "../assets/images/drawings/idea_plant.png"
 
