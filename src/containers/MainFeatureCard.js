@@ -29,13 +29,13 @@ export default function MainFeatureCard() {
         <Typography gutterBottom variant="h5" component="h2">
           Fund Conservation Projects
         </Typography>
-        <Typography variant="body2" component="p" color="textSecondary">
+        <Typography variant="body1" component="p" color="textSecondary">
           Make direct contributions to conservation projects that fight
           extinction and sustain our planet for future generations.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Explore projects</Button>
+        <Button variant="outlined" color="primary" size="small">Explore projects</Button>
       </CardActions>
     </Card>
   );
