@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,9 +22,14 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  innerPaper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -97,6 +103,7 @@ export default function Signup() {
 
   function renderConfirmationForm() {
     return (
+      <div className={classes.innerPaper}>
       <form className={classes.form} onSubmit={handleConfirmationSubmit}>
         <TextField
           value={fields.confirmationCode}
@@ -122,14 +129,15 @@ export default function Signup() {
           Verify
         </Button>
       </form>
+      </div>
     );
   }
 
   function renderForm() {
     return (
-      <div>
+      <div className={classes.innerPaper}>
       <Typography component="h1" variant="h5">
-        Login
+        Signup
       </Typography>
 
       <form className={classes.form} onSubmit={handleSubmit} noValidate>
@@ -186,11 +194,14 @@ export default function Signup() {
   }
 
   return (
-    <Container className="Signup, {classes.paper}" maxWidth="xs">
+    <Container className="Signup" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
       {newUser === null ? renderForm() : renderConfirmationForm()}
+      </div>
     </Container>
   );
 }
