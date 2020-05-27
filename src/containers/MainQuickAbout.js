@@ -21,7 +21,7 @@ export default function MainQuickAbout() {
             </Typography>
             <MainQuickAboutAlbum/>
             <div>
-              <Grid container item spacing={2} justify="center">
+              <Grid container item spacing={0} justify="center">
                   <Button variant="contained" color="primary">
                     Learn more
                   </Button>

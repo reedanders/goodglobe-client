@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275
   },
@@ -17,8 +17,12 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12
-  }
-});
+  },
+  button: {
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 export default function MainFeatureCard() {
   const classes = useStyles();
@@ -35,7 +39,7 @@ export default function MainFeatureCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" color="primary" size="small">Explore projects</Button>
+        <Button className={classes.button} variant="outlined" color="primary" size="small">Explore projects</Button>
       </CardActions>
     </Card>
   );

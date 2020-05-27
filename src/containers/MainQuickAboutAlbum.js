@@ -8,22 +8,12 @@ import Container from '@material-ui/core/Container';
 
 import  idea_bulbs_SMALL  from "../assets/images/drawings/idea_bulbs_SMALL.png"
 import  face_thought_SMALL  from "../assets/images/drawings/face_thought_SMALL.png"
-import  trumpet_social_SMALL  from "../assets/images/drawings/trumpet_social_SMALL.png"
+import  trumpet_social  from "../assets/images/drawings/trumpet_social.png"
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
   },
   card: {
     height: '100%',
@@ -37,10 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
   },
 }));
 
@@ -58,7 +44,7 @@ const cards = [
   {
     title: 'Crowdfund',
     description: 'Individuals and institutions provide direct funding to practitioners',
-    image: trumpet_social_SMALL,
+    image: trumpet_social,
   },
 ];
 
