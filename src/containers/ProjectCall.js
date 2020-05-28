@@ -14,13 +14,10 @@ import Chip from '@material-ui/core/Chip';
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',
-    backgroundColor: theme.palette.grey[800],
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    borderRadius: 10,
   },
   overlay: {
     position: 'absolute',
@@ -28,24 +25,24 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0,0,0,.3)',
+    backgroundColor: 'rgba(0,0,0,0)',
   },
   mainFeaturedPostPaper: {
     backgroundColor: theme.palette.common.white,
   },
   mainFeaturedPostContent: {
     position: 'relative',
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(2),
-      paddingRight: 0,
+      padding: theme.spacing(1),
     },
   },
   mainFeaturedPostTags: {
     position: 'relative',
-    padding: theme.spacing(2),
+    padding: theme.spacing(4),
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(2)
+      padding: theme.spacing(4),
+      paddingRight: 0
     },
   },
   mainFeaturedPostTag: {
@@ -59,31 +56,36 @@ export default function MainFeaturedPost(props) {
   const { post } = props;
 
   return (
-    <Paper elevation={1} className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
-      {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />} 
-      <div className={classes.overlay} />
-      <Grid container>
-        <Grid container item md={7}>
-          <div className={classes.mainFeaturedPostContent}>
-            <Card>
-              <CardContent>
-                <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" color="inherit" paragraph>
-                  {post.description}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link variant="subtitle1" href="#">
-                  {post.linkText}
-                </Link>
-              </CardActions>
-            </Card>
-          </div>
-        </Grid>
-        <Grid container item md={5} alignItems="flex-end" justify="flex-end">
+    <Grid container>
+      <Grid container item>
+        <Paper elevation={3} className={classes.mainFeaturedPost}>
+          <Grid container>
+            <Grid item md={6}>
+              <div className={classes.mainFeaturedPostContent}>
+                <Card>
+                  <CardContent>
+                    <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                      {post.title}
+                    </Typography>
+                    <Typography variant="subtitle1" color="inherit" paragraph>
+                      {post.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Link variant="subtitle1" href="#">
+                      {post.linkText}
+                    </Link>
+                  </CardActions>
+                </Card>
+              </div>
+            </Grid>
+            <Grid item md={6} className={classes.overlay}>
+              {<img style={{ display: 'none' }} src="https://source.unsplash.com/random" alt="Unsplash image" />}
+            </Grid>
+          </Grid>
+        </Paper>
+      </Grid>
+      <Grid container item md={6} alignItems="flex-end" justify="flex-end" direction="column">
           <div className={classes.mainFeaturedPostTags}>
             <Grid item className={classes.mainFeaturedPostTag}><Chip
               label="Increase habitat" 
@@ -92,9 +94,9 @@ export default function MainFeaturedPost(props) {
               label="Education" 
               color="primary" /></Grid>
           </div>
-        </Grid>
       </Grid>
-    </Paper>
+    </Grid>
+    
   );
 }
 

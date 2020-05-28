@@ -10,7 +10,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-import ProjectCall from './ProjectCall';
+import ProjectCallCard from './ProjectCallCard';
 import FeaturedPost from './FeaturedPost';
 import Sidebar from './Sidebar';
 import ProjectStepper from './ProjectStepper';
@@ -86,7 +86,7 @@ export default function Blog() {
       <CssBaseline />
       <Container maxWidth="lg">
         <main>
-          <ProjectCall post={projectCall} />
+          <ProjectCallCard />
           <Grid container spacing={5} className={classes.mainGrid}>
             <Grid item xs={12} md={8}>
               <Typography variant="h6" gutterBottom>
