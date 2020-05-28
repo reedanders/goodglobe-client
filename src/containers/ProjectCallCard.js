@@ -13,6 +13,7 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import FaceIcon from '@material-ui/icons/Face';
+import PlaceIcon from '@material-ui/icons/Place';
 
 import ProgressFunding from './ProgressFunding';
 
@@ -30,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
   detailsSubtext: {
     paddingTop: theme.spacing(0),
     paddingLeft: theme.spacing(2),
-    paddingBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
-  detailsprogress: {
-    paddingTop: theme.spacing(1),
-    paddingLeft: theme.spacing(1),
+  detailsPlace: {
+    paddingTop: theme.spacing(0),
+    paddingLeft: theme.spacing(2),
     paddingBottom: theme.spacing(1),
-    paddingRight: theme.spacing(0),
+    paddingRight: theme.spacing(2),
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -82,12 +83,9 @@ export default function MediaControlCard() {
             Adaptive community based management of forest and farming landscapes to improve the conservation status of Natura 2000 habitats and species.
           </Typography>
         </Grid>
-        <Grid item className={classes.detailsprogress}>
-          <ProgressFunding/>
-        </Grid>
       </Grid>
 
-      <Grid container item md={6} sm={12} justify="flex-end" className={matches ? classes.image : classes.imageSmall}>
+      <Grid container item md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`} className={matches ? classes.image : classes.imageSmall}>
         <Grid item><Chip className={classes.supporterChip} variant="default" color="primary" label="7 supporters"/></Grid>
         <Grid item className={classes.supporterFill}/>
       </Grid>
