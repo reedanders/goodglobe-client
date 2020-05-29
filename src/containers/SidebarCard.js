@@ -16,7 +16,6 @@ import ProgressFunding from './ProgressFunding';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
     marginBottom: theme.spacing(2),
   },
   media: {

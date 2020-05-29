@@ -86,7 +86,7 @@ export default function MediaControlCard() {
       </Grid>
 
       <Grid container item md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`} className={matches ? classes.image : classes.imageSmall}>
-        <Grid item><Chip className={classes.supporterChip} variant="default" color="primary" label="7 supporters"/></Grid>
+        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label="7 supporters"/></Grid>
         <Grid item className={classes.supporterFill}/>
       </Grid>
     </Grid>

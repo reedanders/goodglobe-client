@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -14,6 +15,7 @@ import ProjectCallCard from './ProjectCallCard';
 import FeaturedPost from './FeaturedPost';
 import Sidebar from './Sidebar';
 import ProjectStepper from './ProjectStepper';
+import SidebarCard from './SidebarCard';
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -80,6 +82,7 @@ const sidebar = {
 
 export default function Blog() {
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:960px)');
 
   return (
     <React.Fragment>
@@ -87,19 +90,16 @@ export default function Blog() {
       <Container maxWidth="lg">
         <main>
           <ProjectCallCard />
-          <Grid container spacing={5} className={classes.mainGrid}>
-            <Grid item xs={12} md={8}>
+          <Grid container spacing={2} justify="space-between" direction={ matches ? `row` : `column-reverse`} className={classes.mainGrid}>
+            <Grid item md={8}>
               <Typography variant="h6" gutterBottom>
                 Here is a title
               </Typography>
               <Divider />
             </Grid>
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
+            <Grid item md={4}>
+              <SidebarCard/>
+            </Grid>
           </Grid>
         </main>
       </Container>
