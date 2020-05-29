@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardHeaderSubtitle: {
   	fontWeight: 700,
+  },
+  cardButtonGrid: {
+  	marginTop: theme.spacing(2),
+  },
+  cardButton: {
+  	width: '100%',
   }
 }));
 
@@ -40,7 +46,19 @@ export default function MediaCard() {
 	      <Typography gutterBottom className={classes.cardHeaderSubtitle} variant="subtitle1" component="h2">
 	        EUR 1,628 <Typography variant="caption"> raised of EUR 2,900 goal</Typography>
 	      </Typography>
-	      <ProgressFunding/>    
+	      <ProgressFunding/>
+	      <Grid container className={classes.cardButtonGrid} direction="column" justify="center" alignItems="stretch">
+	        <Grid item>
+	        <Button className={classes.cardButton} variant="contained" color="secondary" size="large">
+	          Donate
+	        </Button>
+	        </Grid>
+	        <Grid item>
+	        <Button className={classes.cardButton} color="white">
+	          Share
+	        </Button>
+	        </Grid>
+        </Grid> 
 	    </CardContent>
 	    <CardContent>
 	      <Typography gutterBottom variant="h6" component="h6">
@@ -95,14 +113,6 @@ export default function MediaCard() {
 	      	</Grid>
 	      </Grid>
 	    </CardContent>
-      <CardActions>
-        <Button variant="contained" color="primary">
-          Support
-        </Button>
-        <Button color="primary">
-          Share
-        </Button>
-      </CardActions>
     </Card>
   );
 }
