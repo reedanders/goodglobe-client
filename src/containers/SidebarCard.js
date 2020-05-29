@@ -11,6 +11,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from '@material-ui/icons/Instagram';
 
 import ProgressFunding from './ProgressFunding';
 
@@ -47,16 +52,16 @@ export default function MediaCard() {
 	        EUR 1,628 <Typography variant="caption"> raised of EUR 2,900 goal</Typography>
 	      </Typography>
 	      <ProgressFunding/>
-	      <Grid container className={classes.cardButtonGrid} direction="column" justify="center" alignItems="stretch">
+	      <Grid container spacing={2} className={classes.cardButtonGrid} direction="column" justify="center" alignItems="stretch">
 	        <Grid item>
 	        <Button className={classes.cardButton} variant="contained" color="secondary" size="large">
 	          Donate
 	        </Button>
 	        </Grid>
-	        <Grid item>
-	        <Button className={classes.cardButton} color="white">
-	          Share
-	        </Button>
+	        <Grid container item spacing={1} justify="center" alignItems="stretch">
+	        	<Grid item><Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" color="inherit"><FacebookIcon/></Link></Grid>
+	        	<Grid item><Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" color="inherit"><TwitterIcon/></Link></Grid>
+	        	<Grid item><Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" color="inherit"><InstagramIcon/></Link></Grid>
 	        </Grid>
         </Grid> 
 	    </CardContent>
