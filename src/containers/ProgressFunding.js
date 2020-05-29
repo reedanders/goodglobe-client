@@ -40,7 +40,7 @@ export default function LinearWithValueLabel() {
 
   return (
     <div className={classes.root}>
-      <LinearProgressWithLabel value={54} />
+      <LinearProgressWithLabel value={54} color="primary"/>
     </div>
   );
 }

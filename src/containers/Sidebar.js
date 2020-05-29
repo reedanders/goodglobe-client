@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   sidebarSection: {
     marginTop: theme.spacing(3),
   },
+  sidebarCard: {
+    justifyContent: "center"
+  }
 }));
 
 export default function Sidebar(props) {
@@ -23,29 +26,8 @@ export default function Sidebar(props) {
   const { archives, description, social, title } = props;
 
   return (
-    <Grid item xs={12} md={4}>
-      <SidebarCard/>
-      <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Archives
-      </Typography>
-      {archives.map((archive) => (
-        <Link display="block" variant="body1" href={archive.url} key={archive.title}>
-          {archive.title}
-        </Link>
-      ))}
-      <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-        Social
-      </Typography>
-      {social.map((network) => (
-        <Link display="block" variant="body1" href="#" key={network}>
-          <Grid container direction="row" spacing={1} alignItems="center">
-            <Grid item>
-              <network.icon />
-            </Grid>
-            <Grid item>{network.name}</Grid>
-          </Grid>
-        </Link>
-      ))}
+    <Grid item xs={12} sm={12} md={4}>
+      <SidebarCard classNames={classes.sidebarCard}/>
     </Grid>
   );
 }

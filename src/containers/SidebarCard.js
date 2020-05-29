@@ -17,13 +17,17 @@ import ProgressFunding from './ProgressFunding';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    marginBottom: theme.spacing(2),
   },
   media: {
     height: 140,
   },
   cardHeader: {
   	backgroundColor: theme.palette.primary.light,
-  	color: theme.palette.common.white
+  	color: theme.palette.common.black,
+  },
+  cardHeaderSubtitle: {
+  	fontWeight: 700,
   }
 }));
 
@@ -34,7 +38,7 @@ export default function MediaCard() {
     <Card className={classes.root}>
 
 	    <CardContent align="center" className={classes.cardHeader}>
-	      <Typography gutterBottom variant="subtitle1" component="h2">
+	      <Typography gutterBottom className={classes.cardHeaderSubtitle} variant="subtitle1" component="h2">
 	        EUR 1,628 <Typography variant="caption"> raised of EUR 2,900 goal</Typography>
 	      </Typography>
 	      <ProgressFunding/>    
@@ -56,7 +60,7 @@ export default function MediaCard() {
 	      <Grid container direction="column" alignItems="center" spacing={1}>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Habitat
+		        	Biodiversity
 		      	</Typography>
 	      		<ButtonGroup size="small" aria-label="outlined primary button group">
 			    	<Button color="primary" variant="contained"></Button>
@@ -68,7 +72,7 @@ export default function MediaCard() {
 	      	</Grid>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Education
+		        	Culture
 		      	</Typography>
 	      		<ButtonGroup size="small" aria-label="outlined primary button group">
 			    	<Button color="primary" variant="contained"></Button>
@@ -80,7 +84,7 @@ export default function MediaCard() {
 	      	</Grid>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Carbon Mitigation
+		        	Carbon Sink
 		      	</Typography>
 	      		<ButtonGroup size="small" aria-label="outlined primary button group">
 			    	<Button color="primary" variant="contained"></Button>
