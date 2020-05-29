@@ -1,21 +1,13 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
-import FaceIcon from '@material-ui/icons/Face';
-import PlaceIcon from '@material-ui/icons/Place';
 
-import ProgressFunding from './ProgressFunding';
+import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
+import EcoIcon from '@material-ui/icons/Eco';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaControlCard() {
   const classes = useStyles();
-  const theme = useTheme();
   const matches = useMediaQuery('(min-width:960px)');
 
   return (
@@ -83,9 +74,29 @@ export default function MediaControlCard() {
             Adaptive community based management of forest and farming landscapes to improve the conservation status of Natura 2000 habitats and species.
           </Typography>
         </Grid>
+        <Grid container item spacing={2} className={classes.detailsSubtext}>
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              icon={<PersonPinCircleIcon />}
+              label="Culture"
+            />
+          </Grid>
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              icon={<EcoIcon />}
+              label="Biodiversity"
+            />
+          </Grid>
+        </Grid>
       </Grid>
 
-      <Grid container item md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`} className={matches ? classes.image : classes.imageSmall}>
+      <Grid container item className={matches ? classes.image : classes.imageSmall} md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`}>
         <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label="7 supporters"/></Grid>
         <Grid item className={classes.supporterFill}/>
       </Grid>

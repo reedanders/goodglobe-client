@@ -1,11 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -47,12 +43,12 @@ export default function MediaCard() {
   return (
     <Card className={classes.root}>
 
-	    <CardContent align="center" className={classes.cardHeader}>
-	      <Typography gutterBottom className={classes.cardHeaderSubtitle} variant="subtitle1" component="h2">
+	    <CardContent className={classes.cardHeader} align="center">
+	      <Typography className={classes.cardHeaderSubtitle} gutterBottom variant="subtitle1" component="h2">
 	        EUR 1,628 <Typography variant="caption"> raised of EUR 2,900 goal</Typography>
 	      </Typography>
 	      <ProgressFunding/>
-	      <Grid container spacing={2} className={classes.cardButtonGrid} direction="column" justify="center" alignItems="stretch">
+	      <Grid className={classes.cardButtonGrid} container spacing={2} direction="column" justify="center" alignItems="stretch">
 	        <Grid item>
 	        <Button className={classes.cardButton} variant="contained" color="secondary" size="large">
 	          Donate

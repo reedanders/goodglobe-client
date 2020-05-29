@@ -8,7 +8,7 @@ import { Amplify } from 'aws-amplify';
 import config from './config';
 import { initSentry } from './libs/errorLib';
 
-import { createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 let theme = createMuiTheme({
@@ -66,13 +66,6 @@ let theme = createMuiTheme({
     h6: {
       fontFamily: [
       'Merriweather Sans',
-      'Arial',
-      'sans-serif',
-      ].join(',')
-    },
-    subtitle1: {
-      fontFamily: [
-      'Lato',
       'Arial',
       'sans-serif',
       ].join(',')
