@@ -7,6 +7,7 @@ import NewProject from "./containers/NewProject";
 import Project from "./containers/Project";
 import Projects from "./containers/Projects";
 import Settings from "./containers/Settings";
+import Dashboard from "./containers/Dashboard";
 import NotFound from "./containers/NotFound";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
@@ -34,6 +35,9 @@ export default function Routes() {
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/settings">
         <Settings />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/Dashboard">
+        <Dashboard />
       </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
   	  <Route>
