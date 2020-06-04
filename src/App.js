@@ -102,8 +102,8 @@ function App() {
               <Grid className={classes.title}></Grid>
               {isAuthenticated ? (
                 <div>
-                  <Button href="/settings">
-                    Settings
+                  <Button color="primary" variant="outlined" size="small" href="/dashboard">
+                    My Account
                   </Button>
                   <Button onClick={handleLogout}>
                     Logout

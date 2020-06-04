@@ -20,6 +20,11 @@ import { withStyles } from '@material-ui/core/styles';
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const styles = (theme) => ({
+  primaryBar: {
+    zIndex: 0,
+    marginTop: theme.spacing(2),
+    paddingTop: theme.spacing(1)
+  },
   secondaryBar: {
     zIndex: 0,
   },
@@ -46,60 +51,20 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
-        <Toolbar>
-          <Grid container spacing={1} alignItems="center">
-            <Hidden smUp>
-              <Grid item>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={onDrawerToggle}
-                  className={classes.menuButton}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Grid>
-            </Hidden>
-            <Grid item xs />
-            <Grid item>
-              <Link className={classes.link} href="#" variant="body2">
-                Go to docs
-              </Link>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Alerts • No alerts">
-                <IconButton color="inherit">
-                  <NotificationsIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <IconButton color="inherit" className={classes.iconButtonAvatar}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
       <AppBar
         component="div"
-        className={classes.secondaryBar}
+        className={classes.primaryBar}
         color="primary"
         position="static"
         elevation={0}
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
+            <Grid item><Avatar alt="Username" src="/static/images/avatar/1.jpg" /></Grid>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                Authentication
+                [Username]
               </Typography>
-            </Grid>
-            <Grid item>
-              <Button className={classes.button} variant="outlined" color="inherit" size="small">
-                Web setup
-              </Button>
             </Grid>
             <Grid item>
               <Tooltip title="Help">
@@ -119,10 +84,9 @@ function Header(props) {
         elevation={0}
       >
         <Tabs value={0} textColor="inherit">
-          <Tab textColor="inherit" label="Users" />
-          <Tab textColor="inherit" label="Sign-in method" />
-          <Tab textColor="inherit" label="Templates" />
-          <Tab textColor="inherit" label="Usage" />
+          <Tab textColor="inherit" label="Home" />
+          <Tab textColor="inherit" label="Projects" />
+          <Tab textColor="inherit" label="Settings" />
         </Tabs>
       </AppBar>
     </React.Fragment>

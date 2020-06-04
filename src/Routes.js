@@ -36,7 +36,7 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/settings">
         <Settings />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/Dashboard">
+      <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
       </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
