@@ -1,11 +1,44 @@
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import LoaderButton from "./LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./BillingForm.css";
 
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Title from '../containers/Title';
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 function BillingForm({ isLoading, onSubmit, ...props }) {
+  const classes = useStyles();
   const [fields, handleFieldChange] = useFormFields({
     name: "",
     storage: ""
@@ -36,45 +69,62 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   }
 
   return (
-    <form className="BillingForm" onSubmit={handleSubmitClick}>
-      <FormGroup bsSize="large" controlId="storage">
-        <ControlLabel>Storage</ControlLabel>
-        <FormControl
-          min="0"
-          type="number"
+    <Container className="BillingForm, {classes.paper}" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Title>
+            Payment information
+        </Title>
+        <form className={classes.form} onSubmit={handleSubmitClick} noValidate>
+          <TextField
           value={fields.storage}
           onChange={handleFieldChange}
-          placeholder="Number of notes to store"
+          variant="outlined"
+          margin="normal"
+          required
+          type="number"
+          fullWidth
+          id="storage"
+          label="Storage"
+          name="storage"
+          autoComplete="storage"
+          autoFocus
         />
-      </FormGroup>
-      <hr />
-      <FormGroup bsSize="large" controlId="name">
-        <ControlLabel>Cardholder&apos;s name</ControlLabel>
-        <FormControl
-          type="text"
+        <TextField
           value={fields.name}
           onChange={handleFieldChange}
-          placeholder="Name on the card"
+          variant="outlined"
+          margin="normal"
+          min="0"
+          type="text"
+          required
+          fullWidth
+          id="name"
+          label="Cardholder's name"
+          name="name"
+          autoComplete="name"
+          autoFocus
         />
-      </FormGroup>
-      <ControlLabel>Credit Card Info</ControlLabel>
-      <CardElement
-        className="card-field"
-        onChange={e => setIsCardComplete(e.complete)}
-        style={{
-          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
-        }}
-      />
-      <LoaderButton
-        block
-        type="submit"
-        bsSize="large"
-        isLoading={isLoading}
-        disabled={!validateForm()}
-      >
-        Purchase
-      </LoaderButton>
-    </form>
+        <CardElement
+          className="card-field"
+          onChange={e => setIsCardComplete(e.complete)}
+          style={{
+            base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
+          }}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          disabled={!validateForm()}
+        >
+          Purchase
+        </Button>
+        </form>
+      </div>
+    </Container>
   );
 }
 

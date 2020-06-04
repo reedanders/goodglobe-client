@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import DashboardTable from './DashboardTable';
 import Grid from '@material-ui/core/Grid';
 import HelpIcon from '@material-ui/icons/Help';
 import Hidden from '@material-ui/core/Hidden';
@@ -19,6 +18,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+import DashboardTable from './DashboardTable';
+import Payment from './Payment';
 import TabPanel from '../components/TabPanel';
 
 function a11yProps(index) {
@@ -123,7 +124,7 @@ export default function Header(props) {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <main className={classes.main}>
-          
+          <Payment />
         </main>
       </TabPanel>
     </React.Fragment>

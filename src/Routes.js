@@ -6,7 +6,7 @@ import Signup from "./containers/Signup";
 import NewProject from "./containers/NewProject";
 import Project from "./containers/Project";
 import Projects from "./containers/Projects";
-import Settings from "./containers/Settings";
+import Payment from "./containers/Payment";
 import Dashboard from "./containers/Dashboard";
 import NotFound from "./containers/NotFound";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
@@ -33,8 +33,8 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/projects/:id">
         <Projects />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/settings">
-        <Settings />
+      <AuthenticatedRoute exact path="/payment">
+        <Payment />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
