@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  main: {
-    flex: 1,
-    padding: theme.spacing(6, 4),
-    background: '#eaeff1',
-  },
   footer: {
     padding: theme.spacing(2),
     background: '#eaeff1',
@@ -51,9 +46,6 @@ export default function Dashboard(props) {
         <CssBaseline />
         <div className={classes.app}>
           <Header onDrawerToggle={handleDrawerToggle} />
-          <main className={classes.main}>
-            <DashboardTable />
-          </main>
         </div>
       </div>
   );

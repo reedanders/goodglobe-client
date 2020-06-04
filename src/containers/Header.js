@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import DashboardTable from './DashboardTable';
 import Grid from '@material-ui/core/Grid';
 import HelpIcon from '@material-ui/icons/Help';
 import Hidden from '@material-ui/core/Hidden';
@@ -15,11 +17,43 @@ import Tabs from '@material-ui/core/Tabs';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <div>{children}</div>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
+
   primaryBar: {
     zIndex: 0,
     marginTop: theme.spacing(2),
@@ -44,10 +78,20 @@ const styles = (theme) => ({
   button: {
     borderColor: lightColor,
   },
-});
+  main: {
+    flex: 1,
+    padding: theme.spacing(6, 4),
+    background: '#eaeff1',
+  },
+}));
 
-function Header(props) {
-  const { classes, onDrawerToggle } = props;
+export default function Header(props) {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <React.Fragment>
@@ -83,19 +127,27 @@ function Header(props) {
         position="static"
         elevation={0}
       >
-        <Tabs value={0} textColor="inherit">
-          <Tab textColor="inherit" label="Home" />
-          <Tab textColor="inherit" label="Projects" />
-          <Tab textColor="inherit" label="Settings" />
+        <Tabs value={value} textColor="inherit" onChange={handleChange} aria-label="my account tabs">
+          <Tab textColor="inherit" label="Home" {...a11yProps(0)}/>
+          <Tab textColor="inherit" label="Projects" {...a11yProps(1)}/>
+          <Tab textColor="inherit" label="Settings" {...a11yProps(2)}/>
         </Tabs>
       </AppBar>
+      <TabPanel value={value} index={0}>
+        <main className={classes.main}>
+          <DashboardTable />
+        </main>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <main className={classes.main}>
+          
+        </main>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <main className={classes.main}>
+          
+        </main>
+      </TabPanel>
     </React.Fragment>
   );
 }
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onDrawerToggle: PropTypes.func.isRequired,
-};
-
-export default withStyles(styles)(Header);
