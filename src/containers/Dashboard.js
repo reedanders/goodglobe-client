@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Navigator from './Navigator';
-import Content from './Content';
+import DashboardTable from './DashboardTable';
 import Header from './Header';
 
 const drawerWidth = 256;
@@ -52,7 +52,7 @@ export default function Dashboard(props) {
         <div className={classes.app}>
           <Header onDrawerToggle={handleDrawerToggle} />
           <main className={classes.main}>
-            <Content />
+            <DashboardTable />
           </main>
         </div>
       </div>
