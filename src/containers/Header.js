@@ -19,7 +19,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import DashboardTable from './DashboardTable';
+import DashboardProjects from './DashboardProjects';
 import Payment from './Payment';
+import NewProject from './NewProject';
 import TabPanel from '../components/TabPanel';
 
 function a11yProps(index) {
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [selectedTab, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -106,23 +108,23 @@ export default function Header(props) {
         position="static"
         elevation={0}
       >
-        <Tabs value={value} textColor="inherit" onChange={handleChange} aria-label="my account tabs">
+        <Tabs value={selectedTab} textColor="inherit" onChange={handleChange} aria-label="my account tabs">
           <Tab textColor="inherit" label="Home" {...a11yProps(0)}/>
           <Tab textColor="inherit" label="Projects" {...a11yProps(1)}/>
           <Tab textColor="inherit" label="Settings" {...a11yProps(2)}/>
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={selectedTab} index={0}>
         <main className={classes.main}>
           <DashboardTable />
         </main>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={selectedTab} index={1}>
         <main className={classes.main}>
-          
+          <DashboardProjects/>
         </main>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={selectedTab} index={2}>
         <main className={classes.main}>
           <Payment />
         </main>
