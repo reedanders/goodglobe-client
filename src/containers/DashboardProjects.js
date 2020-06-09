@@ -60,7 +60,7 @@ export default function Home() {
 	                component="span"
 	                color="textPrimary"
 	              >
-	                Ali Connors
+	                {project.title.trim().split("\n")[0]}
 	              </Typography>
 	              {"Created: " + new Date(project.createdAt).toLocaleString()}
 	            </React.Fragment>

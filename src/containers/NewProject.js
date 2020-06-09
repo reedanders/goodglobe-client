@@ -3,19 +3,58 @@ import { useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
+import { useFormFields } from "../libs/hooksLib";
 import { API } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 import "./NewProject.css";
 
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 export default function NewProject() {
+  const classes = useStyles();
   const file = useRef(null);
   const history = useHistory();
-  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const [fields, handleFieldChange] = useFormFields({
+    title: "",
+    content: ""
+  });
+
   function validateForm() {
-    return content.length > 0;
+    return fields.content.length > 0 && fields.title.length > 0;
   }
 
   function handleFileChange(event) {
@@ -39,7 +78,7 @@ export default function NewProject() {
     try {
       const attachment = file.current ? await s3Upload(file.current) : null;
 
-      await createProject({ content, attachment });
+      await createProject({ ...fields, attachment });
       history.push("/");
     } catch (e) {
       onError(e);
@@ -55,30 +94,51 @@ export default function NewProject() {
   }
 
   return (
-    <div className="NewProject">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="content">
-          <FormControl
-            value={content}
-            componentClass="textarea"
-            onChange={e => setContent(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="file">
-          <ControlLabel>Attachment</ControlLabel>
-          <FormControl onChange={handleFileChange} type="file" />
-        </FormGroup>
-        <LoaderButton
-          block
-          type="submit"
-          bsSize="large"
-          bsStyle="primary"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Create
-        </LoaderButton>
-      </form>
-    </div>
+    <Container className="NewProject, {classes.paper}" maxWidth="xs">
+      <CssBaseline />
+        <div className={classes.paper}>
+          <Typography component="h1" variant="h5">
+            New Project
+          </Typography>
+          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <TextField
+              value={fields.title}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="title"
+              label="Title"
+              name="title"
+              autoComplete="title"
+              autoFocus
+            />
+            <TextField
+              value={fields.content}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="content"
+              label="Content"
+              name="content"
+              autoComplete="content"
+              autoFocus
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              disabled={!validateForm()}
+            >
+              Submit
+            </Button>
+          </form>
+        </div>
+    </Container>
   );
 }
