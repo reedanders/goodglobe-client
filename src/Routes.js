@@ -6,7 +6,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewProject from "./containers/NewProject";
 import Project from "./containers/Project";
-import Projects from "./containers/Projects";
+import EditProject from "./containers/EditProject";
 import Payment from "./containers/Payment";
 import Dashboard from "./containers/Dashboard";
 import NotFound from "./containers/NotFound";
@@ -35,7 +35,7 @@ export default function Routes() {
         <NewProject />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/projects/:id">
-        <Projects />
+        <EditProject />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/payment">
         <Payment />

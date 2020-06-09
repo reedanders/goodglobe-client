@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
@@ -41,24 +41,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewProject() {
+export default function EditProject() {
   const classes = useStyles();
   const file = useRef(null);
+  const { id } = useParams();
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const [fields, handleFieldChange] = useFormFields({
-    title: "",
-    content: ""
-  });
+  const [project, setProject] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  // const [fields, handleFieldChange] = useFormFields({
+  //   title: "",
+  //   content: ""
+  // });
+  const [content, setContent] = useState(null);
+  const [title, setTitle] = useState(null);
+
 
   function validateForm() {
-    return fields.content.length > 0 && fields.title.length > 0;
+    return content.length > 0 && title.length > 0;
   }
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
-  }
+  useEffect(() => {
+    function loadProject() {
+      return API.get("goodglobe", `/projects/${id}`);
+    }
+
+    async function onLoad() {
+      try {
+        const project = await loadProject();
+        // const {...fields} = project;
+        const { content, title, attachment} = project;
+
+        if (attachment) {
+          project.attachmentURL = await Storage.vault.get(attachment);
+        }
+
+        setTitle(title);
+        setContent(content);
+        setProject(project);
+      } catch (e) {
+        onError(e);
+      }
+    }
+
+    onLoad();
+  }, [id]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -77,7 +106,7 @@ export default function NewProject() {
     try {
       const attachment = file.current ? await s3Upload(file.current) : null;
 
-      await createProject({ ...fields, attachment });
+      await createProject({ title, content, attachment });
       history.push("/");
     } catch (e) {
       onError(e);
@@ -93,16 +122,16 @@ export default function NewProject() {
   }
 
   return (
-    <Container className="NewProject, {classes.paper}" maxWidth="xs">
+    <Container className="EditProject, {classes.paper}" maxWidth="xs">
       <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            New Project
+            Edit Project
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
-              value={fields.title}
-              onChange={handleFieldChange}
+              value={title}
+              onChange={e => setTitle(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -114,8 +143,8 @@ export default function NewProject() {
               autoFocus
             />
             <TextField
-              value={fields.content}
-              onChange={handleFieldChange}
+              value={content}
+              onChange={e => setContent(e.target.value)}
               variant="outlined"
               margin="normal"
               required
