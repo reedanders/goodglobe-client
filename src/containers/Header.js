@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const classes = useStyles();
   const [selectedTab, setValue] = useState(0);
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -83,7 +83,6 @@ export default function Header(props) {
     async function onLoad() {
       try {
         const user = await Auth.currentAuthenticatedUser();
-        console.log(user)
         setUser(user)
       } catch (e) {
         onError(e);
@@ -145,7 +144,6 @@ export default function Header(props) {
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
         <main className={classes.main}>
-          <EditUser/>
           <Payment />
         </main>
       </TabPanel>

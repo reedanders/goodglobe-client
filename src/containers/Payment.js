@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
+    marginTop: theme.spacing(2),
     maxWidth: 936,
     margin: 'auto',
     overflow: 'hidden',
@@ -56,7 +57,7 @@ export default function Payment() {
   }
 
   return (
-    <div className="Settings">
+    <div className="Payment">
       <Paper className={classes.paper}>
       <StripeProvider stripe={stripe}>
         <Elements>
