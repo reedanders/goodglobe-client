@@ -24,6 +24,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -53,6 +54,7 @@ export default function CreateProject() {
     theme_biodiv: 0,
     theme_culture: 0,
     theme_carbon: 0,
+    is_public: false,
   });
 
   async function handleSubmit(event) {
@@ -134,6 +136,7 @@ export default function CreateProject() {
               onChange={handleFieldChange}
               variant="outlined"
               margin="normal"
+              type="number"
               required
               fullWidth
               id="theme_biodiv"
@@ -148,7 +151,6 @@ export default function CreateProject() {
               variant="outlined"
               margin="normal"
               type="number"
-              max="5"
               required
               fullWidth
               id="theme_culture"
@@ -162,6 +164,7 @@ export default function CreateProject() {
               onChange={handleFieldChange}
               variant="outlined"
               margin="normal"
+              type="number"
               required
               fullWidth
               id="theme_carbon"

@@ -20,10 +20,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -60,6 +62,7 @@ export default function EditProject() {
   const [theme_biodiv, setTheme_biodiv] = useState("");
   const [theme_culture, setTheme_culture] = useState("");
   const [theme_carbon, setTheme_carbon] = useState("");
+  const [is_public, setIsPublic] = useState(false);
 
 
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         // const {...fields} = project;
-        const { title, content, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
+        const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
 
         if (attachment) {
           project.attachmentURL = await Storage.vault.get(attachment);
@@ -79,6 +82,7 @@ export default function EditProject() {
 
         setTitle(title);
         setContent(content);
+        setIsPublic(is_public);
         setTheme_biodiv(theme_biodiv);
         setTheme_culture(theme_culture);
         setTheme_carbon(theme_carbon);
@@ -116,6 +120,7 @@ export default function EditProject() {
       await saveProject({
       	title,
         content,
+        is_public,
         theme_biodiv,
         theme_culture,
         theme_carbon,
@@ -177,6 +182,12 @@ export default function EditProject() {
     return str.replace(/^\w+-/, "");
   }
 
+  const toggleChecked = () => {
+    setIsPublic((prev) => !prev);
+    console.log(is_public)
+  };
+
+
   return (
     <Container className="EditProject, {classes.paper}" maxWidth="xs">
       <CssBaseline />
@@ -216,6 +227,7 @@ export default function EditProject() {
               onChange={e => setTheme_biodiv(e.target.value)}
               variant="outlined"
               margin="normal"
+              type="number"
               required
               fullWidth
               id="theme_biodiv"
@@ -230,7 +242,6 @@ export default function EditProject() {
               variant="outlined"
               margin="normal"
               type="number"
-              max="5"
               required
               fullWidth
               id="theme_culture"
@@ -244,6 +255,7 @@ export default function EditProject() {
               onChange={e => setTheme_carbon(e.target.value)}
               variant="outlined"
               margin="normal"
+              type="number"
               required
               fullWidth
               id="theme_carbon"
@@ -252,6 +264,11 @@ export default function EditProject() {
               autoComplete="theme_carbon"
               autoFocus
             />
+            <FormControlLabel
+              id="is_public"
+		      control={<Switch checked={is_public} onChange={toggleChecked} color="primary"/>}
+		      label={is_public ? "Public" : "Private"}
+		    />
             <Button
               type="submit"
               fullWidth
@@ -265,7 +282,6 @@ export default function EditProject() {
             <Button
               fullWidth
               variant="contained"
-              color="danger"
               onClick={handleDelete}
             >
               Delete
