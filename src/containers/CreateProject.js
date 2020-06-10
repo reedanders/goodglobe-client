@@ -14,12 +14,14 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,6 +53,7 @@ export default function CreateProject() {
   const [fields, handleFieldChange] = useFormFields({
     title: "",
     content: "",
+    attachment: null,
     theme_biodiv: 0,
     theme_culture: 0,
     theme_carbon: 0,
@@ -72,9 +75,9 @@ export default function CreateProject() {
     setIsLoading(true);
 
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
+      fields.attachment = file.current ? await s3Upload(file.current) : null;
 
-      await createProject({ ...fields, attachment });
+      await createProject({ ...fields });
       history.push("/");
     } catch (e) {
       onError(e);
@@ -173,6 +176,7 @@ export default function CreateProject() {
               autoComplete="theme_carbon"
               autoFocus
             />
+            <Input id="file" type="file" onChange={handleFileChange}/>
             <Button
               type="submit"
               fullWidth

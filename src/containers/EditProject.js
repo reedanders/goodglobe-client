@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
-import { API } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
@@ -21,6 +21,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
+import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -182,6 +183,10 @@ export default function EditProject() {
     return str.replace(/^\w+-/, "");
   }
 
+  function handleFileChange(event) {
+    file.current = event.target.files[0];
+  }
+
   const toggleChecked = () => {
     setIsPublic((prev) => !prev);
     console.log(is_public)
@@ -264,6 +269,7 @@ export default function EditProject() {
               autoComplete="theme_carbon"
               autoFocus
             />
+            <Input placeholder={project.attachment} id="file" type="file" onChange={handleFileChange}/>
             <FormControlLabel
               id="is_public"
 		      control={<Switch checked={is_public} onChange={toggleChecked} color="primary"/>}
