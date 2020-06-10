@@ -57,6 +57,9 @@ export default function EditProject() {
   // });
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [theme_biodiv, setTheme_biodiv] = useState("");
+  const [theme_culture, setTheme_culture] = useState("");
+  const [theme_carbon, setTheme_carbon] = useState("");
 
 
   useEffect(() => {
@@ -68,7 +71,7 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         // const {...fields} = project;
-        const { content, title, attachment} = project;
+        const { title, content, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
 
         if (attachment) {
           project.attachmentURL = await Storage.vault.get(attachment);
@@ -76,6 +79,9 @@ export default function EditProject() {
 
         setTitle(title);
         setContent(content);
+        setTheme_biodiv(theme_biodiv);
+        setTheme_culture(theme_culture);
+        setTheme_carbon(theme_carbon);
         setProject(project);
       } catch (e) {
         onError(e);
@@ -110,6 +116,9 @@ export default function EditProject() {
       await saveProject({
       	title,
         content,
+        theme_biodiv,
+        theme_culture,
+        theme_carbon,
         attachment: attachment || project.attachment
       });
       history.push("/");
@@ -200,6 +209,47 @@ export default function EditProject() {
               label="Content"
               name="content"
               autoComplete="content"
+              autoFocus
+            />
+            <TextField
+              value={theme_biodiv}
+              onChange={e => setTheme_biodiv(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="theme_biodiv"
+              label="Biodiversity Contribution"
+              name="theme_biodiv"
+              autoComplete="theme_biodiv"
+              autoFocus
+            />
+            <TextField
+              value={theme_culture}
+              onChange={e => setTheme_culture(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              type="number"
+              max="5"
+              required
+              fullWidth
+              id="theme_culture"
+              label="Cultural Contribution"
+              name="theme_culture"
+              autoComplete="theme_culture"
+              autoFocus
+            />
+            <TextField
+              value={theme_carbon}
+              onChange={e => setTheme_carbon(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="theme_carbon"
+              label="Carbon Mitigation"
+              name="theme_carbon"
+              autoComplete="theme_carbon"
               autoFocus
             />
             <Button

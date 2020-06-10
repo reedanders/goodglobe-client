@@ -21,7 +21,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import DashboardTable from './DashboardTable';
 import DashboardProjects from './DashboardProjects';
 import Payment from './Payment';
-import NewProject from './NewProject';
 import TabPanel from '../components/TabPanel';
 
 function a11yProps(index) {

@@ -4,8 +4,8 @@ import Home from "./containers/Home";
 import Landing from "./containers/Landing";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import NewProject from "./containers/NewProject";
 import Project from "./containers/Project";
+import CreateProject from "./containers/CreateProject";
 import EditProject from "./containers/EditProject";
 import Payment from "./containers/Payment";
 import Dashboard from "./containers/Dashboard";
@@ -32,7 +32,7 @@ export default function Routes() {
         <Signup />
       </UnauthenticatedRoute>
       <AuthenticatedRoute exact path="/projects/new">
-        <NewProject />
+        <CreateProject />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/projects/:id">
         <EditProject />

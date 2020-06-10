@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NewProject() {
+export default function CreateProject() {
   const classes = useStyles();
   const file = useRef(null);
   const history = useHistory();
@@ -49,16 +49,11 @@ export default function NewProject() {
 
   const [fields, handleFieldChange] = useFormFields({
     title: "",
-    content: ""
+    content: "",
+    theme_biodiv: 0,
+    theme_culture: 0,
+    theme_carbon: 0,
   });
-
-  function validateForm() {
-    return fields.content.length > 0 && fields.title.length > 0;
-  }
-
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -92,12 +87,20 @@ export default function NewProject() {
     });
   }
 
+  function validateForm() {
+    return fields.content.length > 0 && fields.title.length > 0;
+  }
+
+  function handleFileChange(event) {
+    file.current = event.target.files[0];
+  }
+
   return (
-    <Container className="NewProject, {classes.paper}" maxWidth="xs">
+    <Container className="CreateProject, {classes.paper}" maxWidth="xs">
       <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
-            New Project
+            Create Project
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
@@ -124,6 +127,47 @@ export default function NewProject() {
               label="Content"
               name="content"
               autoComplete="content"
+              autoFocus
+            />
+            <TextField
+              value={fields.theme_biodiv}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="theme_biodiv"
+              label="Biodiversity Contribution"
+              name="theme_biodiv"
+              autoComplete="theme_biodiv"
+              autoFocus
+            />
+            <TextField
+              value={fields.theme_culture}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              type="number"
+              max="5"
+              required
+              fullWidth
+              id="theme_culture"
+              label="Cultural Contribution"
+              name="theme_culture"
+              autoComplete="theme_culture"
+              autoFocus
+            />
+            <TextField
+              value={fields.theme_carbon}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="theme_carbon"
+              label="Carbon Mitigation"
+              name="theme_carbon"
+              autoComplete="theme_carbon"
               autoFocus
             />
             <Button
