@@ -55,13 +55,9 @@ export default function EditProject() {
   //   title: "",
   //   content: ""
   // });
-  const [content, setContent] = useState(null);
-  const [title, setTitle] = useState(null);
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
 
-
-  function validateForm() {
-    return content.length > 0 && title.length > 0;
-  }
 
   useEffect(() => {
     function loadProject() {
@@ -89,7 +85,10 @@ export default function EditProject() {
     onLoad();
   }, [id]);
 
+
   async function handleSubmit(event) {
+  	let attachment
+
     event.preventDefault();
 
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -104,14 +103,54 @@ export default function EditProject() {
     setIsLoading(true);
 
     try {
-      const attachment = file.current ? await s3Upload(file.current) : null;
+      if (file.current) {
+        attachment = await s3Upload(file.current);
+      }
 
-      await createProject({ title, content, attachment });
+      await saveProject({
+      	title,
+        content,
+        attachment: attachment || project.attachment
+      });
       history.push("/");
     } catch (e) {
       onError(e);
       setIsLoading(false);
     }
+  }
+
+
+  async function handleDelete(event) {
+    event.preventDefault();
+
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this project?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      await deleteProject();
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
+    }
+  }
+
+  function saveProject(project) {
+  	console.log(project);
+    return API.put("goodglobe", `/projects/${id}`, {
+      body: project
+    });
+  }
+
+  function deleteProject() {
+    return API.del("goodglobe", `/projects/${id}`);
   }
 
 
@@ -121,10 +160,18 @@ export default function EditProject() {
     });
   }
 
+  function validateForm() {
+    return (content.length > 0 && title.length > 0);
+  }
+
+  function formatFilename(str) {
+    return str.replace(/^\w+-/, "");
+  }
+
   return (
     <Container className="EditProject, {classes.paper}" maxWidth="xs">
       <CssBaseline />
-        <div className={classes.paper}>
+        {project && (<div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Edit Project
           </Typography>
@@ -165,8 +212,16 @@ export default function EditProject() {
             >
               Submit
             </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              color="danger"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           </form>
-        </div>
+        </div>)}
     </Container>
   );
 }
