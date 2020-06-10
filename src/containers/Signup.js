@@ -47,6 +47,8 @@ export default function Signup() {
     email: "",
     password: "",
     confirmPassword: "",
+    nick_name: "",
+    full_name: "",
     confirmationCode: "",
   });
   const history = useHistory();
@@ -58,7 +60,9 @@ export default function Signup() {
     return (
       fields.email.length > 0 &&
       fields.password.length > 0 &&
-      fields.password === fields.confirmPassword
+      fields.password === fields.confirmPassword &&
+      fields.nick_name.length > 0 &&
+      fields.full_name.length > 0
     );
   }
 
@@ -72,9 +76,14 @@ export default function Signup() {
     setIsLoading(true);
 
     try {
+      console.log(fields)
       const newUser = await Auth.signUp({
         username: fields.email,
         password: fields.password,
+        attributes: {
+          nickname: fields.nick_name,
+          name: fields.full_name,
+        },
       });
       setIsLoading(false);
       setNewUser(newUser);
@@ -141,6 +150,32 @@ export default function Signup() {
       </Typography>
 
       <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        <TextField
+            value={fields.nick_name}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="nick_name"
+            label="Nick Name"
+            name="nick_name"
+            autoComplete="nick_name"
+            autoFocus
+          />
+          <TextField
+            value={fields.full_name}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="full_name"
+            label="Full Name"
+            name="full_name"
+            autoComplete="full_name"
+            autoFocus
+          />
         <TextField
             value={fields.email}
             onChange={handleFieldChange}

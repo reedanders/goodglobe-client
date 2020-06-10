@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { Auth } from "aws-amplify";
+import { onError } from "../libs/errorLib";
+
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
@@ -20,6 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import DashboardTable from './DashboardTable';
 import DashboardProjects from './DashboardProjects';
+import EditUser from './EditUser';
 import Payment from './Payment';
 import TabPanel from '../components/TabPanel';
 
@@ -67,11 +71,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
   const classes = useStyles();
-  const [selectedTab, setValue] = React.useState(0);
+  const [selectedTab, setValue] = useState(0);
+  const [user, setUser] = useState("")
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+
+    async function onLoad() {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        console.log(user)
+        setUser(user)
+      } catch (e) {
+        onError(e);
+      }
+    }
+
+    onLoad();
+  }, []);
 
   return (
     <React.Fragment>
@@ -84,10 +104,10 @@ export default function Header(props) {
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
-            <Grid item><Avatar alt="Username" src="/static/images/avatar/1.jpg" /></Grid>
+            <Grid item><Avatar alt={user && user.attributes.name} src="/static/images/avatar/1.jpg" /></Grid>
             <Grid item xs>
               <Typography color="inherit" variant="h5" component="h1">
-                [Username]
+                {user && user.attributes.name}
               </Typography>
             </Grid>
             <Grid item>
@@ -125,6 +145,7 @@ export default function Header(props) {
       </TabPanel>
       <TabPanel value={selectedTab} index={2}>
         <main className={classes.main}>
+          <EditUser/>
           <Payment />
         </main>
       </TabPanel>
