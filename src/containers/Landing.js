@@ -38,6 +38,27 @@ const mainFeaturedProject = {
 
 export default function Landing() {
 	const classes = useStyles();
+	const [projects, setProjects] = useState([]);
+
+	useEffect(() => {
+	  async function onLoad() {
+
+	    try {
+	      const projects = await loadProjects();
+	      console.log(projects)
+	      setProjects(projects);
+	    } catch (e) {
+	      onError(e);
+	    }
+
+	  }
+
+	  onLoad();
+	}, []);
+
+	function loadProjects() {
+	  return API.get("goodglobe", "/projects/public");
+	}
 
 	return (
     <div className="Landing">

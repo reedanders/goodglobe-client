@@ -28,6 +28,7 @@ export default function Home() {
 
 	    try {
 	      const projects = await loadProjects();
+	      console.log(projects)
 	      setProjects(projects);
 	    } catch (e) {
 	      onError(e);
@@ -62,7 +63,7 @@ export default function Home() {
 	              >
 	                {project.title.trim().split("\n")[0]}
 	              </Typography>
-	              {"Created: " + new Date(project.createdAt).toLocaleString()}
+	              {" Created: " + new Date(project.createdAt).toLocaleString()}
 	            </React.Fragment>
 	          }
 	        />
