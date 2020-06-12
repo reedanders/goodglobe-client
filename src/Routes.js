@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./containers/Home";
 import Landing from "./containers/Landing";
 import Login from "./containers/Login";
@@ -40,9 +40,8 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/payment">
         <Payment />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/dashboard">
-        <Dashboard />
-      </AuthenticatedRoute>
+      <Redirect exact from="/dashboard" to="/dashboard/home" />
+      <AuthenticatedRoute exact path="/dashboard/:page?" render={props => <Dashboard {...props} />}/>
       {/* Finally, catch all unmatched routes */}
   	  <Route>
   	    <NotFound />

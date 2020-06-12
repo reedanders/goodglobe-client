@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Auth } from "aws-amplify";
 import { onError } from "../libs/errorLib";
+import { useHistory } from "react-router-dom";
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
@@ -26,13 +27,6 @@ import DashboardProjects from './DashboardProjects';
 import EditUser from './EditUser';
 import Payment from './Payment';
 import TabPanel from '../components/TabPanel';
-
-function a11yProps(index) {
-  return {
-    id: `my-account-tab-tab-${index}`,
-    'aria-controls': `my-account-tabpanel-${index}`,
-  };
-}
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -69,13 +63,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function a11yProps(index) {
+  return {
+    id: `my-account-tab-tab-${index}`,
+    'aria-controls': `my-account-tabpanel-${index}`,
+  };
+}
+
 export default function Header(props) {
   const classes = useStyles();
-  const [selectedTab, setValue] = useState(0);
+  const history = useHistory();
+  const [selectedTab, setSelectedTab] = useState(0);
   const [user, setUser] = useState("");
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    // history.push(newValue);
+    setSelectedTab(newValue);
   };
 
   useEffect(() => {
