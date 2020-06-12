@@ -44,9 +44,9 @@ export default function Landing() {
 	  async function onLoad() {
 
 	    try {
-	      const projects = await loadProjects();
-	      console.log(projects)
-	      setProjects(projects);
+	      // const projects = await loadProjects();
+	      // console.log(projects)
+	      // setProjects(projects);
 	    } catch (e) {
 	      onError(e);
 	    }

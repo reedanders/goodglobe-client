@@ -28,7 +28,6 @@ export default function Home() {
 
 	    try {
 	      const projects = await loadProjects();
-	      console.log(projects)
 	      setProjects(projects);
 	    } catch (e) {
 	      onError(e);
