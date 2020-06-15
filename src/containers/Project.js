@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { onError } from "../libs/errorLib";
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,10 +21,22 @@ const useStyles = makeStyles((theme) => ({
 export default function Blog() {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function onLoad() {
+
+      const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
+      
+    }
+
+    onLoad();
+  }, [matches]);
 
   return (
     <React.Fragment>
       <CssBaseline />
+      {!isLoading && (
       <Container maxWidth="lg">
         <main>
           <ProjectCallCard />
@@ -45,6 +58,7 @@ export default function Blog() {
           </Grid>
         </main>
       </Container>
+      )}
     </React.Fragment>
   );
 }

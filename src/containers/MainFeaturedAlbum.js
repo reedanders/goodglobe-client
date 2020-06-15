@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { onError } from "../libs/errorLib";
+import { API } from "aws-amplify";
+
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -24,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
+    minHeight:"65vh"
   },
   card: {
     height: '100%',
@@ -46,13 +51,36 @@ const cards = [1, 2, 3];
 
 export default function MainFeaturedAlbum() {
   const classes = useStyles();
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function onLoad() {
+
+      try {
+        const projects = await loadProjects();
+        setProjects(projects);
+      } catch (e) {
+        onError(e);
+      }
+
+      setIsLoading(false);
+    }
+
+    onLoad();
+  }, []);
+
+  function loadProjects() {
+    return API.get("goodglobe", "/projects/public");
+  }
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
       <Typography component="h2" variant="h4" align="center" color="textPrimary" gutterBottom>Just Launched</Typography>
+      {isLoading ? <Typography align="center"> <CircularProgress /></Typography> : ''}
       <Grid container spacing={4}>
-        {cards.map((card) => (
-          <Grid item key={card} xs={12} sm={6} md={4}>
+        {projects.map((project) => (
+          <Grid item key={project} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardActionArea href="/project">
               <CardMedia
@@ -62,10 +90,10 @@ export default function MainFeaturedAlbum() {
               />
               <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
-                  Heading
+                  {project.title}
                 </Typography>
                 <Typography>
-                  This is a media card. You can use this section to describe the content.
+                  {project.content}
                 </Typography>
               </CardContent>
               <CardActions>
