@@ -26,7 +26,7 @@ export default function Blog() {
   useEffect(() => {
     async function onLoad() {
 
-      const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
+      // const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
       
     }
 
