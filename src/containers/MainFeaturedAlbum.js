@@ -60,6 +60,7 @@ export default function MainFeaturedAlbum() {
       try {
         const projects = await loadProjects();
         setProjects(projects);
+        console.log(projects)
       } catch (e) {
         onError(e);
       }
@@ -80,7 +81,7 @@ export default function MainFeaturedAlbum() {
       {isLoading ? <Typography align="center"> <CircularProgress /></Typography> : ''}
       <Grid container spacing={4}>
         {projects.map((project) => (
-          <Grid item key={project} xs={12} sm={6} md={4}>
+          <Grid item key={project.projectId} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardActionArea href="/project">
               <CardMedia
