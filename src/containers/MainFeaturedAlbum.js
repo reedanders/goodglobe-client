@@ -59,8 +59,7 @@ export default function MainFeaturedAlbum() {
 
       try {
         const projects = await loadProjects();
-        setProjects(projects);
-        console.log(projects)
+        setProjects(projects.slice(0, 3));
       } catch (e) {
         onError(e);
       }
@@ -78,7 +77,7 @@ export default function MainFeaturedAlbum() {
   return (
     <Container className={classes.cardGrid} maxWidth="md">
       <Typography component="h2" variant="h4" align="center" color="textPrimary" gutterBottom>Just Launched</Typography>
-      {isLoading ? <Typography align="center"> <CircularProgress /></Typography> : ''}
+      {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
       <Grid container spacing={4}>
         {projects.map((project) => (
           <Grid item key={project.projectId} xs={12} sm={6} md={4}>

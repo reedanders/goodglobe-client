@@ -55,7 +55,7 @@ export default function MainFeaturedAlbum() {
     <Container className={classes.cardGrid} maxWidth="md">
       <Grid container spacing={4}>
         {cards.map((card) => (
-          <Grid item key={card} xs={12} sm={6} md={4} alignItems='center'>
+          <Grid container item key={card.title} xs={12} sm={6} md={4} alignItems='center'>
             <Card elevation={0} className={classes.card}>
                 <Grid container alignItems='center' justify='center'>
                   <Grid item></Grid>

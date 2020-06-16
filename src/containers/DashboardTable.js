@@ -46,7 +46,7 @@ export default function DashboardTable() {
   return (
     <Paper className={classes.paper}>
       <Title>Recent Donations</Title>
-      {rows.length != 0 ? (
+      {rows.length !== 0 ? (
             <div>
             <Table size="small">
               <TableHead>
