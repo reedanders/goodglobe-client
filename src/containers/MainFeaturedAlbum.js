@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import ProgressFunding from './ProgressFunding';
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -41,6 +43,16 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
+  cardActions: {
+    flexGrow: 1,
+    padding: 0
+  },
+  cardActionGrid: {
+    padding: theme.spacing(2)
+  },
+  cardHeaderSubtitle: {
+    fontWeight: 700,
+  },
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
@@ -59,8 +71,11 @@ export default function MainFeaturedAlbum() {
 
       try {
         const projects = await loadProjects();
-        setProjects(projects.slice(0, 3));
+        if (projects) {
+          setProjects(projects.slice(0, 3));
+        }
       } catch (e) {
+        console.log(e);
         onError(e);
       }
 
@@ -71,8 +86,16 @@ export default function MainFeaturedAlbum() {
   }, []);
 
   function loadProjects() {
-    return API.get("goodglobe", "/projects/public");
-  }
+    return API.get("goodglobe", "/projects");
+  };
+
+  function setProgressValue(current, target) {
+    return (100*(current/target));
+  };
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
@@ -82,27 +105,25 @@ export default function MainFeaturedAlbum() {
         {projects.map((project) => (
           <Grid item key={project.projectId} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
-              <CardActionArea href="/project">
+              <CardActionArea href={`/project/${project.projectId}`}>
               <CardMedia
                 className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
+                image={project.attachment_url}
                 title="Image title"
               />
               <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {project.title}
                 </Typography>
-                <Typography>
-                  {project.content}
-                </Typography>
               </CardContent>
-              <CardActions>
-                <Button size="small" color="primary">
-                  View
-                </Button>
-                <Button size="small" color="primary">
-                  Edit
-                </Button>
+              <CardActions className={classes.cardActions}>
+                <Grid container className={classes.cardActionGrid} direction="column">
+                  <Grid item>
+                  <Typography className={classes.cardHeaderSubtitle} gutterBottom variant="subtitle1" component="h2">
+                    EUR {numberWithCommas(project.current_funding)}<Typography variant="caption"> raised of EUR {numberWithCommas(project.target_funding)} goal</Typography>
+                  </Typography></Grid>
+                  <Grid item><ProgressFunding value={setProgressValue(project.current_funding, project.target_funding)}/></Grid>
+                </Grid>
               </CardActions>
               </CardActionArea>
             </Card>

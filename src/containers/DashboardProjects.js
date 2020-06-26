@@ -46,7 +46,7 @@ export default function Home() {
   function renderProjectsList(projects) {
 	  return [{}].concat(projects).map((project, i) =>
 	    i !== 0 ? (
-	      <NavLink key={project.projectId} to={`/projects/${project.projectId}`}>
+	      <NavLink key={project.projectId} to={`/projects/edit/${project.projectId}`}>
 	       <List component="nav" aria-label="main mailbox folders">
 	      	<ListItem alignItems="flex-start">
 	      	<ListItemAvatar>

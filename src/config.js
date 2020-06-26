@@ -2,17 +2,17 @@ const dev = {
   STRIPE_KEY: "pk_test_IkEk1d6pYbKDsXnVqdtcTRFp",
   s3: {
     REGION: "us-east-1",
-    BUCKET: "goodglobe-app-api-dev-attachmentsbucket-rpxrvu4akwpp"
+    BUCKET: "goodglobe-app-5-api-dev-attachmentsbucket-1mlcmgwve4go7"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://dwnzqe1u8c.execute-api.us-east-1.amazonaws.com/dev"
+    URL: "https://8h6745jlr4.execute-api.us-east-1.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_Xgu0DvQtA",
-    APP_CLIENT_ID: "7psd42lucjjdcfj95id29808vu",
-    IDENTITY_POOL_ID: "us-east-1:7fb4570d-76bd-406a-b5d7-d1edc46c6776"
+    USER_POOL_ID: "us-east-1_suTKBbvwN",
+    APP_CLIENT_ID: "7kud8enl3dok6e1ubteihes7d5",
+    IDENTITY_POOL_ID: "us-east-1:e85feec3-fba3-4002-8fe9-b9471eb06296"
   }
 };
 

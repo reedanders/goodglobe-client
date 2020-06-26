@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import Slider from '@material-ui/core/Slider';
 
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -34,20 +35,44 @@ const useStyles = makeStyles((theme) => ({
   },
   cardButton: {
   	width: '100%',
+  },
+  sliderColor: {
+  	color: theme.palette.primary.main,
+  	height: 8,
   }
 }));
 
-export default function MediaCard() {
+function numberWithCommas(x) {
+	if (x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	} else {return}
+    
+}
+
+export default function SideBarCard(props) {
   const classes = useStyles();
+  const [humanCurrent, setHumanCurrent] = useState("");
+  const [humanTarget, setHumanTarget] = useState("");
+  const [progressValue, setProgressValue] = useState(0);
+
+  useEffect(() => {
+    async function onLoad() {
+    	setHumanTarget(numberWithCommas(props.project.target_funding));
+    	setHumanCurrent(numberWithCommas(props.project.current_funding));
+    	setProgressValue(100*(props.project.current_funding/props.project.target_funding));
+    }
+
+    onLoad();
+  }, [humanCurrent, humanTarget]);
 
   return (
     <Card className={classes.root}>
 
 	    <CardContent className={classes.cardHeader} align="center">
 	      <Typography className={classes.cardHeaderSubtitle} gutterBottom variant="subtitle1" component="h2">
-	        EUR 1,628 <Typography variant="caption"> raised of EUR 2,900 goal</Typography>
+	        EUR {humanCurrent} <Typography variant="caption"> raised of EUR {humanTarget} goal</Typography>
 	      </Typography>
-	      <ProgressFunding/>
+	      <ProgressFunding value={progressValue}/>
 	      <Grid className={classes.cardButtonGrid} container spacing={2} direction="column" justify="center" alignItems="stretch">
 	        <Grid item>
 	        <Button className={classes.cardButton} variant="contained" color="secondary" size="large">
@@ -63,7 +88,7 @@ export default function MediaCard() {
 	    </CardContent>
 	    <CardContent>
 	      <Typography gutterBottom variant="h6" component="h6">
-	        Pracitioners
+	        Pracitioner
 	      </Typography>
 	      <Grid container direction="column" spacing={1}>
 	      	<Grid item><Avatar alt="Emy Sharp" src="/static/images/avatar/1.jpg" /></Grid>
@@ -75,42 +100,51 @@ export default function MediaCard() {
 	      <Typography gutterBottom variant="h6" component="h6">
 	        Themes
 	      </Typography>
-	      <Grid container direction="column" alignItems="center" spacing={1}>
+	      <Grid container direction="column" spacing={1}>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
 		        	Biodiversity
 		      	</Typography>
-	      		<ButtonGroup size="small" aria-label="outlined primary button group">
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button></Button>
-			    	<Button></Button>
-			    </ButtonGroup>
+	      		<Slider className={classes.sliderColor}
+			        defaultValue={props.project.theme_biodiv}
+			        aria-labelledby="discrete-slider"
+			        valueLabelDisplay="auto"
+			        step={1}
+			        min={0}
+			        max={5}
+			        color="primary"
+			        disabled
+			      />
 	      	</Grid>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
 		        	Culture
 		      	</Typography>
-	      		<ButtonGroup size="small" aria-label="outlined primary button group">
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button color="primary" variant="contained"></Button>
-			    </ButtonGroup>
+	      		<Slider className={classes.sliderColor}
+			        defaultValue={props.project.theme_culture}
+			        aria-labelledby="discrete-slider"
+			        valueLabelDisplay="auto"
+			        step={1}
+			        min={0}
+			        max={5}
+			        color="primary"
+			        disabled
+			      />
 	      	</Grid>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
 		        	Carbon Sink
 		      	</Typography>
-	      		<ButtonGroup size="small" aria-label="outlined primary button group">
-			    	<Button color="primary" variant="contained"></Button>
-			    	<Button></Button>
-			    	<Button></Button>
-			    	<Button></Button>
-			    	<Button></Button>
-			    </ButtonGroup>
+	      		<Slider className={classes.sliderColor}
+			        defaultValue={props.project.theme_carbon}
+			        aria-labelledby="discrete-slider"
+			        valueLabelDisplay="auto"
+			        step={1}
+			        min={0}
+			        max={5}
+			        color="primary"
+			        disabled
+			      />
 	      	</Grid>
 	      </Grid>
 	    </CardContent>

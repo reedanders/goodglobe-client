@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
+import { Auth } from 'aws-amplify'
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
 import { API } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload, s3GetUrl } from "../libs/awsLib";
 import config from "../config";
 
 import Button from '@material-ui/core/Button';
@@ -44,8 +45,12 @@ export default function CreateProject() {
 
   const [fields, handleFieldChange] = useFormFields({
     title: "",
+    pitch: "",
     content: "",
     attachment: null,
+    attachment_url: "temp.jpg",
+    target_funding: 0,
+    current_funding: 0,
     theme_biodiv: 0,
     theme_culture: 0,
     theme_carbon: 0,
@@ -68,7 +73,7 @@ export default function CreateProject() {
 
     try {
       fields.attachment = file.current ? await s3Upload(file.current) : null;
-
+      // fields.attachmentUrl = file.current ? await s3GetUrl(file.current) : null;
       await createProject({ ...fields });
       history.push("/");
     } catch (e) {
@@ -111,6 +116,19 @@ export default function CreateProject() {
               label="Title"
               name="title"
               autoComplete="title"
+              autoFocus
+            />
+            <TextField
+              value={fields.pitch}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="pitch"
+              label="Pitch"
+              name="pitch"
+              autoComplete="pitch"
               autoFocus
             />
             <TextField
@@ -166,6 +184,34 @@ export default function CreateProject() {
               label="Carbon Mitigation"
               name="theme_carbon"
               autoComplete="theme_carbon"
+              autoFocus
+            />
+            <TextField
+              value={fields.target_funding}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              type="number"
+              required
+              fullWidth
+              id="target_funding"
+              label="Target Funding"
+              name="target_funding"
+              autoComplete="target_funding"
+              autoFocus
+            />
+            <TextField
+              value={fields.current_funding}
+              onChange={handleFieldChange}
+              variant="outlined"
+              margin="normal"
+              type="number"
+              required
+              fullWidth
+              id="current_funding"
+              label="Current Funding"
+              name="current_funding"
+              autoComplete="current_funding"
               autoFocus
             />
             <Input id="file" type="file" onChange={handleFileChange}/>

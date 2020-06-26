@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
-import { API, Storage } from "aws-amplify";
+import { API, Storage, Auth } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
@@ -41,15 +41,12 @@ export default function EditProject() {
   const file = useRef(null);
   const { id } = useParams();
   const history = useHistory();
+  const [user, setUser] = useState("");
 
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  // const [fields, handleFieldChange] = useFormFields({
-  //   title: "",
-  //   content: ""
-  // });
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [theme_biodiv, setTheme_biodiv] = useState("");
@@ -59,14 +56,19 @@ export default function EditProject() {
 
 
   useEffect(() => {
-    function loadProject() {
-      return API.get("goodglobe", `/projects/${id}`);
+    function loadProject(user) {
+      return API.get("goodglobe", `/projects/${id}`, {
+        'queryStringParameters': {
+          'projectId': id,
+          'userId': user
+        }
+      });
     }
 
     async function onLoad() {
       try {
-        const project = await loadProject();
-        // const {...fields} = project;
+        const user = await Auth.currentAuthenticatedUser();
+        const project = await loadProject(user);
         const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
 
         if (attachment) {
@@ -81,6 +83,7 @@ export default function EditProject() {
         setTheme_carbon(theme_carbon);
         setProject(project);
       } catch (e) {
+        console.log(e);
         onError(e);
       }
     }

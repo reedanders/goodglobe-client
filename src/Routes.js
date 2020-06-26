@@ -18,7 +18,7 @@ export default function Routes() {
       <Route exact path="/">
         <Landing />
       </Route>
-      <Route exact path="/project">
+      <Route exact path="/project/:id">
         <Project />
       </Route>
       <UnauthenticatedRoute exact path="/login">
@@ -30,7 +30,7 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/projects/new">
         <CreateProject />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/projects/:id">
+      <AuthenticatedRoute exact path="/projects/edit/:id">
         <EditProject />
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/payment">

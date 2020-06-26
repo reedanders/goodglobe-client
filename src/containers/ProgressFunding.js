@@ -34,13 +34,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LinearWithValueLabel() {
+export default function LinearWithValueLabel(props) {
   const classes = useStyles();
 
 
   return (
     <div className={classes.root}>
-      <LinearProgressWithLabel value={54} color="primary"/>
+      <LinearProgressWithLabel value={props.value} color="primary"/>
     </div>
   );
 }

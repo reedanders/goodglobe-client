@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { onError } from "../libs/errorLib";
+import { useParams, useHistory } from "react-router-dom";
+import { API, Storage } from "aws-amplify";
+import { s3Upload } from "../libs/awsLib";
+import config from "../config";
+
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,25 +26,38 @@ const useStyles = makeStyles((theme) => ({
 export default function Blog() {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
+  const { id } = useParams();
+  const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function onLoad() {
+    function loadProject() {
+      return API.get("goodglobe", `/projects/view/${id}`, {
+        'body': { "projectId" : id }
+      });
+    }
 
-      // const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
-      
+    async function onLoad() {
+      try {
+        const project = await loadProject();
+        setProject(project);
+        const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
+      } catch (e) {
+        console.log(e);
+        onError(e);
+      }
     }
 
     onLoad();
-  }, [matches]);
+  }, [id]);
 
   return (
     <React.Fragment>
       <CssBaseline />
-      {!isLoading && (
+      {project && (
       <Container maxWidth="lg">
         <main>
-          <ProjectCallCard />
+          <ProjectCallCard project={project}/>
           <Grid 
             container 
             spacing={2} 
@@ -48,12 +66,12 @@ export default function Blog() {
             className={classes.mainGrid}>
             <Grid item md={8}>
               <Typography variant="h6" gutterBottom>
-                Here is a title
+                Background
               </Typography>
               <Divider />
             </Grid>
             <Grid item md={4}>
-              <SidebarCard/>
+              <SidebarCard project={project}/>
             </Grid>
           </Grid>
         </main>
