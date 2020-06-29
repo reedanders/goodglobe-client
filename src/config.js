@@ -20,17 +20,17 @@ const prod = {
   STRIPE_KEY: "pk_test_IkEk1d6pYbKDsXnVqdtcTRFp",
   s3: {
     REGION: "us-east-1",
-    BUCKET: "goodglobe-app-api-prod-attachmentsbucket-1dc1vp66vq3z5"
+    BUCKET: "goodglobe-app-5-api-prod-attachmentsbucket-1kno2k7f8g0ns"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://y1fnzbn6ua.execute-api.us-east-1.amazonaws.com/prod"
+    URL: "https://m5g6wnhvv4.execute-api.us-east-1.amazonaws.com/prod"
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_swZ3aWaox",
-    APP_CLIENT_ID: "4lu1m39h9or3e2479v71ok8aaj",
-    IDENTITY_POOL_ID: "us-east-1:ac03ee8a-0325-4eba-b287-019186789a71"
+    USER_POOL_ID: "us-east-1_AXmz9yZGp",
+    APP_CLIENT_ID: "jkf2f57kn2hmea5848e7bss5j",
+    IDENTITY_POOL_ID: "us-east-1:e57774b8-7a3b-4e4c-b1a8-f58ff30aec19"
   }
 };
 
