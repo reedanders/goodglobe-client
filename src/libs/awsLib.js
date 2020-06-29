@@ -3,11 +3,22 @@ import { Storage } from "aws-amplify";
 export async function s3Upload(file) {
   const filename = `${Date.now()}-${file.name}`;
 
-  const stored = await Storage.vault.put(filename, file, {
-    contentType: file.type,
-  });
+  Storage.configure({ level: 'public' });
 
-  return stored.key;
+  // const stored = await Storage.put(filename, file, {
+  //   contentType: file.type,
+  // });
+  // const stored_public = await Storage.put(filename, file, {
+  //   contentType: file.type,
+  // });
+
+  const stored = await Storage.put(filename, file, {
+    contentType: file.type,
+  }).then (result => Storage.get(result.key));
+
+  console.log(stored)
+
+  return stored;
 }
 
 export async function s3GetUrl(attachment) {

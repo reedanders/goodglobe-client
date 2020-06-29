@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { onError } from "../libs/errorLib";
 import { useParams, useHistory } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload, s3GetUrl } from "../libs/awsLib";
 import config from "../config";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,10 +40,11 @@ export default function Blog() {
     async function onLoad() {
       try {
         const project = await loadProject();
+        // project.attachmentUrl = project.attachment ? await s3GetUrl(project.attachment) : "";
         setProject(project);
+        console.log(project);
         const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
       } catch (e) {
-        console.log(e);
         onError(e);
       }
     }

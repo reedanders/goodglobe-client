@@ -118,7 +118,7 @@ export default function MediaControlCard(props) {
         </Grid>
       </Grid>
 
-      <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment_url})` }} md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`}>
+      <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment})` }} md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`}>
         <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label="7 supporters"/></Grid>
         <Grid item className={classes.supporterFill}/>
       </Grid>
