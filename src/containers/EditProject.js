@@ -41,7 +41,6 @@ export default function EditProject() {
   const file = useRef(null);
   const { id } = useParams();
   const history = useHistory();
-  const [user, setUser] = useState("");
 
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,11 +55,10 @@ export default function EditProject() {
 
 
   useEffect(() => {
-    function loadProject(user) {
-      return API.get("goodglobe", `/projects/${id}`, {
+    function loadProject() {
+      return API.get("goodglobe", `/projects/edit/${id}`, {
         'queryStringParameters': {
-          'projectId': id,
-          'userId': user
+          'projectId': id
         }
       });
     }
@@ -68,7 +66,9 @@ export default function EditProject() {
     async function onLoad() {
       try {
         const user = await Auth.currentAuthenticatedUser();
-        const project = await loadProject(user);
+        const project = await loadProject();
+        setProject(project);
+        console.log(project);
         const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
 
         if (attachment) {
