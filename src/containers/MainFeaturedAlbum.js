@@ -108,7 +108,7 @@ export default function MainFeaturedAlbum() {
               <CardActionArea href={`/project/${project.projectId}`}>
               <CardMedia
                 className={classes.cardMedia}
-                image={project.attachment_url}
+                image={project.attachment}
                 title="Image title"
               />
               <CardContent className={classes.cardContent}>
