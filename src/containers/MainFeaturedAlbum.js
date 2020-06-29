@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+    height: '15vh'
   },
   cardActions: {
     flexGrow: 1,
