@@ -15,6 +15,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
 import Input from '@material-ui/core/Input';
 
+import {stateFromHTML} from 'draft-js-import-html';
+import {stateToHTML} from 'draft-js-export-html';
+import {Editor, EditorState} from 'draft-js';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -43,8 +47,13 @@ export default function EditProject() {
   const history = useHistory();
 
   const [project, setProject] = useState(null);
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  const editor = useRef(null);
   
-  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [theme_biodiv, setTheme_biodiv] = useState("");
   const [theme_culture, setTheme_culture] = useState("");
@@ -73,7 +82,7 @@ export default function EditProject() {
         }
 
         setTitle(title);
-        setContent(content);
+        setEditorState(EditorState.createWithContent(stateFromHTML(content)));
         setIsPublic(is_public);
         setTheme_biodiv(theme_biodiv);
         setTheme_culture(theme_culture);
@@ -108,9 +117,11 @@ export default function EditProject() {
         attachment = await s3Upload(file.current);
       }
 
+      // setContent(stateToHTML(editorState.getCurrentContent()));
+
       await saveProject({
       	title,
-        content,
+        content: stateToHTML(editorState.getCurrentContent()),
         is_public,
         theme_biodiv,
         theme_culture,
@@ -144,7 +155,6 @@ export default function EditProject() {
   }
 
   function saveProject(project) {
-  	console.log(project);
     return API.put("goodglobe", `/projects/${id}`, {
       body: project
     });
@@ -155,7 +165,8 @@ export default function EditProject() {
   }
 
   function validateForm() {
-    return (content.length > 0 && title.length > 0);
+    return true;
+    // return (content.length > 0 && title.length > 0);
   }
 
   function handleFileChange(event) {
@@ -166,7 +177,6 @@ export default function EditProject() {
     setIsPublic((prev) => !prev);
     console.log(is_public)
   };
-
 
   return (
     <Container className="EditProject, {classes.paper}" maxWidth="xs">
@@ -189,18 +199,11 @@ export default function EditProject() {
               autoComplete="title"
               autoFocus
             />
-            <TextField
-              value={content}
-              onChange={e => setContent(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="content"
-              label="Content"
-              name="content"
-              autoComplete="content"
-              autoFocus
+            <Editor
+              spellCheck
+              ref={editor}
+              editorState={editorState}
+              onChange={editorState => setEditorState(editorState)}
             />
             <TextField
               value={theme_biodiv}

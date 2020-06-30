@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -14,8 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {stateToHTML} from 'draft-js-export-html';
-
-import Editor from './Editor';
+import {Editor, EditorState} from 'draft-js';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,6 +41,12 @@ export default function CreateProject() {
   const classes = useStyles();
   const file = useRef(null);
   const history = useHistory();
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  const editor = useRef(null);
 
   const [fields, handleFieldChange] = useFormFields({
     title: "",
@@ -71,10 +76,10 @@ export default function CreateProject() {
 
     try {
 
-      console.log(fields.content)
       
       fields.attachment = file.current ? await s3Upload(file.current) : null;
-      // fields.content = "" ? "" : stateToHTML(fields.content.getCurrentContent());
+
+      fields.content = stateToHTML(editorState.getCurrentContent());
 
       await createProject({ ...fields });
       history.push("/");
@@ -98,6 +103,14 @@ export default function CreateProject() {
   function handleFileChange(event) {
     file.current = event.target.files[0];
   }
+
+  // function setState(value) {
+  //   if (value) {
+  //     return EditorState.createWithContent(stateFromHTML(value))
+  //   } else {
+  //     return EditorState.createEmpty()
+  //   }
+  // }
 
   return (
     <Container className="CreateProject, {classes.paper}" maxWidth="xs">
@@ -206,7 +219,12 @@ export default function CreateProject() {
               autoFocus
             />
             <Input id="file" type="file" onChange={handleFileChange}/>
-            <Editor value={fields.content} onChange={handleFieldChange}/>
+            <Editor
+              spellCheck
+              ref={editor}
+              editorState={editorState}
+              onChange={editorState => setEditorState(editorState)}
+            />
             <Button
               type="submit"
               fullWidth

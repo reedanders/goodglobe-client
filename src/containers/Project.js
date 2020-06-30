@@ -69,6 +69,7 @@ export default function Blog() {
                 Background
               </Typography>
               <Divider />
+              <Typography dangerouslySetInnerHTML={{ __html: project.content }} />
             </Grid>
             <Grid item md={4}>
               <SidebarCard project={project}/>
