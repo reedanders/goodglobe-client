@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import Editor from './Editor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -127,19 +128,7 @@ export default function CreateProject() {
               autoComplete="pitch"
               autoFocus
             />
-            <TextField
-              value={fields.content}
-              onChange={handleFieldChange}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="content"
-              label="Content"
-              name="content"
-              autoComplete="content"
-              autoFocus
-            />
+            
             <TextField
               value={fields.theme_biodiv}
               onChange={handleFieldChange}
@@ -211,6 +200,7 @@ export default function CreateProject() {
               autoFocus
             />
             <Input id="file" type="file" onChange={handleFileChange}/>
+            <Editor value={fields.content} onChange={handleFieldChange}/>
             <Button
               type="submit"
               fullWidth
