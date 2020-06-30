@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 
 import ProjectCallCard from './ProjectCallCard';
 import SidebarCard from './SidebarCard';
+import ObjectiveStepper from './ObjectiveStepper';
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -69,7 +70,12 @@ export default function Blog() {
                 Background
               </Typography>
               <Divider />
-              <Typography dangerouslySetInnerHTML={{ __html: project.content }} />
+              <Typography dangerouslySetInnerHTML={{ __html: project.content }} gutterBottom/>
+              <Typography variant="h6" gutterBottom>
+                Objectives
+              </Typography>
+              <Divider />
+              <ObjectiveStepper/>
             </Grid>
             <Grid item md={4}>
               <SidebarCard project={project}/>
