@@ -132,7 +132,7 @@ export default function SideBarCard(props) {
 	      	</Grid>
 	      	<Grid item>
 		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Carbon Sink
+		        	Carbon Mitigation
 		      	</Typography>
 	      		<Slider className={classes.sliderColor}
 			        defaultValue={props.project.theme_carbon}
