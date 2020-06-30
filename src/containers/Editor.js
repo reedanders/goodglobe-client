@@ -1,18 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Editor, EditorState} from 'draft-js';
-import {stateToHTML} from 'draft-js-export-html';
 import {stateFromHTML} from 'draft-js-import-html';
 
-export default function MyEditor(props) {
+function CustomEditor(props) {
+  const { value } = props;
+
   const [editorState, setEditorState] = React.useState(
-    setState(props.value)
+    setState(value)
   );
 
   const editor = React.useRef(null);
 
-  function setState(value) {
-    if (value) {
-      return EditorState.createWithContent(stateFromHTML(props.value))
+  function setState(parentValue) {
+    if (parentValue) {
+      return EditorState.createWithContent(stateFromHTML(parentValue))
     } else {
       return EditorState.createEmpty()
     }
@@ -46,3 +48,9 @@ export default function MyEditor(props) {
     </div>
   );
 }
+
+CustomEditor.propTypes = {
+  value: PropTypes.string.isRequired,
+};
+
+export default (CustomEditor);

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {stateToHTML} from 'draft-js-export-html';
 
 import Editor from './Editor';
 
@@ -69,8 +70,12 @@ export default function CreateProject() {
     }
 
     try {
+
+      console.log(fields.content)
+      
       fields.attachment = file.current ? await s3Upload(file.current) : null;
-      // fields.attachmentUrl = file.current ? await s3GetUrl(file.current) : null;
+      // fields.content = "" ? "" : stateToHTML(fields.content.getCurrentContent());
+
       await createProject({ ...fields });
       history.push("/");
     } catch (e) {
@@ -86,7 +91,8 @@ export default function CreateProject() {
   }
 
   function validateForm() {
-    return fields.content.length > 0 && fields.title.length > 0;
+    // return fields.content.length > 0 && fields.title.length > 0;
+    return true;
   }
 
   function handleFileChange(event) {
