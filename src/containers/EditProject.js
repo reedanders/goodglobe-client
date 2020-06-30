@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
-import { API, Storage, Auth } from "aws-amplify";
+import { API, Storage } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
@@ -43,8 +43,6 @@ export default function EditProject() {
   const history = useHistory();
 
   const [project, setProject] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
   
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -65,7 +63,6 @@ export default function EditProject() {
 
     async function onLoad() {
       try {
-        const user = await Auth.currentAuthenticatedUser();
         const project = await loadProject();
         setProject(project);
         console.log(project);
@@ -106,8 +103,6 @@ export default function EditProject() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
       if (file.current) {
         attachment = await s3Upload(file.current);
@@ -125,7 +120,6 @@ export default function EditProject() {
       history.push("/");
     } catch (e) {
       onError(e);
-      setIsLoading(false);
     }
   }
 
@@ -141,14 +135,11 @@ export default function EditProject() {
       return;
     }
 
-    setIsDeleting(true);
-
     try {
       await deleteProject();
       history.push("/");
     } catch (e) {
       onError(e);
-      setIsDeleting(false);
     }
   }
 
@@ -163,19 +154,8 @@ export default function EditProject() {
     return API.del("goodglobe", `/projects/${id}`);
   }
 
-
-  function createProject(project) {
-    return API.post("goodglobe", "/projects", {
-      body: project
-    });
-  }
-
   function validateForm() {
     return (content.length > 0 && title.length > 0);
-  }
-
-  function formatFilename(str) {
-    return str.replace(/^\w+-/, "");
   }
 
   function handleFileChange(event) {

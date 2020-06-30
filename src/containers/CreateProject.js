@@ -1,10 +1,9 @@
-import React, { useRef, useState } from "react";
-import { Auth } from 'aws-amplify'
+import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
 import { API } from "aws-amplify";
-import { s3Upload, s3GetUrl } from "../libs/awsLib";
+import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
 import Button from '@material-ui/core/Button';
@@ -41,7 +40,6 @@ export default function CreateProject() {
   const classes = useStyles();
   const file = useRef(null);
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(false);
 
   const [fields, handleFieldChange] = useFormFields({
     title: "",
@@ -69,8 +67,6 @@ export default function CreateProject() {
       return;
     }
 
-    setIsLoading(true);
-
     try {
       fields.attachment = file.current ? await s3Upload(file.current) : null;
       // fields.attachmentUrl = file.current ? await s3GetUrl(file.current) : null;
@@ -78,7 +74,6 @@ export default function CreateProject() {
       history.push("/");
     } catch (e) {
       onError(e);
-      setIsLoading(false);
     }
   }
 
@@ -112,6 +107,7 @@ export default function CreateProject() {
               margin="normal"
               required
               fullWidth
+              max="55"
               id="title"
               label="Title"
               name="title"

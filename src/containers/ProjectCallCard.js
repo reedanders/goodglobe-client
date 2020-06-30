@@ -68,7 +68,7 @@ export default function MediaControlCard(props) {
     }
 
     onLoad();
-  }, []);
+  }, );
 
   return (
     <Paper className={classes.root}>

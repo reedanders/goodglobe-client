@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: ""
@@ -55,14 +54,11 @@ export default function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setIsLoading(true);
-
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
     } catch (e) {
       onError(e);
-      setIsLoading(false);
     }
   }
 

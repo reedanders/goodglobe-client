@@ -6,9 +6,6 @@ import { onError } from "../libs/errorLib";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Title from '../containers/Title';
 import Paper from '@material-ui/core/Paper';
@@ -29,14 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EditUser() {
   const history = useHistory();
   const classes = useStyles();
-  const [codeSent, setCodeSent] = useState(false);
-  // const [fields, handleFieldChange] = useFormFields({
-  //   code: "",
-  //   email: "",
-  // });
-  const [isConfirming, setIsConfirming] = useState(false);
-  const [isSendingCode, setIsSendingCode] = useState(false);
-
+  
   const [nickname, setNickname] = useState("");
   const [fullname, setFullname] = useState("");
 
@@ -60,7 +50,7 @@ export default function EditUser() {
 
     try {
       const user = await Auth.currentAuthenticatedUser();
-      const response = await Auth.updateUserAttributes(user, { nickname: nickname });
+      // const response = await Auth.updateUserAttributes(user, { nickname: nickname });
       history.push("/");
     } catch (error) {
       onError(error);
@@ -112,7 +102,6 @@ export default function EditUser() {
           color="primary"
           className={classes.submit}
         >
-          Modify {isSendingCode ? "true" : "false"}
         </Button>
       </form>
       </Paper>

@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
@@ -63,7 +62,7 @@ export default function SideBarCard(props) {
     }
 
     onLoad();
-  }, [humanCurrent, humanTarget]);
+  }, );
 
   return (
     <Card className={classes.root}>

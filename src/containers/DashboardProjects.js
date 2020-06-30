@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { PageHeader, ListGroup, ListGroupItem, Jumbotron, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { useAppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
-import { LinkContainer } from "react-router-bootstrap";
 import { NavLink } from "react-router-dom"
 
 import { 
-	Grid, CircularProgress, Link, List, ListItem, Divider,
+	Grid, CircularProgress, List, ListItem, Button,
 	ListItemText, ListItemAvatar, Avatar, Typography, ListItemIcon,
 	Card, CardActionArea, CardActions, CardContent
 	} 
@@ -110,7 +109,7 @@ export default function Home() {
   function renderProjects() {
     return (
       <div className="projects">
-        <PageHeader>Your Projects</PageHeader>
+        <Typography variant="h5" component="h2">Your Projects</Typography>
         <Grid container justify="center">
           {isLoading ? <CircularProgress /> : ''}
         </Grid>

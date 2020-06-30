@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -59,8 +58,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
-const cards = [1, 2, 3];
 
 export default function MainFeaturedAlbum() {
   const classes = useStyles();

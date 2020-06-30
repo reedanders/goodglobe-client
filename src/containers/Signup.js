@@ -54,7 +54,6 @@ export default function Signup() {
   const history = useHistory();
   const [newUser, setNewUser] = useState(null);
   const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
     return (
@@ -73,7 +72,6 @@ export default function Signup() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setIsLoading(true);
 
     try {
       console.log(fields)
@@ -85,18 +83,14 @@ export default function Signup() {
           name: fields.full_name,
         },
       });
-      setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
       onError(e);
-      setIsLoading(false);
     }
   }
 
   async function handleConfirmationSubmit(event) {
     event.preventDefault();
-
-    setIsLoading(true);
 
     try {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
@@ -106,7 +100,6 @@ export default function Signup() {
       history.push("/");
     } catch (e) {
       onError(e);
-      setIsLoading(false);
     }
   }
 

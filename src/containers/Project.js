@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { onError } from "../libs/errorLib";
-import { useParams, useHistory } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
-import { s3Upload, s3GetUrl } from "../libs/awsLib";
-import config from "../config";
+import { useParams } from "react-router-dom";
+import { API } from "aws-amplify";
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -14,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import ProjectCallCard from './ProjectCallCard';
-import ProjectStepper from './ProjectStepper';
 import SidebarCard from './SidebarCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +25,7 @@ export default function Blog() {
   const matches = useMediaQuery('(min-width:960px)');
   const { id } = useParams();
   const [project, setProject] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     function loadProject() {
@@ -37,25 +34,27 @@ export default function Blog() {
       });
     }
 
+    function checkLoading() {
+      return typeof matches === 'boolean' ? setIsLoading(false) : "";
+    }
+
     async function onLoad() {
       try {
         const project = await loadProject();
-        // project.attachmentUrl = project.attachment ? await s3GetUrl(project.attachment) : "";
         setProject(project);
-        console.log(project);
-        const result = typeof matches === 'boolean' ? setIsLoading(false) : "";
+        checkLoading()
       } catch (e) {
         onError(e);
       }
     }
 
     onLoad();
-  }, [id]);
+  }, [id, matches]);
 
   return (
     <React.Fragment>
       <CssBaseline />
-      {project && (
+      {!isLoading && project && (
       <Container maxWidth="lg">
         <main>
           <ProjectCallCard project={project}/>

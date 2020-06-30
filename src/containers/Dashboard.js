@@ -1,23 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { Auth } from "aws-amplify";
 import { onError } from "../libs/errorLib";
-import { useHistory } from "react-router-dom";
-import PropTypes from 'prop-types';
 
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import HelpIcon from '@material-ui/icons/Help';
-import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -26,10 +18,8 @@ import Typography from '@material-ui/core/Typography';
 
 import DashboardTable from './DashboardTable';
 import DashboardProjects from './DashboardProjects';
-import EditUser from './EditUser';
 import Payment from './Payment';
 import TabPanel from '../components/TabPanel';
-import Navigator from './Navigator';
 
 
 const drawerWidth = 256;
@@ -106,7 +96,6 @@ export default function Dashboard(props) {
 
   const [selectedTab, setSelectedTab] = useState(indexToTabName[page]);
   const [user, setUser] = useState("");
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
 
@@ -121,11 +110,6 @@ export default function Dashboard(props) {
 
     onLoad();
   }, []);
-
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   function a11yProps(index) {
     return {
