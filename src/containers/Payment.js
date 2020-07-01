@@ -7,7 +7,6 @@ import BillingForm from "../components/BillingForm";
 import config from "../config";
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import EditUser from "./EditUser";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,7 +59,6 @@ export default function Payment() {
   return (
     <div className="Payment">
       <Paper className={classes.paper}>
-      <EditUser/>
       <StripeProvider stripe={stripe}>
         <Elements>
           <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />

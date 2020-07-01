@@ -49,8 +49,8 @@ export default function EditUser() {
     event.preventDefault();
 
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      const response = await Auth.updateUserAttributes(user, { nickname: nickname, name: fullname });
+      // const user = await Auth.currentAuthenticatedUser();
+      // const response = await Auth.updateUserAttributes(user, { nickname: nickname, name: full });
       history.push("/");
     } catch (error) {
       onError(error);
