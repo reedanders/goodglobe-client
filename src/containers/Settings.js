@@ -4,7 +4,8 @@ import { API } from "aws-amplify";
 import { onError } from "../libs/errorLib";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import BillingForm from "../components/BillingForm";
-import "./Settings.css";
+
+import EditUser  from '/EditUser';
 import config from "../config";
 
 export default function Settings() {

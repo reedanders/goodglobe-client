@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { useFormFields } from "../libs/hooksLib";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
@@ -53,13 +53,16 @@ export default function CreateProject() {
     pitch: "",
     content: "",
     attachment: null,
-    attachment_url: "temp.jpg",
     target_funding: 0,
     current_funding: 0,
     theme_biodiv: 0,
     theme_culture: 0,
     theme_carbon: 0,
     is_public: false,
+    practioner: false,
+    practioner_fullname: "",
+    practioner_image: "",
+
   });
 
   async function handleSubmit(event) {
@@ -80,6 +83,10 @@ export default function CreateProject() {
       fields.attachment = file.current ? await s3Upload(file.current) : null;
 
       fields.content = stateToHTML(editorState.getCurrentContent());
+
+      fields.practioner_fullname = Auth.user.attributes.name
+      fields.practioner_image = Auth.user.attributes.picture
+      // console.log(Auth.user.attributes)
 
       await createProject({ ...fields });
       history.push("/");

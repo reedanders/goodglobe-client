@@ -87,12 +87,13 @@ export default function SideBarCard(props) {
 	    </CardContent>
 	    <CardContent>
 	      <Typography gutterBottom variant="h6" component="h6">
-	        Pracitioner
+	        Practioner 
 	      </Typography>
 	      <Grid container direction="column" spacing={1}>
-	      	<Grid item><Avatar alt="Emy Sharp" src="/static/images/avatar/1.jpg" /></Grid>
-	      	<Grid item><Avatar alt="My Sharp" src="/static/images/avatar/1.jpg" /></Grid>
-	      	<Grid item><Avatar alt="Harp" src="/static/images/avatar/1.jpg" /></Grid>
+	      	<Grid container item spacing={1} alignItems="center">
+	      		<Grid item><Avatar alt={props.project.practioner_fullname} src={props.project.practioner_image} /></Grid>
+	      		<Grid item><Typography variant="subtitle2" component="h6">{props.project.practioner_fullname}</Typography></Grid>
+	      	</Grid>
 	      </Grid>
 	    </CardContent>
 	    <CardContent>

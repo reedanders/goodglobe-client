@@ -72,6 +72,7 @@ export default function Signup() {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    const avatar = Math.random().toString(36).substring(2);
 
     try {
       console.log(fields)
@@ -81,6 +82,8 @@ export default function Signup() {
         attributes: {
           nickname: fields.nick_name,
           name: fields.full_name,
+          picture: `https://avatars.dicebear.com/api/jdenticon/${avatar}.svg`,
+          updated_at: String(Date.now()),
         },
       });
       setNewUser(newUser);

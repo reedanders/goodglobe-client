@@ -50,7 +50,7 @@ export default function EditUser() {
 
     try {
       const user = await Auth.currentAuthenticatedUser();
-      // const response = await Auth.updateUserAttributes(user, { nickname: nickname });
+      const response = await Auth.updateUserAttributes(user, { nickname: nickname, name: fullname });
       history.push("/");
     } catch (error) {
       onError(error);
