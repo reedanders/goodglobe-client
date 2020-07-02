@@ -70,12 +70,28 @@ export default function EditUser() {
       const user = await Auth.currentAuthenticatedUser();
       const attachment = file.current ? await s3Upload(file.current) : picture;
 
-      await Auth.updateUserAttributes(user, { nickname: nickname, name: fullname, picture: attachment, updated_at: String(Date.now()) });
+      await Auth.updateUserAttributes(user, 
+        { nickname: nickname, 
+          name: fullname, 
+          picture: attachment, 
+          updated_at: String(Date.now()) });
+
+      // await updateProject({
+      //   practioner_fullname: fullname,
+      //   practioner_image: picture,
+      // });
+
       history.push("/");
     } catch (error) {
       onError(error);
     }
   }
+
+  // function updateProject(project) {
+  //   return API.put("goodglobe", `/projects/${id}`, {
+  //     body: project
+  //   });
+  // }
 
   function handleFileChange(event) {
     file.current = event.target.files[0];

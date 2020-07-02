@@ -6,7 +6,7 @@ import { onError } from "./libs/errorLib";
 import "./App.css";
 import Routes from "./Routes";
 import ErrorBoundary from "./components/ErrorBoundary";
-import logo from './assets/images/logo_full.png'
+import logo from './assets/images/logo_small.png'
 
 import { 
   AppBar, Container, Toolbar, Typography, Link, Button,
