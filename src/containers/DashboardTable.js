@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useAppContext } from "../libs/contextLib";
+import { onError } from "../libs/errorLib";
+import { API } from "aws-amplify";
+
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -9,25 +12,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-// Generate Order Data
-function createData(id, date, name, paymentMethod, amount, view) {
-  return { id, date, name, paymentMethod, amount, view };
-}
-
-const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'VISA ⠀•••• 3719', 312.44, "project"),
-  createData(1, '16 Mar, 2019', 'Paul McCartney',  'VISA ⠀•••• 2574', 866.99, "project"),
-  createData(2, '16 Mar, 2019', 'Tom Scholz',  'MC ⠀•••• 1253', 100.81, "project"),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'AMEX ⠀•••• 2000', 654.39, "project"),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'VISA ⠀•••• 5919', 212.79, "project"),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+import Title from './Title';
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -37,52 +25,112 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 936,
     margin: 'auto',
     overflow: 'hidden',
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
 }));
 
-export default function DashboardTable() {
+export default function DashboardTable(props) {
+
   const classes = useStyles();
-  return (
-    <Paper className={classes.paper}>
-      <Title>Recent Donations</Title>
-      {rows.length !== 0 ? (
-            <div>
+  const [projects, setProjects] = useState([]);
+  const { isAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function onLoad() {
+      if (!isAuthenticated) {
+        return;
+      }
+
+      try {
+        const projects = await loadProjects();
+        setProjects(projects);
+      } catch (e) {
+        onError(e);
+      }
+
+      setIsLoading(false);
+    }
+
+    onLoad();
+  }, [isAuthenticated]);
+
+  function loadProjects() {
+    return API.get("goodglobe", "/projects/user");
+  }
+
+  function renderCreate(){
+    return (
+      <Paper className={classes.paper}>
+      <Title>Start a Project</Title>
+      <Grid container >
+        <Grid item>
+          <Button variant="contained" color="primary" size="small" href="/projects/new">Create</Button>
+        </Grid>
+      </Grid>
+      
+    </Paper>
+      )
+  }
+
+  function renderTable() {
+    return (
+      <Paper className={classes.paper}>
+      <Title>Existing Projects</Title>
+      {projects.length !== 0 ? (
             <Table size="small">
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Project</TableCell>
-                  <TableCell>Payment Method</TableCell>
-                  <TableCell>Donation Amount</TableCell>
+                  <TableCell><Typography variant="overline" component="h6">Project</Typography></TableCell>
+                  <TableCell><Typography variant="overline" component="h6">Summary</Typography></TableCell>
+                  <TableCell><Typography variant="overline" component="h6">Status</Typography></TableCell>
                   <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.date}</TableCell>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.paymentMethod}</TableCell>
-                    <TableCell>{row.amount}</TableCell>
-                    <TableCell align="right"><Button variant="outlined" color="secondary" size="small" href={row.view}>Go to Project</Button></TableCell>
+                {projects.map((row) => (
+                  <TableRow key={row.projectId}>
+                    <TableCell>{row.title}</TableCell>
+                    <TableCell>{row.pitch}</TableCell>
+                    <TableCell>{ row.is_public ? "Public" : "Private" }</TableCell>
+                    <TableCell align="right"><Button variant="contained" color="secondary" size="small" href={`/projects/edit/${row.projectId}`}>Edit</Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <div className={classes.seeMore}>
-              <Link color="primary" href="#" onClick={preventDefault}>
-                See donation history
-              </Link>
-            </div>
-            </div>
             ) : (
                   <div>
                   <Grid container justify="center" alignItems="center">
-                    <Grid item><Typography variant="subtitle1" component="h2"> No recent donation information</Typography></Grid>
+                    <Grid item><Typography variant="subtitle1" component="h2"> No recent project information</Typography></Grid>
                   </Grid>
                   </div>
                   )}
     </Paper>
+    );
+  }
+
+  function renderPapers(){
+    return (
+        <div>
+          {renderCreate()}
+          {renderTable()}
+        </div>
+      );
+  }
+
+  function waitLoading() {
+    return (
+      <Grid container justify="center">
+        <CircularProgress />
+      </Grid>
+      );
+  }
+
+  return (
+
+    <div className="DashboardTable">
+      {isLoading ? waitLoading() : renderPapers()}
+    </div>
   );
 }

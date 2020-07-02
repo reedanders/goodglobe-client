@@ -78,7 +78,6 @@ export default function CreateProject() {
     }
 
     try {
-
       
       fields.attachment = file.current ? await s3Upload(file.current) : null;
 

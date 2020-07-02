@@ -39,7 +39,7 @@ export default function Home() {
 	}, [isAuthenticated]);
 
 	function loadProjects() {
-	  return API.get("goodglobe", "/projects");
+	  return API.get("goodglobe", "/projects/user");
 	}
 
   function renderProjectsList(projects) {

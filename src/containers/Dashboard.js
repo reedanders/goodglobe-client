@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6, 4),
     background: '#eaeff1',
   },
+  avatar: {
+    backgroundColor: 'white',
+  },
 }));
 
 export default function Dashboard(props) {
@@ -136,7 +139,7 @@ export default function Dashboard(props) {
           >
             <Toolbar>
               <Grid container alignItems="center" spacing={1}>
-                <Grid item><Avatar alt={user && user.attributes.name} src="/static/images/avatar/1.jpg" /></Grid>
+                <Grid item><Avatar className={classes.avatar} alt={user && user.attributes.name} src={user && user.attributes.picture} /></Grid>
                 <Grid item xs>
                   <Typography color="inherit" variant="h5" component="h1">
                     {user && user.attributes.name}
@@ -167,7 +170,7 @@ export default function Dashboard(props) {
           </AppBar>
           <TabPanel value={selectedTab} index={0}>
             <main className={classes.main}>
-              <DashboardTable />
+              <DashboardTable user={user}/>
             </main>
           </TabPanel>
           <TabPanel value={selectedTab} index={1}>
