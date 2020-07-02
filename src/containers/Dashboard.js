@@ -17,7 +17,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 import DashboardTable from './DashboardTable';
-import DashboardProjects from './DashboardProjects';
+import EditUser from './EditUser';
 import Payment from './Payment';
 import TabPanel from '../components/TabPanel';
 
@@ -88,12 +88,12 @@ export default function Dashboard(props) {
   const { page } = params;
   const tabNameToIndex = {
     0: "home",
-    1: "projects",
+    1: "profile",
     2: "settings"
   }
   const indexToTabName = {
     home: 0,
-    projects: 1,
+    profile: 1,
     settings: 2
   }
 
@@ -164,7 +164,7 @@ export default function Dashboard(props) {
           >
             <Tabs value={selectedTab} textColor="inherit" onChange={handleChange} aria-label="my account tabs">
               <Tab textColor="inherit" label="Home" {...a11yProps(0)}/>
-              <Tab textColor="inherit" label="Projects" {...a11yProps(1)}/>
+              <Tab textColor="inherit" label="Profile" {...a11yProps(1)}/>
               <Tab textColor="inherit" label="Settings" {...a11yProps(2)}/>
             </Tabs>
           </AppBar>
@@ -175,7 +175,7 @@ export default function Dashboard(props) {
           </TabPanel>
           <TabPanel value={selectedTab} index={1}>
             <main className={classes.main}>
-              <DashboardProjects/>
+              <EditUser/>
             </main>
           </TabPanel>
           <TabPanel value={selectedTab} index={2}>

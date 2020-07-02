@@ -64,7 +64,14 @@ export default function DashboardTable(props) {
     return (
       <Paper className={classes.paper}>
       <Title>Start a Project</Title>
-      <Grid container >
+      <Grid container spacing={2}>
+        <Grid item>
+          <Typography variant="body1" component="p">
+            This is text we need to update giving a brief overview of what a project is all about.
+            This is text we need to update giving a brief overview of what a project is all about.
+            Also it should look more pretty.
+          </Typography>
+        </Grid>
         <Grid item>
           <Button variant="contained" color="primary" size="small" href="/projects/new">Create</Button>
         </Grid>

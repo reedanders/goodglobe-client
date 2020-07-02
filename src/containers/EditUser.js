@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
+import { s3Upload } from "../libs/awsLib";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Title from '../containers/Title';
 import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
+import config from "../config";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,15 +24,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     padding: theme.spacing(2),
   },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 
 export default function EditUser() {
   const history = useHistory();
   const classes = useStyles();
-  
+  const file = useRef(null);
   const [nickname, setNickname] = useState("");
   const [fullname, setFullname] = useState("");
+  const [picture, setPicture] = useState("");
 
   useEffect(() => {
 
@@ -37,6 +45,7 @@ export default function EditUser() {
         const user = await Auth.currentAuthenticatedUser();
         setNickname(user.attributes.nickname);
         setFullname(user.attributes.name);
+        setPicture(user.attributes.picture);
       } catch (e) {
         onError(e);
       }
@@ -48,21 +57,32 @@ export default function EditUser() {
   async function handleUpdateClick(event) {
     event.preventDefault();
 
+    if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
+      alert(
+        `Please pick a file smaller than ${
+          config.MAX_ATTACHMENT_SIZE / 1000000
+        } MB.`
+      );
+      return;
+    }
+
     try {
-      // const user = await Auth.currentAuthenticatedUser();
-      // const response = await Auth.updateUserAttributes(user, { nickname: nickname, name: full });
+      const user = await Auth.currentAuthenticatedUser();
+      const attachment = file.current ? await s3Upload(file.current) : picture;
+
+      await Auth.updateUserAttributes(user, { nickname: nickname, name: fullname, picture: attachment, updated_at: String(Date.now()) });
       history.push("/");
     } catch (error) {
       onError(error);
     }
   }
 
-  // function validateEmailForm() {
-  //   return fields.email.length > 0;
-  // }
+  function handleFileChange(event) {
+    file.current = event.target.files[0];
+  }
 
   return (
-    <div className="EditUser">
+    <Container className="EditUser" maxWidth="xs">
       <CssBaseline />
       <Paper className={classes.paper}>
       <Title>
@@ -95,16 +115,17 @@ export default function EditUser() {
           autoComplete="fullname"
           autoFocus
         />
+        <Input id="file" type="file" onChange={handleFileChange}/>
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
-        >
+        >Submit
         </Button>
       </form>
       </Paper>
-    </div>
+    </Container>
   );
 }
