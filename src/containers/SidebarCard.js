@@ -41,7 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
   profileOffset: {
   	paddingLeft: theme.spacing(5)
-  }
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
 }));
 
 function numberWithCommas(x) {
@@ -94,7 +98,7 @@ export default function SideBarCard(props) {
 	      </Typography>
 	      <Grid container direction="column" spacing={1}>
 	      	<Grid container item spacing={1} alignItems="center">
-	      		<Grid item><Avatar alt={props.project.practioner_fullname} src={props.project.practioner_image} /></Grid>
+	      		<Grid item><Avatar className={classes.large} alt={props.project.practioner_fullname} src={props.project.practioner_image} /></Grid>
 	      		<Grid item><Typography variant="subtitle1" component="h6">{props.project.practioner_fullname}</Typography>
 	      		</Grid>
 	      	</Grid>

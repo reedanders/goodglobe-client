@@ -8,6 +8,8 @@ export async function s3Upload(file) {
 
   const stored = await Storage.put(filename, file, {
     contentType: file.type,
+    ACL: 'public-read'
+
   });
 
   const result = `https://${config.s3.BUCKET}.s3.amazonaws.com/public/${stored.key}`;
