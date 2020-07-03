@@ -18,6 +18,7 @@ import Input from '@material-ui/core/Input';
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
+import './Editor.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
