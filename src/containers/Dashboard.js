@@ -104,7 +104,7 @@ export default function Dashboard(props) {
 
     async function onLoad() {
       try {
-        const user = await Auth.currentAuthenticatedUser();
+        const user = await Auth.currentUserInfo();
         setUser(user)
       } catch (e) {
         onError(e);

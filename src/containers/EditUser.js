@@ -36,16 +36,20 @@ export default function EditUser() {
   const file = useRef(null);
   const [nickname, setNickname] = useState("");
   const [fullname, setFullname] = useState("");
+  const [profile, setProfile] = useState("");
   const [picture, setPicture] = useState("");
 
   useEffect(() => {
 
     async function onLoad() {
       try {
-        const user = await Auth.currentAuthenticatedUser();
+        const user = await Auth.currentUserInfo();
         setNickname(user.attributes.nickname);
         setFullname(user.attributes.name);
         setPicture(user.attributes.picture);
+        if( user.attributes.profile !== undefined ) {
+            setProfile(user.attributes.profile)
+        }
       } catch (e) {
         onError(e);
       }
@@ -74,11 +78,12 @@ export default function EditUser() {
         { nickname: nickname, 
           name: fullname, 
           picture: attachment, 
+          profile: profile,
           updated_at: String(Date.now()) });
-
       // await updateProject({
       //   practioner_fullname: fullname,
       //   practioner_image: picture,
+      //   practioner_profile: "Test profile",
       // });
 
       history.push("/");
@@ -129,6 +134,20 @@ export default function EditUser() {
           label="Full name"
           name="fullname"
           autoComplete="fullname"
+          autoFocus
+        />
+        <TextField
+          value={profile}
+          onChange={e => setProfile(e.target.value)}
+          variant="outlined"
+          margin="normal"
+          multiline
+          rows={3}
+          fullWidth
+          id="profile"
+          label="Profile"
+          name="profile"
+          autoComplete="profile"
           autoFocus
         />
         <Input id="file" type="file" onChange={handleFileChange}/>

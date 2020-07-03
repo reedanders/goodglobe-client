@@ -91,7 +91,7 @@ export default function DashboardTable(props) {
                 <TableRow>
                   <TableCell><Typography variant="overline" component="h6">Project</Typography></TableCell>
                   <TableCell><Typography variant="overline" component="h6">Summary</Typography></TableCell>
-                  <TableCell><Typography variant="overline" component="h6">Status</Typography></TableCell>
+                  <TableCell><Typography variant="overline" component="h6"></Typography></TableCell>
                   <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
@@ -100,7 +100,7 @@ export default function DashboardTable(props) {
                   <TableRow key={row.projectId}>
                     <TableCell>{row.title}</TableCell>
                     <TableCell>{row.pitch}</TableCell>
-                    <TableCell>{ row.is_public ? "Public" : "Private" }</TableCell>
+                    <TableCell>{ row.is_public ? <Button variant="outlined" color="secondary" size="small" href={`/project/${row.projectId}`}>Public</Button>: <Button disabled size="small">Private</Button> }</TableCell>
                     <TableCell align="right"><Button variant="contained" color="secondary" size="small" href={`/projects/edit/${row.projectId}`}>Edit</Button></TableCell>
                   </TableRow>
                 ))}
