@@ -17,6 +17,7 @@
     "draft-js-import-html": "^1.4.1",
     "material-ui-dropzone": "^3.2.1",
     "material-ui-image": "^3.2.3",
+    "mui-rte": "^1.23.1",
     "react": "^16.13.1",
     "react-bootstrap": "^0.33.1",
     "react-bulma-components": "^3.2.0",

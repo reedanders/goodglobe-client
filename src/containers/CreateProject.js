@@ -6,6 +6,7 @@ import { API, Auth } from "aws-amplify";
 import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
+import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -15,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
+import './Editor.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  divider:{
+    margin: theme.spacing(2)
+  },
+  editorTitle:{
+    paddingLeft: theme.spacing(1),
+    color: 'rgba(0, 0, 0, 0.5)'
+
+  }
 }));
 
 export default function CreateProject() {
@@ -153,7 +163,17 @@ export default function CreateProject() {
               autoComplete="pitch"
               autoFocus
             />
-            
+            <Divider className={classes.divider}/>
+            <Typography variant="body1" component="body1" className={classes.editorTitle}>Background</Typography>
+            <div className={classes.editor}>
+            <Editor
+              spellCheck
+              ref={editor}
+              editorState={editorState}
+              onChange={editorState => setEditorState(editorState)}
+              style={{background: 'blue'}}
+            /></div>
+            <Divider className={classes.divider}/>
             <TextField
               value={fields.theme_biodiv}
               onChange={handleFieldChange}
@@ -225,12 +245,6 @@ export default function CreateProject() {
               autoFocus
             />
             <Input id="file" type="file" onChange={handleFileChange}/>
-            <Editor
-              spellCheck
-              ref={editor}
-              editorState={editorState}
-              onChange={editorState => setEditorState(editorState)}
-            />
             <Button
               type="submit"
               fullWidth
