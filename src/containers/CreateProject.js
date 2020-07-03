@@ -72,6 +72,7 @@ export default function CreateProject() {
     practioner: false,
     practioner_fullname: "",
     practioner_image: "",
+    practioner_profile: "",
 
   });
 
@@ -93,9 +94,12 @@ export default function CreateProject() {
 
       fields.content = stateToHTML(editorState.getCurrentContent());
 
-      fields.practioner_fullname = Auth.user.attributes.name
-      fields.practioner_image = Auth.user.attributes.picture
-      // console.log(Auth.user.attributes)
+      const user = await Auth.currentUserInfo();
+      fields.practioner_fullname = user.attributes.name
+      fields.practioner_image = user.attributes.picture
+      if( user.attributes.profile !== undefined ) {
+            fields.practioner_profile = user.attributes.profile
+        }
 
       await createProject({ ...fields });
       history.push("/");
