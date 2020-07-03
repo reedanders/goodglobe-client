@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Auth } from "aws-amplify";
+import { API } from "aws-amplify";
 import { useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { s3Upload } from "../libs/awsLib";
@@ -80,11 +81,12 @@ export default function EditUser() {
           picture: attachment, 
           profile: profile,
           updated_at: String(Date.now()) });
-      // await updateProject({
-      //   practioner_fullname: fullname,
-      //   practioner_image: picture,
-      //   practioner_profile: "Test profile",
-      // });
+
+      await updateProject({
+        practioner_fullname: fullname,
+        practioner_image: picture,
+        practioner_profile: profile,
+      });
 
       history.push("/");
     } catch (error) {
@@ -92,11 +94,11 @@ export default function EditUser() {
     }
   }
 
-  // function updateProject(project) {
-  //   return API.put("goodglobe", `/projects/${id}`, {
-  //     body: project
-  //   });
-  // }
+  function updateProject(project) {
+    return API.put("goodglobe", `/projects/user/`, {
+      body: project
+    });
+  }
 
   function handleFileChange(event) {
     file.current = event.target.files[0];

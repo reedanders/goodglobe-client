@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   sliderColor: {
   	color: theme.palette.primary.main,
   	height: 8,
+  },
+  profileOffset: {
+  	paddingLeft: theme.spacing(5)
   }
 }));
 
@@ -92,7 +95,11 @@ export default function SideBarCard(props) {
 	      <Grid container direction="column" spacing={1}>
 	      	<Grid container item spacing={1} alignItems="center">
 	      		<Grid item><Avatar alt={props.project.practioner_fullname} src={props.project.practioner_image} /></Grid>
-	      		<Grid item><Typography variant="subtitle2" component="h6">{props.project.practioner_fullname}</Typography></Grid>
+	      		<Grid item><Typography variant="subtitle1" component="h6">{props.project.practioner_fullname}</Typography>
+	      		</Grid>
+	      	</Grid>
+	      	<Grid item>
+	      		<Typography variant="subtitle2" component="p" className={classes.profileOffset}>{props.project.practioner_profile}</Typography>
 	      	</Grid>
 	      </Grid>
 	    </CardContent>
