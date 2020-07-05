@@ -73,8 +73,14 @@ export default function CreateProject() {
     practioner_fullname: "",
     practioner_image: "",
     practioner_profile: "",
-
   });
+
+  const emptyObjective = {
+    "title" : "",
+    "description" : "",
+    "status" : ""
+  }
+  const [objectives, setObjectives] = useState([emptyObjective])
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -124,13 +130,16 @@ export default function CreateProject() {
     file.current = event.target.files[0];
   }
 
-  // function setState(value) {
-  //   if (value) {
-  //     return EditorState.createWithContent(stateFromHTML(value))
-  //   } else {
-  //     return EditorState.createEmpty()
-  //   }
-  // }
+  const handleObjectiveChange = index => e => {
+
+    console.log('index: ' + index);
+    console.log('property name: '+ e.target.name);
+    let newArr = [...objectives]; // copying the old datas array
+    newArr[index].title = e.target.value; // replace e.target.value with whatever you want to change it to
+
+    setObjectives(newArr); // ??
+    console.log(objectives)
+}
 
   return (
     <Container className="CreateProject, {classes.paper}" maxWidth="xs">
@@ -177,6 +186,16 @@ export default function CreateProject() {
               onChange={editorState => setEditorState(editorState)}
               style={{background: 'blue'}}
             /></div>
+            <Divider className={classes.divider}/>
+
+            <ul>
+              {objectives.map((data, index) => (
+                <li key={data.title} key={index}>
+                  <input type="text" name="title" value={data.title} onChange={handleObjectiveChange(index)} />
+                </li>
+              ))}
+            </ul>
+            
             <Divider className={classes.divider}/>
             <TextField
               value={fields.theme_biodiv}
