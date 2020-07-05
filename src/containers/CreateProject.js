@@ -8,6 +8,7 @@ import config from "../config";
 
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +17,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
@@ -157,6 +159,10 @@ export default function CreateProject() {
     return objectives[last].title !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
   }
 
+  const removeIndex = index => e => {
+    setObjectives(objectives.filter((_, i2) => i2 !== index));
+  }
+
   return (
     <Container className="CreateProject, {classes.paper}" maxWidth="sm">
       <CssBaseline />
@@ -236,6 +242,9 @@ export default function CreateProject() {
                   />
                 </Grid>
                 <Grid item xs={1} className={classes.objectiveTags}>
+                  <IconButton onClick={removeIndex(index)} aria-label="delete">
+                    <DeleteForeverIcon />
+                  </IconButton>
                 </Grid>
 
               </Grid>
