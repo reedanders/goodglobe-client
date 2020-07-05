@@ -14,6 +14,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Grid from '@material-ui/core/Grid';
+
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
 import './Editor.css';
@@ -40,10 +45,19 @@ const useStyles = makeStyles((theme) => ({
   divider:{
     margin: theme.spacing(2)
   },
-  editorTitle:{
+  editorTitle: {
     paddingLeft: theme.spacing(1),
     color: 'rgba(0, 0, 0, 0.5)'
-
+  },
+  objectiveTags : {
+    marginTop: theme.spacing(2),
+    marginRight: theme.spacing(1)
+  },
+  objectiveContainer: {
+    padding: theme.spacing(2),
+    border: 'solid gray 1px',
+    borderRadius: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   }
 }));
 
@@ -80,6 +94,7 @@ export default function CreateProject() {
     "description" : "",
     "status" : ""
   }
+
   const [objectives, setObjectives] = useState([emptyObjective])
 
   async function handleSubmit(event) {
@@ -132,17 +147,24 @@ export default function CreateProject() {
 
   const handleObjectiveChange = index => e => {
 
-    console.log('index: ' + index);
-    console.log('property name: '+ e.target.name);
+    const prop_name = e.target.name;
     let newArr = [...objectives]; // copying the old datas array
-    newArr[index].title = e.target.value; // replace e.target.value with whatever you want to change it to
+    newArr[index][prop_name] = e.target.value; // replace e.target.value with whatever you want to change it to
 
-    setObjectives(newArr); // ??
-    console.log(objectives)
-}
+    setObjectives(newArr);
+  }
+
+  function addObjective () {
+    const last = objectives.length - 1;
+    return objectives[last].title !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
+  }
+
+  function deleteObjective (index) {
+
+  }
 
   return (
-    <Container className="CreateProject, {classes.paper}" maxWidth="xs">
+    <Container className="CreateProject, {classes.paper}" maxWidth="sm">
       <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -177,7 +199,7 @@ export default function CreateProject() {
               autoFocus
             />
             <Divider className={classes.divider}/>
-            <Typography variant="body1" component="body1" className={classes.editorTitle}>Background</Typography>
+            <Typography variant="body1" component="p" className={classes.editorTitle}>Background</Typography>
             <div className={classes.editor}>
             <Editor
               spellCheck
@@ -187,14 +209,48 @@ export default function CreateProject() {
               style={{background: 'blue'}}
             /></div>
             <Divider className={classes.divider}/>
+            <Typography variant="h6" component="h6" gutterBottom>Objectives</Typography>
+            {objectives.map((data, index) => (
+              <div key={index} className={classes.objectiveContainer}>
+              <Grid container justify="space-between" spacing={3}>
+                <Grid item xs={10}>
+                  <TextField
+                    value={data.title}
+                    onChange={handleObjectiveChange(index)}
+                    variant="outlined"
+                    margin="normal"
+                    type="text"
+                    fullWidth
+                    id="title"
+                    label="Objective Title"
+                    name="title"
+                    autoComplete="title"
+                    autoFocus
+                  />
+                  <TextField
+                    value={data.description}
+                    onChange={handleObjectiveChange(index)}
+                    variant="outlined"
+                    margin="normal"
+                    type="text"
+                    fullWidth
+                    id="description"
+                    label="Objective Description"
+                    name="description"
+                    autoComplete="description"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={1} className={classes.objectiveTags}>
+                  <IconButton aria-label="delete">
+                    <DeleteForeverIcon />
+                  </IconButton>
+                </Grid>
 
-            <ul>
-              {objectives.map((data, index) => (
-                <li key={data.title} key={index}>
-                  <input type="text" name="title" value={data.title} onChange={handleObjectiveChange(index)} />
-                </li>
-              ))}
-            </ul>
+              </Grid>
+              </div>
+            ))}
+            <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
             
             <Divider className={classes.divider}/>
             <TextField
