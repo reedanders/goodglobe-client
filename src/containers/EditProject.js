@@ -16,7 +16,9 @@ import Switch from '@material-ui/core/Switch';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
@@ -41,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  divider:{
+    margin: theme.spacing(2)
   },
   objectiveTags : {
     marginTop: theme.spacing(2),
@@ -95,8 +100,7 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         setProject(project);
-        console.log(project);
-        const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment} = project;
+        const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment, objectives} = project;
 
         if (attachment) {
           project.attachmentURL = await Storage.vault.get(attachment);
@@ -110,15 +114,14 @@ export default function EditProject() {
         setTheme_carbon(theme_carbon);
         setProject(project);
         setObjectives(objectives);
-        
+
       } catch (e) {
-        console.log(e);
         onError(e);
       }
     }
 
     onLoad();
-  }, );
+  }, [id] );
 
 
   async function handleSubmit(event) {
@@ -199,7 +202,6 @@ export default function EditProject() {
 
   const toggleChecked = () => {
     setIsPublic((prev) => !prev);
-    console.log(is_public)
   };
 
   const handleObjectiveChange = index => e => {
@@ -215,6 +217,10 @@ export default function EditProject() {
     const last = objectives.length - 1;
     return objectives[last].title !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
   };
+
+  const removeIndex = index => e => {
+    setObjectives(objectives.filter((_, i2) => i2 !== index));
+  }
 
   return (
     <Container className="EditProject, {classes.paper}" maxWidth="xs">
@@ -277,6 +283,9 @@ export default function EditProject() {
                     />
                   </Grid>
                   <Grid item xs={1} className={classes.objectiveTags}>
+                    <IconButton onClick={removeIndex(index)} aria-label="delete">
+                      <DeleteForeverIcon />
+                    </IconButton>
                   </Grid>
 
                 </Grid>
