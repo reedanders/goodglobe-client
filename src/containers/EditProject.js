@@ -129,7 +129,7 @@ export default function EditProject() {
         theme_carbon,
         attachment: attachment || project.attachment
       });
-      history.push("/");
+      history.push("/dashboard");
     } catch (e) {
       onError(e);
     }

@@ -75,7 +75,7 @@ export default function Blog() {
                 Objectives
               </Typography>
               <Divider />
-              <ObjectiveStepper/>
+              <ObjectiveStepper project={project}/>
             </Grid>
             <Grid item md={4}>
               <SidebarCard project={project}/>

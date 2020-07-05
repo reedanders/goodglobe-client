@@ -15,8 +15,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Grid from '@material-ui/core/Grid';
 
 import {stateToHTML} from 'draft-js-export-html';
@@ -122,8 +120,8 @@ export default function CreateProject() {
             fields.practioner_profile = user.attributes.profile
         }
 
-      await createProject({ ...fields });
-      history.push("/");
+      await createProject({ ...fields, objectives });
+      history.push("/dashboard");
     } catch (e) {
       onError(e);
     }
@@ -157,10 +155,6 @@ export default function CreateProject() {
   function addObjective () {
     const last = objectives.length - 1;
     return objectives[last].title !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
-  }
-
-  function deleteObjective (index) {
-
   }
 
   return (
@@ -242,9 +236,6 @@ export default function CreateProject() {
                   />
                 </Grid>
                 <Grid item xs={1} className={classes.objectiveTags}>
-                  <IconButton aria-label="delete">
-                    <DeleteForeverIcon />
-                  </IconButton>
                 </Grid>
 
               </Grid>
