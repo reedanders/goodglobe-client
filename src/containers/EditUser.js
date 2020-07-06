@@ -84,7 +84,7 @@ export default function EditUser() {
 
       await updateProject({
         practioner_fullname: fullname,
-        practioner_image: picture,
+        practioner_image: attachment,
         practioner_profile: profile,
       });
 
