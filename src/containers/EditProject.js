@@ -175,7 +175,7 @@ export default function EditProject() {
 
     try {
       await deleteProject();
-      history.push("/");
+      history.push("/dashboard");
     } catch (e) {
       onError(e);
     }
@@ -192,8 +192,7 @@ export default function EditProject() {
   };
 
   function validateForm() {
-    return true;
-    // return (content.length > 0 && title.length > 0);
+    return (title.length > 0 && title.length < 55);
   };
 
   function handleFileChange(event) {
@@ -207,8 +206,8 @@ export default function EditProject() {
   const handleObjectiveChange = index => e => {
 
     const prop_name = e.target.name;
-    let newArr = [...objectives]; // copying the old datas array
-    newArr[index][prop_name] = e.target.value; // replace e.target.value with whatever you want to change it to
+    let newArr = [...objectives];
+    newArr[index][prop_name] = e.target.value; 
 
     setObjectives(newArr);
   };
@@ -223,7 +222,7 @@ export default function EditProject() {
   }
 
   return (
-    <Container className="EditProject, {classes.paper}" maxWidth="xs">
+    <Container className="EditProject, {classes.paper}" maxWidth="sm">
       <CssBaseline />
         {project && (<div className={classes.paper}>
           <Typography component="h1" variant="h5">

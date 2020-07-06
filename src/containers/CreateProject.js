@@ -137,8 +137,7 @@ export default function CreateProject() {
   }
 
   function validateForm() {
-    // return fields.content.length > 0 && fields.title.length > 0;
-    return true;
+    return (fields.content.length > 10 && fields.title.length > 0 && fields.title.length < 55);
   }
 
   function handleFileChange(event) {
@@ -148,8 +147,8 @@ export default function CreateProject() {
   const handleObjectiveChange = index => e => {
 
     const prop_name = e.target.name;
-    let newArr = [...objectives]; // copying the old datas array
-    newArr[index][prop_name] = e.target.value; // replace e.target.value with whatever you want to change it to
+    let newArr = [...objectives]; 
+    newArr[index][prop_name] = e.target.value; 
 
     setObjectives(newArr);
   }

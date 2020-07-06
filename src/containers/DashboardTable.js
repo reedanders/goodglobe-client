@@ -67,9 +67,9 @@ export default function DashboardTable(props) {
       <Grid container spacing={2}>
         <Grid item>
           <Typography variant="body1" component="p">
-            This is text we need to update giving a brief overview of what a project is all about.
-            This is text we need to update giving a brief overview of what a project is all about.
-            Also it should look more pretty.
+            Get started creating a project as a early user of GoodGlobe. After creating a project, 
+            you can you'll be able to edit it content in this dashboard. Please contact Ingmar with 
+            questions and features you'd like us to add.
           </Typography>
         </Grid>
         <Grid item>
