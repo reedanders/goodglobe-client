@@ -137,7 +137,7 @@ export default function CreateProject() {
   }
 
   function validateForm() {
-    return (fields.content.length > 10 && fields.title.length > 0 && fields.title.length < 55);
+    return (fields.title.length > 0 && fields.title.length < 55);
   }
 
   function handleFileChange(event) {
