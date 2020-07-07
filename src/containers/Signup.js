@@ -161,7 +161,7 @@ export default function Signup() {
         Signup
       </Typography>
 
-      <form className={classes.form} onSubmit={handleSubmit} noValidate>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
             value={fields.email}
             onChange={handleFieldChange}
@@ -186,8 +186,6 @@ export default function Signup() {
           label="Nick Name"
           name="nick_name"
           autoComplete="nick_name"
-          autoFocus
-          helperText="The short name we will call you by."
         />
         <TextField
           value={fields.full_name}
@@ -200,8 +198,6 @@ export default function Signup() {
           label="Full Name"
           name="full_name"
           autoComplete="full_name"
-          autoFocus
-          helperText="The full name we will include on your public profile."
         />
         <TextField
           value={fields.password}
