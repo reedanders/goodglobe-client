@@ -179,6 +179,7 @@ export default function EditProject() {
     } catch (e) {
       onError(e);
     }
+    
   };
 
   function saveProject(project) {

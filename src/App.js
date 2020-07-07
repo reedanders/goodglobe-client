@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { AppContext } from "./libs/contextLib";
 import { Auth } from "aws-amplify";
+import CookieConsent from "react-cookie-consent";
+
+import { AppContext } from "./libs/contextLib";
 import { onError } from "./libs/errorLib";
-import "./App.css";
 import Routes from "./Routes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import logo from './assets/images/logo_small.png';
+
 
 import { 
   AppBar, Container, Toolbar, Typography, Link, Button,
@@ -128,6 +130,17 @@ function App() {
             <Routes />
           </AppContext.Provider>
         </ErrorBoundary>
+
+        <CookieConsent
+          location="bottom"
+          buttonText="Accept"
+          cookieName="GoodGlobeCookieConsent"
+          style={{ fontFamily: "Lato,Arial,sans-serif", background: "#2B373B" }}
+          buttonStyle={{ backgroundColor: "#CCC5E8", fontFamily: "Lato,Arial,sans-serif", fontSize: "13px" }}
+          expires={150}
+        >
+          This website uses cookies to enhance your experience.{" "}
+        </CookieConsent>
 
         {/* Footer */}
         <footer className={classes.footer}>
