@@ -5,12 +5,20 @@ import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 import { NavLink } from "react-router-dom"
 
-import { 
-	Grid, CircularProgress, List, ListItem, Button,
-	ListItemText, ListItemAvatar, Avatar, Typography, ListItemIcon,
-	Card, CardActionArea, CardActions, CardContent
-	} 
-	from '@material-ui/core';
+import Grid from '@material-ui/core/Inbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 import InboxIcon from '@material-ui/icons/Inbox';
 
