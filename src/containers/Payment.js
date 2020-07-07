@@ -7,6 +7,7 @@ import BillingForm from "../components/BillingForm";
 import config from "../config";
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,9 +25,19 @@ export default function Payment() {
   const [isLoading, setIsLoading] = useState(false);
   const [stripe, setStripe] = useState(null);
 
+  const { enqueueSnackbar } = useSnackbar();
+  const message = "Heads up! This is a demo website. We'll accept payments soon.";
+
   useEffect(() => {
     setStripe(window.Stripe(config.STRIPE_KEY));
-  }, []);
+    enqueueSnackbar(message , {
+        variant: 'info',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+        },
+      });
+    }, [enqueueSnackbar]);
 
   function billUser(details) {
     return API.post("goodglobe", "/billing", {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import CookieConsent from "react-cookie-consent";
+import { SnackbarProvider } from 'notistack';
 
 import { AppContext } from "./libs/contextLib";
 import { onError } from "./libs/errorLib";
@@ -43,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
-
 }));
 
 function Copyright() {
@@ -127,7 +127,9 @@ function App() {
 
         <ErrorBoundary>
           <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <SnackbarProvider maxSnack={1}>
             <Routes />
+          </SnackbarProvider>
           </AppContext.Provider>
         </ErrorBoundary>
 

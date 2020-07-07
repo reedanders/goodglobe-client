@@ -252,7 +252,7 @@ ReactDOM.render(
    <Router>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+        <App />
     </ThemeProvider>
    </Router>
   </React.StrictMode>,

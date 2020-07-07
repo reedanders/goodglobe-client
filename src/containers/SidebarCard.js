@@ -13,6 +13,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 
+import { useSnackbar } from 'notistack';
+
 import ProgressFunding from './ProgressFunding';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +63,10 @@ export default function SideBarCard(props) {
   const [humanTarget, setHumanTarget] = useState("");
   const [progressValue, setProgressValue] = useState(0);
 
+  const [isNotify, setIsNotify] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const message = "Heads up! This is a demo website. We'll accept payments soon.";
+
   useEffect(() => {
     async function onLoad() {
     	setHumanTarget(numberWithCommas(props.project.target_funding));
@@ -70,6 +76,22 @@ export default function SideBarCard(props) {
 
     onLoad();
   }, );
+
+  function handleDonate () {
+
+  	if (!isNotify) {
+  		setIsNotify(true);
+	  	enqueueSnackbar(message , {
+	        variant: 'info',
+	        anchorOrigin: {
+	            vertical: 'top',
+	            horizontal: 'center',
+	        }
+	      });
+  	} else {
+  		return
+  	}
+  };
 
   return (
     <Card className={classes.root}>
@@ -81,7 +103,7 @@ export default function SideBarCard(props) {
 	      <ProgressFunding value={progressValue}/>
 	      <Grid className={classes.cardButtonGrid} container spacing={2} direction="column" justify="center" alignItems="stretch">
 	        <Grid item>
-	        <Button className={classes.cardButton} variant="contained" color="secondary" size="large">
+	        <Button className={classes.cardButton} onClick={handleDonate} variant="contained" color="secondary" size="large">
 	          Donate
 	        </Button>
 	        </Grid>
