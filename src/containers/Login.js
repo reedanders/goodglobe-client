@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
-  const { userHasAuthenticated } = useAppContext();
+  const { userHasAuthenticated, isFirst } = useAppContext();
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: ""
@@ -66,6 +66,7 @@ export default function Login() {
   }
 
   async function handleSubmit(event) {
+    console.log(isFirst)
     event.preventDefault();
 
     try {

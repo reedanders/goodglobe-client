@@ -65,7 +65,7 @@ export default function SideBarCard(props) {
 
   const [isNotify, setIsNotify] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  const message = "Heads up! This is a demo website. We'll accept payments soon.";
+  const message = "Thanks for your interest! This is a demo website. We'll accept payments soon.";
 
   useEffect(() => {
     async function onLoad() {

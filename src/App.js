@@ -64,6 +64,7 @@ function App() {
   const history = useHistory();
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isFirst, setIsFirst] = useState(true);
 
   const classes = useStyles();
 
@@ -126,7 +127,7 @@ function App() {
           {/* End Header */}
 
         <ErrorBoundary>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, isFirst, setIsFirst }}>
           <SnackbarProvider maxSnack={1}>
             <Routes />
           </SnackbarProvider>

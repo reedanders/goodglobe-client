@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 
-import { 
-  Grid, Typography, Container, Button
-  } 
-  from '@material-ui/core';
-
-import { useSnackbar } from 'notistack';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 import MainFeaturedProject from './MainFeaturedProject';
 import MainQuickAbout from './MainQuickAbout';
@@ -36,20 +34,6 @@ const mainFeaturedProject = {
 
 export default function Landing() {
 	const classes = useStyles();
-
-	const { enqueueSnackbar } = useSnackbar();
-	const message = "Heads up! This is a demo website. We'll accept payments soon.";
-
-	useEffect(() => {
-	    enqueueSnackbar(message, {
-	    	variant: 'info',
-	    	anchorOrigin: {
-		        vertical: 'top',
-		        horizontal: 'center',
-		    },
-		    preventDuplicate: true,
-	    });
-	  }, [enqueueSnackbar]);
 
 	return (
     <div className="Landing">
