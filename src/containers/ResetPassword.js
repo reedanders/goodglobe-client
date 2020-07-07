@@ -116,6 +116,7 @@ export default function ResetPassword() {
             name="email"
             autoComplete="email"
             autoFocus
+            helperText="We'll attempt to send a reset email to this email address."
           />
         <Button
           type="submit"

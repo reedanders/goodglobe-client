@@ -163,32 +163,6 @@ export default function Signup() {
 
       <form className={classes.form} onSubmit={handleSubmit} noValidate>
         <TextField
-            value={fields.nick_name}
-            onChange={handleFieldChange}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nick_name"
-            label="Nick Name"
-            name="nick_name"
-            autoComplete="nick_name"
-            autoFocus
-          />
-          <TextField
-            value={fields.full_name}
-            onChange={handleFieldChange}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="full_name"
-            label="Full Name"
-            name="full_name"
-            autoComplete="full_name"
-            autoFocus
-          />
-        <TextField
             value={fields.email}
             onChange={handleFieldChange}
             variant="outlined"
@@ -201,6 +175,34 @@ export default function Signup() {
             autoComplete="email"
             autoFocus
           />
+        <TextField
+          value={fields.nick_name}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="nick_name"
+          label="Nick Name"
+          name="nick_name"
+          autoComplete="nick_name"
+          autoFocus
+          helperText="The short name we will call you by."
+        />
+        <TextField
+          value={fields.full_name}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="full_name"
+          label="Full Name"
+          name="full_name"
+          autoComplete="full_name"
+          autoFocus
+          helperText="The full name we will include on your public profile."
+        />
         <TextField
           value={fields.password}
           onChange={handleFieldChange}
