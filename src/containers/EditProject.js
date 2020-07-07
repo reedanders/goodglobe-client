@@ -19,6 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
@@ -67,6 +68,8 @@ export default function EditProject() {
 
   const [project, setProject] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty()
   );
@@ -125,6 +128,7 @@ export default function EditProject() {
 
 
   async function handleSubmit(event) {
+
   	let attachment
 
     event.preventDefault();
@@ -139,6 +143,8 @@ export default function EditProject() {
     }
 
     try {
+      setIsLoading(true);
+      
       if (file.current) {
         attachment = await s3Upload(file.current);
       }
@@ -157,12 +163,14 @@ export default function EditProject() {
       });
       history.push("/dashboard");
     } catch (e) {
+      setIsLoading(false);
       onError(e);
     }
   };
 
 
   async function handleDelete(event) {
+
     event.preventDefault();
 
     const confirmed = window.confirm(
@@ -174,12 +182,14 @@ export default function EditProject() {
     }
 
     try {
+      setIsDeleting(true);
       await deleteProject();
       history.push("/dashboard");
     } catch (e) {
+      setIsDeleting(false);
       onError(e);
     }
-    
+
   };
 
   function saveProject(project) {
@@ -349,6 +359,7 @@ export default function EditProject() {
               color="primary"
               className={classes.submit}
               disabled={!validateForm()}
+              endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
             >
               Submit
             </Button>
@@ -356,6 +367,7 @@ export default function EditProject() {
               fullWidth
               variant="contained"
               onClick={handleDelete}
+              endIcon={isDeleting ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
             >
               Delete
             </Button>

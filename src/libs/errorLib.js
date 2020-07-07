@@ -37,5 +37,7 @@ export function onError(error) {
   }
 
   logError(error, errorInfo);
+  
+  return message
 
 }

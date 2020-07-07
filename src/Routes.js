@@ -11,6 +11,7 @@ import Dashboard from "./containers/Dashboard";
 import NotFound from "./containers/NotFound";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
   return (
@@ -26,6 +27,9 @@ export default function Routes() {
       </UnauthenticatedRoute>
       <UnauthenticatedRoute exact path="/signup">
         <Signup />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/login/reset">
+        <ResetPassword />
       </UnauthenticatedRoute>
       <AuthenticatedRoute exact path="/projects/new">
         <CreateProject />

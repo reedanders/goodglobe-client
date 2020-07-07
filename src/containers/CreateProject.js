@@ -18,6 +18,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
@@ -66,6 +67,7 @@ export default function CreateProject() {
   const file = useRef(null);
   const history = useHistory();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty()
   );
@@ -110,7 +112,7 @@ export default function CreateProject() {
     }
 
     try {
-      
+      setIsLoading(true);
       fields.attachment = file.current ? await s3Upload(file.current) : null;
 
       fields.content = stateToHTML(editorState.getCurrentContent());
@@ -125,6 +127,7 @@ export default function CreateProject() {
       await createProject({ ...fields, objectives });
       history.push("/dashboard");
     } catch (e) {
+      setIsLoading(false);
       onError(e);
     }
   }
@@ -330,6 +333,7 @@ export default function CreateProject() {
               color="primary"
               className={classes.submit}
               disabled={!validateForm()}
+              endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
             >
               Submit
             </Button>

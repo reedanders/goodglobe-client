@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -16,7 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,24 +43,38 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
   const { userHasAuthenticated } = useAppContext();
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: ""
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
+  }
+
+  function alertError(msg) {
+    enqueueSnackbar(msg , {
+      variant: 'error',
+      anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'center',
+      },
+    });
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
+      setIsLoading(true);
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
     } catch (e) {
-      onError(e);
+      setIsLoading(false);
+      alertError(onError(e));
     }
   }
 
@@ -110,12 +126,13 @@ export default function Login() {
           color="primary"
           className={classes.submit}
           disabled={!validateForm()}
+          endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
         >
           Login
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link href="/login/reset" variant="body2">
               Forgot password?
             </Link>
           </Grid>

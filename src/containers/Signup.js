@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,8 +54,10 @@ export default function Signup() {
     confirmationCode: "",
   });
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const [newUser, setNewUser] = useState(null);
   const { userHasAuthenticated } = useAppContext();
+  const { enqueueSnackbar } = useSnackbar();
 
   function validateForm() {
     return (
@@ -69,13 +73,23 @@ export default function Signup() {
     return fields.confirmationCode.length > 0;
   }
 
+  function alertError(msg) {
+    enqueueSnackbar(msg , {
+      variant: 'error',
+      anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'center',
+      },
+    });
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     const avatar = Math.random().toString(36).substring(2);
 
     try {
-      console.log(fields)
+      setIsLoading(true);
       const newUser = await Auth.signUp({
         username: fields.email,
         password: fields.password,
@@ -88,7 +102,8 @@ export default function Signup() {
       });
       setNewUser(newUser);
     } catch (e) {
-      onError(e);
+      setIsLoading(false);
+      alertError(onError(e));
     }
   }
 
@@ -102,7 +117,8 @@ export default function Signup() {
       userHasAuthenticated(true);
       history.push("/");
     } catch (e) {
-      onError(e);
+      const msg = onError(e);
+      alertError(msg);
     }
   }
 
@@ -216,6 +232,7 @@ export default function Signup() {
           color="primary"
           className={classes.submit}
           disabled={!validateForm()}
+          endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
         >
           Signup
         </Button>
