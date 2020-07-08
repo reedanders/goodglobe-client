@@ -39,7 +39,7 @@ export default function MainFeatureCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button className={classes.button} variant="outlined" color="primary" size="small">Explore projects</Button>
+        <Button href="/discover"className={classes.button} variant="outlined" color="primary" size="small">Explore projects</Button>
       </CardActions>
     </Card>
   );

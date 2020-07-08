@@ -73,7 +73,7 @@ export default function Landing() {
 		      		</Typography>
 	      		</Grid>
 	      		<Grid item>
-		      		<Button href="" size="small" color="primary">
+		      		<Button href="/dashboard" size="small" color="primary">
 			          Start a Project!
 			        </Button>
 			        <Button href="" size="small">

@@ -10,12 +10,13 @@ import Routes from "./Routes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import logo from './assets/images/logo_small.png';
 
-
-import { 
-  AppBar, Container, Toolbar, Typography, Link, Button,
-  Grid
-  } 
-  from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Container from '@material-ui/core/Container';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import { makeStyles } from '@material-ui/core/styles';
 

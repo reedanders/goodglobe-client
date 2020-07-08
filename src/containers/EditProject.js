@@ -251,7 +251,6 @@ export default function EditProject() {
               label="Title"
               name="title"
               autoComplete="title"
-              autoFocus
             />
             <Editor
               spellCheck
@@ -276,7 +275,6 @@ export default function EditProject() {
                       label="Objective Title"
                       name="title"
                       autoComplete="title"
-                      autoFocus
                     />
                     <TextField
                       value={data.description}
@@ -289,7 +287,6 @@ export default function EditProject() {
                       label="Objective Description"
                       name="description"
                       autoComplete="description"
-                      autoFocus
                     />
                   </Grid>
                   <Grid item xs={1} className={classes.objectiveTags}>
@@ -316,7 +313,6 @@ export default function EditProject() {
               label="Biodiversity Contribution"
               name="theme_biodiv"
               autoComplete="theme_biodiv"
-              autoFocus
             />
             <TextField
               value={theme_culture}
@@ -330,7 +326,6 @@ export default function EditProject() {
               label="Cultural Contribution"
               name="theme_culture"
               autoComplete="theme_culture"
-              autoFocus
             />
             <TextField
               value={theme_carbon}
@@ -344,7 +339,6 @@ export default function EditProject() {
               label="Carbon Mitigation"
               name="theme_carbon"
               autoComplete="theme_carbon"
-              autoFocus
             />
             <Input placeholder={project.attachment} id="file" type="file" onChange={handleFileChange}/>
             <FormControlLabel

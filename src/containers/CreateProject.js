@@ -198,7 +198,6 @@ export default function CreateProject() {
               label="Pitch"
               name="pitch"
               autoComplete="pitch"
-              autoFocus
             />
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Background</Typography>
@@ -227,7 +226,6 @@ export default function CreateProject() {
                     label="Objective Title"
                     name="title"
                     autoComplete="title"
-                    autoFocus
                   />
                   <TextField
                     value={data.description}
@@ -240,7 +238,6 @@ export default function CreateProject() {
                     label="Objective Description"
                     name="description"
                     autoComplete="description"
-                    autoFocus
                   />
                 </Grid>
                 <Grid item xs={1} className={classes.objectiveTags}>
@@ -267,7 +264,6 @@ export default function CreateProject() {
               label="Biodiversity Contribution"
               name="theme_biodiv"
               autoComplete="theme_biodiv"
-              autoFocus
             />
             <TextField
               value={fields.theme_culture}
@@ -281,7 +277,6 @@ export default function CreateProject() {
               label="Cultural Contribution"
               name="theme_culture"
               autoComplete="theme_culture"
-              autoFocus
             />
             <TextField
               value={fields.theme_carbon}
@@ -295,7 +290,6 @@ export default function CreateProject() {
               label="Carbon Mitigation"
               name="theme_carbon"
               autoComplete="theme_carbon"
-              autoFocus
             />
             <TextField
               value={fields.target_funding}
@@ -309,7 +303,6 @@ export default function CreateProject() {
               label="Target Funding"
               name="target_funding"
               autoComplete="target_funding"
-              autoFocus
             />
             <TextField
               value={fields.current_funding}
@@ -323,7 +316,6 @@ export default function CreateProject() {
               label="Current Funding"
               name="current_funding"
               autoComplete="current_funding"
-              autoFocus
             />
             <Input id="file" type="file" onChange={handleFileChange}/>
             <Button
