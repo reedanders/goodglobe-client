@@ -6,7 +6,7 @@ export function useFormFields(initialState) {
   return [
     fields,
     function(event) {
-      const value = event.target.type === 'text' ? event.target.value : event.target.checked;
+      const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
       setValues({
         ...fields,
         [event.target.id]: value
