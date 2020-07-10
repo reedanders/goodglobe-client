@@ -43,7 +43,6 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   function validateForm() {
     return (
       fields.name !== "" &&
-      fields.storage !== "" &&
       isCardComplete
     );
   }
@@ -68,20 +67,6 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
             Payment information
         </Title>
         <form className={classes.form} onSubmit={handleSubmitClick} noValidate>
-          <TextField
-          value={fields.storage}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          type="number"
-          fullWidth
-          id="storage"
-          label="Storage"
-          name="storage"
-          autoComplete="storage"
-          autoFocus
-        />
         <TextField
           value={fields.name}
           onChange={handleFieldChange}
@@ -112,7 +97,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
           className={classes.submit}
           disabled={!validateForm()}
         >
-          Purchase
+          Save
         </Button>
         </form>
       </div>
