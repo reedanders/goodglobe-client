@@ -49,8 +49,11 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(7),
   },
   divider:{
-    margin: theme.spacing(1)
+    margin: theme.spacing(2)
   },
+  themeInfo: {
+  	paddingLeft: theme.spacing(5)
+  }
 }));
 
 function numberWithCommas(x) {
@@ -136,7 +139,7 @@ export default function SideBarCard(props) {
 	      <Typography gutterBottom variant="h6" component="h6">
 	        Themes addressed
 	      </Typography>
-	      <Grid container direction="column" spacing={1}>
+	      <Grid container direction="column" spacing={1} className={classes.themeInfo}>
 	      {props.project.theme_biodiv ? 
 	      	<div>
 	      	<Grid item>
