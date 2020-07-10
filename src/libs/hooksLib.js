@@ -6,9 +6,10 @@ export function useFormFields(initialState) {
   return [
     fields,
     function(event) {
+      const value = event.target.type === 'text' ? event.target.value : event.target.checked;
       setValues({
         ...fields,
-        [event.target.id]: event.target.value
+        [event.target.id]: value
       });
     }
   ];

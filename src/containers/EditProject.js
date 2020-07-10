@@ -20,6 +20,10 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
@@ -77,10 +81,17 @@ export default function EditProject() {
   const editor = useRef(null);
   
   const [title, setTitle] = useState("");
-  const [theme_biodiv, setTheme_biodiv] = useState("");
-  const [theme_culture, setTheme_culture] = useState("");
-  const [theme_carbon, setTheme_carbon] = useState("");
   const [is_public, setIsPublic] = useState(false);
+
+  const [theme_biodiv, setTheme_biodiv] = useState("");
+  const [theme_habitat, setTheme_habitat] = useState("");
+  const [theme_air, setTheme_air] = useState("");
+  const [theme_waste, setTheme_waste] = useState("");
+  const [theme_water, setTheme_water] = useState("");
+  const [theme_resilience, setTheme_resilience] = useState("");
+  const [theme_mitigation, setTheme_mitigation] = useState("");
+  const [theme_awareness, setTheme_awareness] = useState("");
+  const [theme_knowledge, setTheme_knowledge] = useState("");
 
   const emptyObjective = {
     "title" : "",
@@ -103,7 +114,21 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         setProject(project);
-        const { title, content, is_public, theme_biodiv, theme_culture, theme_carbon, attachment, objectives} = project;
+        const { title, 
+                content, 
+                is_public, 
+                attachment, 
+                objectives,
+                theme_biodiv,
+                theme_habitat,
+                theme_air,
+                theme_waste,
+                theme_water,
+                theme_resilience,
+                theme_mitigation,
+                theme_awareness,
+                theme_knowledge,
+              } = project;
 
         if (attachment) {
           project.attachmentURL = await Storage.vault.get(attachment);
@@ -112,11 +137,17 @@ export default function EditProject() {
         setTitle(title);
         setEditorState(EditorState.createWithContent(stateFromHTML(content)));
         setIsPublic(is_public);
-        setTheme_biodiv(theme_biodiv);
-        setTheme_culture(theme_culture);
-        setTheme_carbon(theme_carbon);
-        setProject(project);
         setObjectives(objectives);
+        setTheme_biodiv(theme_biodiv);
+        setTheme_habitat(theme_habitat);
+        setTheme_air(theme_air);
+        setTheme_water(theme_water);
+        setTheme_waste(theme_waste);
+        setTheme_resilience(theme_resilience);
+        setTheme_mitigation(theme_mitigation);
+        setTheme_awareness(theme_awareness);
+        setTheme_knowledge(theme_knowledge);
+        setProject(project);
 
       } catch (e) {
         onError(e);
@@ -156,8 +187,14 @@ export default function EditProject() {
         content: stateToHTML(editorState.getCurrentContent()),
         is_public,
         theme_biodiv,
-        theme_culture,
-        theme_carbon,
+        theme_habitat,
+        theme_air,
+        theme_waste,
+        theme_water,
+        theme_resilience,
+        theme_mitigation,
+        theme_awareness,
+        theme_knowledge,
         attachment: attachment || project.attachment,
         objectives
       });
@@ -298,48 +335,54 @@ export default function EditProject() {
                 </Grid>
                 </div>
               ))}
-              <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
+            <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
               
-              <Divider className={classes.divider}/>
-            <TextField
-              value={theme_biodiv}
-              onChange={e => setTheme_biodiv(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_biodiv"
-              label="Biodiversity Contribution"
-              name="theme_biodiv"
-              autoComplete="theme_biodiv"
-            />
-            <TextField
-              value={theme_culture}
-              onChange={e => setTheme_culture(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_culture"
-              label="Cultural Contribution"
-              name="theme_culture"
-              autoComplete="theme_culture"
-            />
-            <TextField
-              value={theme_carbon}
-              onChange={e => setTheme_carbon(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_carbon"
-              label="Carbon Mitigation"
-              name="theme_carbon"
-              autoComplete="theme_carbon"
-            />
+            <Divider className={classes.divider}/>
+
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Select themes</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={theme_biodiv} onChange={e => setTheme_biodiv(e.target.checked)} id="theme_biodiv" name="theme_biodiv" />}
+                  label="Biodiversity"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_habitat} onChange={e => setTheme_habitat(e.target.checked)} id="theme_habitat" name="theme_habitat" />}
+                  label="Habitat"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_air} onChange={e => setTheme_air(e.target.checked)} id="theme_air" name="theme_air" />}
+                  label="Air"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_waste} onChange={e => setTheme_waste(e.target.checked)} id="theme_waste" name="theme_waste" />}
+                  label="Waste"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_water} onChange={e => setTheme_water(e.target.checked)} id="theme_water" name="theme_water" />}
+                  label="Water"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_resilience} onChange={e => setTheme_resilience(e.target.checked)} id="theme_resilience"  name="theme_resilience" />}
+                  label="Climate Resilience"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_mitigation} onChange={e => setTheme_mitigation(e.target.checked)} id="theme_mitigation" name="theme_mitigation" />}
+                  label="Climate Mitigation"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_awareness} onChange={e => setTheme_awareness(e.target.checked)} id="theme_awareness" name="theme_awareness" />}
+                  label="Awareness"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={theme_knowledge} onChange={e => setTheme_knowledge(e.target.checked)} id="theme_knowledge" name="theme_knowledge" />}
+                  label="Knowledge"
+                />
+              </FormGroup>
+            </FormControl>
+
+            <Divider className={classes.divider}/>
+
             <Input placeholder={project.attachment} id="file" type="file" onChange={handleFileChange}/>
             <FormControlLabel
               id="is_public"

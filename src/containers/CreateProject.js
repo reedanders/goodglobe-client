@@ -17,6 +17,12 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -81,9 +87,15 @@ export default function CreateProject() {
     attachment: null,
     target_funding: 0,
     current_funding: 0,
-    theme_biodiv: 0,
-    theme_culture: 0,
-    theme_carbon: 0,
+    theme_biodiv: false,
+    theme_habitat: false,
+    theme_air: false,
+    theme_waste: false,
+    theme_water: false,
+    theme_resilience: false,
+    theme_mitigation: false,
+    theme_awareness: false,
+    theme_knowledge: false,
     is_public: false,
     practioner: false,
     practioner_fullname: "",
@@ -252,45 +264,48 @@ export default function CreateProject() {
             <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
             
             <Divider className={classes.divider}/>
-            <TextField
-              value={fields.theme_biodiv}
-              onChange={handleFieldChange}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_biodiv"
-              label="Biodiversity Contribution"
-              name="theme_biodiv"
-              autoComplete="theme_biodiv"
-            />
-            <TextField
-              value={fields.theme_culture}
-              onChange={handleFieldChange}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_culture"
-              label="Cultural Contribution"
-              name="theme_culture"
-              autoComplete="theme_culture"
-            />
-            <TextField
-              value={fields.theme_carbon}
-              onChange={handleFieldChange}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="theme_carbon"
-              label="Carbon Mitigation"
-              name="theme_carbon"
-              autoComplete="theme_carbon"
-            />
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">Select themes</FormLabel>
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_biodiv} onChange={handleFieldChange} id="theme_biodiv" name="theme_biodiv" />}
+                  label="Biodiversity"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_habitat} onChange={handleFieldChange} id="theme_habitat" name="theme_habitat" />}
+                  label="Habitat"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_air} onChange={handleFieldChange} id="theme_air" name="theme_air" />}
+                  label="Air"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_waste} onChange={handleFieldChange} id="theme_waste" name="theme_waste" />}
+                  label="Waste"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_water} onChange={handleFieldChange} id="theme_water" name="theme_water" />}
+                  label="Water"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_resilience} onChange={handleFieldChange} id="theme_resilience"  name="theme_resilience" />}
+                  label="Climate Resilience"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_mitigation} onChange={handleFieldChange} id="theme_mitigation" name="theme_mitigation" />}
+                  label="Climate Mitigation"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_awareness} onChange={handleFieldChange} id="theme_awareness" name="theme_awareness" />}
+                  label="Awareness"
+                />
+                <FormControlLabel
+                  control={<Checkbox checked={fields.theme_knowledge} onChange={handleFieldChange} id="theme_knowledge" name="theme_knowledge" />}
+                  label="Knowledge"
+                />
+              </FormGroup>
+            </FormControl>
+            <Divider className={classes.divider}/>
             <TextField
               value={fields.target_funding}
               onChange={handleFieldChange}

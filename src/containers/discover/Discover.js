@@ -40,10 +40,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
   },
   categoryGrid:{
-  	padding: theme.spacing(4),
+  	padding: theme.spacing(4)
   },
   categoryMedia: {
-  	width: '80%',
+  	width: '100%',
   },
   categoryMainTitle: {
   	color: theme.palette.common.black,
@@ -82,7 +82,7 @@ const icons = [
   {
     title: 'Water',
     image: Water,
-    attribution: "Water by Fernanddo Santtander from the Noun Project",
+    attribution: "Water by Smalllike from the Noun Project",
   },
   {
     title: 'Resilience',
@@ -97,12 +97,12 @@ const icons = [
   {
     title: 'Awareness',
     image: Awareness,
-    attribution: "Awareness by Nithinan Tatah from the Noun Project",
+    attribution: "adapt by Oleksandr Panasovskyi from the Noun Project",
   },
   {
     title: 'Knowledge',
     image: Knowledge,
-    attribution: "Learning by Flatart from the Noun Project",
+    attribution: "Share by Adrien Coquet from the Noun Project",
   },
 ];
 
@@ -154,7 +154,7 @@ export default function Discover() {
 	  <Container className={classes.cardGrid} maxWidth="md">
 		  {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
 		<Grid container spacing={4}>
-		  {projects.map((project) => (
+		  {projects.slice(0, 9).map((project) => (
 		    <Grid item key={project.projectId} xs={12} sm={6} md={4}>
 		      <ProjectCard project={project}/>
 		    </Grid>
@@ -166,7 +166,7 @@ export default function Discover() {
       <Typography variant="h5" component="h5" align="center" className={classes.categoryMainTitle}>Browse projects by category</Typography>
 	      <Grid container spacing={4} justify="center" alignItems="center" className={classes.categoryGrid}>
 	        {icons.map((card) => (
-	          <Grid item key={card.title} xs={6} sm={3} md={2} alignItems="center">
+	          <Grid item container key={card.title} xs={6} sm={3} md={2} justify="center">
                 <img src={card.image} alt={card.attribution} className={classes.categoryMedia}/>
                 <Typography variant="h6" component="h6" align="center" className={classes.categoryTitle}>
                   {card.title} 
