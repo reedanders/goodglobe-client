@@ -81,6 +81,7 @@ export default function EditProject() {
   const editor = useRef(null);
   
   const [title, setTitle] = useState("");
+  const [pitch, setPitch] = useState("");
   const [is_public, setIsPublic] = useState(false);
 
   const [theme_biodiv, setTheme_biodiv] = useState("");
@@ -114,7 +115,8 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         setProject(project);
-        const { title, 
+        const { title,
+                pitch,
                 content, 
                 is_public, 
                 attachment, 
@@ -136,6 +138,7 @@ export default function EditProject() {
 
         setTitle(title);
         setEditorState(EditorState.createWithContent(stateFromHTML(content)));
+        setPitch(pitch);
         setIsPublic(is_public);
         setObjectives(objectives);
         setTheme_biodiv(theme_biodiv);
@@ -185,6 +188,7 @@ export default function EditProject() {
       await saveProject({
       	title,
         content: stateToHTML(editorState.getCurrentContent()),
+        pitch, 
         is_public,
         theme_biodiv,
         theme_habitat,
@@ -288,6 +292,18 @@ export default function EditProject() {
               label="Title"
               name="title"
               autoComplete="title"
+            />
+            <TextField
+              value={pitch}
+              onChange={e => setPitch(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="pitch"
+              label="Pitch"
+              name="pitch"
+              autoComplete="pitch"
             />
             <Editor
               spellCheck
