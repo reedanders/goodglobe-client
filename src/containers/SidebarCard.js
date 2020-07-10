@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2)
   },
   themeInfo: {
-  	paddingLeft: theme.spacing(5)
+  	paddingLeft: theme.spacing(2)
   }
 }));
 
