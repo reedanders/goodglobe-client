@@ -6,10 +6,6 @@ import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
-import EcoIcon from '@material-ui/icons/Eco';
-import EmojiTransportationIcon from '@material-ui/icons/EmojiTransportation';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -48,23 +44,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function isChip(value) {
-  return value > 2 ? true : false;
-};
 
 export default function MediaControlCard(props) {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
-  const [isCulture, setIsCulture] = useState(false);
-  const [isBiodiv, setIsBiodiv] = useState(false);
-  const [isCarbon, setIsCarbon] = useState(false);
+  const [isBiodiv, setIsBiodiv] = useState("");
+  const [isHabitat, setIsHabitat] = useState("");
+  const [isAir, setIsAir] = useState("");
+  const [isWaste, setIsWaste] = useState("");
+  const [isWater, setIsWater] = useState("");
+  const [isResilience, setIsResilience] = useState("");
+  const [isMitigation, setIsMitigation] = useState("");
+  const [isAwareness, setIsAwareness] = useState("");
+  const [isKnowledge, setIsKnowledge] = useState("");
 
   useEffect(() => {
 
     async function onLoad() {
-      setIsCulture(isChip(props.project.theme_culture));
-      setIsBiodiv(isChip(props.project.theme_biodiv));
-      setIsCarbon(isChip(props.project.theme_carbon));
+      setIsBiodiv(props.project.theme_biodiv);
+      setIsHabitat(props.project.theme_habitat);
+      setIsAir(props.project.theme_air);
+      setIsWaste(props.project.theme_waste);
+      setIsWater(props.project.theme_water);
+      setIsResilience(props.project.theme_resilience);
+      setIsMitigation(props.project.theme_mitigation);
+      setIsAwareness(props.project.theme_awareness);
+      setIsKnowledge(props.project.theme_knowledge);
     }
 
     onLoad();
@@ -85,36 +90,88 @@ export default function MediaControlCard(props) {
           </Typography>
         </Grid>
         <Grid container item spacing={2} className={classes.detailsSubtext}>
-          {isCulture ?  
+
+          {isBiodiv ?  
           <Grid item>
             <Chip
               variant="outlined"
               size="small"
               color="primary"
-              icon={<PersonPinCircleIcon />}
-              label="Culture"
+              label="Biodiversity"
             /> 
           </Grid> : ""}
+          {isHabitat ?  
           <Grid item>
-            {isBiodiv ?  
             <Chip
               variant="outlined"
               size="small"
               color="primary"
-              icon={<EcoIcon />}
-              label="Biodiversity"
-            /> : ""}
-          </Grid>
+              label="Habitat"
+            /> 
+          </Grid> : ""}
+          {isAir ?  
           <Grid item>
-            {isCarbon ?  
             <Chip
               variant="outlined"
               size="small"
               color="primary"
-              icon={<EmojiTransportationIcon />}
-              label="Carbon"
-            /> : ""}
-          </Grid>
+              label="Air"
+            /> 
+          </Grid> : ""}
+          {isWaste ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Waste"
+            /> 
+          </Grid> : ""}
+          {isWater ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Water"
+            /> 
+          </Grid> : ""}
+          {isResilience ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Climate Resilience"
+            /> 
+          </Grid> : ""}
+          {isMitigation ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Climate Mitigation"
+            /> 
+          </Grid> : ""}
+          {isAwareness ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Awareness"
+            /> 
+          </Grid> : ""}
+          {isKnowledge ?  
+          <Grid item>
+            <Chip
+              variant="outlined"
+              size="small"
+              color="primary"
+              label="Knowledge"
+            /> 
+          </Grid> : ""}
         </Grid>
       </Grid>
 

@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import Slider from '@material-ui/core/Slider';
+import Divider from '@material-ui/core/Divider';
 
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+  },
+  divider:{
+    margin: theme.spacing(1)
   },
 }));
 
@@ -131,54 +134,127 @@ export default function SideBarCard(props) {
 	    </CardContent>
 	    <CardContent>
 	      <Typography gutterBottom variant="h6" component="h6">
-	        Themes
+	        Themes addressed
 	      </Typography>
 	      <Grid container direction="column" spacing={1}>
+	      {props.project.theme_biodiv ? 
+	      	<div>
 	      	<Grid item>
-		      	<Typography gutterBottom variant="overline" component="h6">
+		      	<Typography variant="overline" component="h6">
 		        	Biodiversity
 		      	</Typography>
-	      		<Slider className={classes.sliderColor}
-			        defaultValue={props.project.theme_biodiv}
-			        aria-labelledby="discrete-slider"
-			        valueLabelDisplay="auto"
-			        step={1}
-			        min={0}
-			        max={5}
-			        color="primary"
-			        disabled
-			      />
+	      		<Typography variant="subtitle2" component="p">
+	      			Biodiversity — the extraordinary variety of ecosystems, 
+	      			species and genes that surround us — 
+	      			giving us food, fresh water and clean air, shelter and medicine, 
+	      			mitigating natural disasters, pests and diseases and 
+	      			contributes to regulating the climate. 
+	      		</Typography>
 	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_habitat ? 
+	      	<div>
 	      	<Grid item>
-		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Culture
+		      	<Typography variant="overline" component="h6">
+		        	Habitat
 		      	</Typography>
-	      		<Slider className={classes.sliderColor}
-			        defaultValue={props.project.theme_culture}
-			        aria-labelledby="discrete-slider"
-			        valueLabelDisplay="auto"
-			        step={1}
-			        min={0}
-			        max={5}
-			        color="primary"
-			        disabled
-			      />
+	      		<Typography variant="subtitle2" component="p">
+	      			Conservation of a wide range of rare, threatened or endemic animal and plant species, in addition to rare habitat types.
+	      		</Typography>
 	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_air ? 
+	      	<div>
 	      	<Grid item>
-		      	<Typography gutterBottom variant="overline" component="h6">
-		        	Carbon Mitigation
+		      	<Typography variant="overline" component="h6">
+		        	Air
 		      	</Typography>
-	      		<Slider className={classes.sliderColor}
-			        defaultValue={props.project.theme_carbon}
-			        aria-labelledby="discrete-slider"
-			        valueLabelDisplay="auto"
-			        step={1}
-			        min={0}
-			        max={5}
-			        color="primary"
-			        disabled
-			      />
+	      		<Typography variant="subtitle2" component="p">
+	      			Air is ... 
+	      		</Typography>
 	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_waste ? 
+	      	<div>
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Waste
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Waste is ... 
+	      		</Typography>
+	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_water ? 
+	      	<div>
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Water
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Water is ... 
+	      		</Typography>
+	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_resilience ? 
+	      	<div>
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Climate Resilience
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Climate resilience is ... 
+	      		</Typography>
+	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_mitigation ? 
+	      	<div>
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Climate Mitigation
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Climate mitigating is ... 
+	      		</Typography>
+	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_awareness ? 
+	      	<div>
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Awareness Building
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Awareness building ...  
+	      		</Typography>
+	      	</Grid>
+	      	<Divider className={classes.divider}/>
+	      	</div>
+	      	: ""}
+	      	{props.project.theme_knowledge ? 
+	      	<Grid item>
+		      	<Typography variant="overline" component="h6">
+		        	Knowledge Development
+		      	</Typography>
+	      		<Typography variant="subtitle2" component="p">
+	      			Knowledge development is ... 
+	      		</Typography>
+	      	</Grid>
+	      	: ""}
 	      </Grid>
 	    </CardContent>
     </Card>
