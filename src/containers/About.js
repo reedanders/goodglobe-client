@@ -79,7 +79,7 @@ export default function About() {
               <Typography component="h6" variant="h6" align="left" gutterBottom>
               <p>Is there are need for GoodGlobe? In the below graphic we outline a few of our motivations. One benefit we see in this platform 
               is <i>fast</i> planning and action. Another need we hope to address is more discussion between people observing in the field and people 
-              observing through data., which is somewhere in the <i>knowledge</i> and <i>community</i> bubbles. 
+              observing through data, which is somewhere in the <i>knowledge</i> and <i>community</i> bubbles. 
               While this is just a sketch, we'd like to hear why you think GoodGlobe is (or isn't) needed in conservation.</p>
               </Typography>
             </Grid>
