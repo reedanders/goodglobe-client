@@ -17,7 +17,7 @@ export default function MainQuickAbout() {
             <MainQuickAboutAlbum/>
             <div>
               <Grid container item spacing={0} justify="center">
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" href="/about">
                     Learn more
                   </Button>
               </Grid>

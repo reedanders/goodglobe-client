@@ -9,6 +9,7 @@ import EditProject from "./containers/EditProject";
 import Payment from "./containers/Payment";
 import Dashboard from "./containers/Dashboard";
 import Discover from "./containers/discover/Discover";
+import About from "./containers/About";
 import NotFound from "./containers/NotFound";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
@@ -25,6 +26,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/discover">
         <Discover />
+      </Route>
+      <Route exact path="/about">
+        <About />
       </Route>
       <UnauthenticatedRoute exact path="/login">
         <Login />

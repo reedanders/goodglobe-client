@@ -76,7 +76,7 @@ export default function Landing() {
 		      		<Button href="/dashboard" size="small" color="primary">
 			          Start a Project!
 			        </Button>
-			        <Button href="" size="small">
+			        <Button href="/about" size="small">
 			          Learn more
 			        </Button>
 		        </Grid>
