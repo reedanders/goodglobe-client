@@ -7,12 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import DiscoverButton from './DiscoverButton';
 import ProjectCard from '../ProjectCard';
 
-import idea_plant from "../../assets/images/drawings/idea_plant.png"
 import Biodiversity from "../../assets/icons/biodiversity.png"
 import Habitat from "../../assets/icons/habitat.png"
 import Air from "../../assets/icons/air.png"
@@ -52,9 +51,15 @@ const useStyles = makeStyles((theme) => ({
   categoryTitle: {
   	color: theme.palette.common.black,
   },
+  categoryButton: {
+    margin: theme.spacing(3)
+  },
   media: {
     width: '100%',
   },
+  customAnchor: {
+    textDecoration: "none !important"
+}
 }));
 
 
@@ -63,46 +68,55 @@ const icons = [
     title: 'Biodiversity',
     image: Biodiversity,
     attribution: "relationship by Nithinan Tatah from the Noun Project",
+    name: 'theme_biodiv'
   },
   {
     title: 'Habitat',
     image: Habitat,
     attribution: "wildlife by Nithinan Tatah from the Noun Project",
+    name: 'theme_habitat'
   },
   {
     title: 'Air',
     image: Air,
     attribution: "Air by Lars Meiertoberens from the Noun Project",
+    name: 'theme_air'
   },
   {
     title: 'Waste',
     image: Waste,
     attribution: "plastic mountain by supalerk laipawat from the Noun Project",
+    name: 'theme_waste'
   },
   {
     title: 'Water',
     image: Water,
     attribution: "Water by Smalllike from the Noun Project",
+    name: 'theme_water'
   },
   {
     title: 'Resilience',
     image: Resilience,
     attribution: "Resilience by Attilio Baghino from the Noun Project",
+    name: 'theme_resilience'
   },
   {
     title: 'Mitigation',
     image: Mitigation,
     attribution: "heat wave by Wichai Wi from the Noun Project",
+    name: 'theme_mitigation'
   },
   {
     title: 'Awareness',
     image: Awareness,
     attribution: "adapt by Oleksandr Panasovskyi from the Noun Project",
+    name: 'theme_awareness'
   },
   {
     title: 'Knowledge',
     image: Knowledge,
     attribution: "Share by Adrien Coquet from the Noun Project",
+    name: 'theme_knowledge'
   },
 ];
 
@@ -120,7 +134,6 @@ export default function Discover() {
 	      setProjects(projects);
 	    }
 	  } catch (e) {
-	    console.log(e);
 	    onError(e);
 	  }
 
@@ -153,7 +166,7 @@ export default function Discover() {
 
 	  <Container className={classes.cardGrid} maxWidth="md">
 		  {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
-		<Grid container spacing={4}>
+		<Grid container spacing={4} >
 		  {projects.slice(0, 9).map((project) => (
 		    <Grid item key={project.projectId} xs={12} sm={6} md={4}>
 		      <ProjectCard project={project}/>
@@ -164,46 +177,31 @@ export default function Discover() {
 
       <Paper className={classes.categoryPaper} >
       <Typography variant="h5" component="h5" align="center" className={classes.categoryMainTitle}>Browse projects by category</Typography>
-	      <Grid container spacing={4} justify="center" alignItems="center" className={classes.categoryGrid}>
+	      <Grid container spacing={1} direction="row" justify="center" alignItems="center" className={classes.categoryGrid}>
 	        {icons.map((card) => (
-	          <Grid item container key={card.title} xs={6} sm={3} md={2} justify="center">
-                <img src={card.image} alt={card.attribution} className={classes.categoryMedia}/>
-                <Typography variant="h6" component="h6" align="center" className={classes.categoryTitle}>
-                  {card.title} 
-                </Typography>
-	          </Grid>
+            <Grid item key={card.title} className={classes.categoryButton}><DiscoverButton icon={card}/></Grid>
 	        ))}
 	      </Grid>
 	    </Paper>
 
-      <Container maxWidth="md" className={classes.cardGrid}>
-	      <Grid container>
-	      	<Grid item container md={7} direction="column" justify="center">
-	      		<Grid item>
-	      			<Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>
-		      		Grassroots Funding for Conservation
-		      		</Typography>
-	      		</Grid>
-	      		<Grid item>
-	      			<Typography component="p" variant="body1" align="left" color="textPrimary" gutterBottom>
-		      		Let's get you started! We're building a simple, efficient process for experienced 
-		      		conservation practitioners to get funding for conservation projects. Here's how it works.
-		      		</Typography>
-	      		</Grid>
-	      		<Grid item>
-		      		<Button href="" size="small" color="primary">
-			          Start a Project!
-			        </Button>
-			        <Button href="" size="small">
-			          Learn more
-			        </Button>
-		        </Grid>
-	      	</Grid>
-	      	<Grid item md={5}>
-	      		<img src={idea_plant} alt="idea watering plant" className={classes.media}/>
-	      	</Grid>
-	      </Grid>
-      </Container>
+      {icons.map((section) => (
+        <div key={section.title}>
+        <Container className={classes.cardGrid} maxWidth="md">
+        <a href={`/discover#${section.title}`} name={section.title} className={classes.customAnchor}>
+        {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : 
+        <div><Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>{section.title}</Typography>
+        <Grid container spacing={4}>
+          {
+            projects.slice(0, 3).map(project => ( project[section.name] === true ?
+            <Grid item key={project.projectId} xs={12} sm={6} md={4}>
+              <ProjectCard project={project}/>
+            </Grid>
+            : "" ))
+          }
+        </Grid></div>}</a>
+        </Container>
+        </div>
+      ))}
 
     </div>
   );
