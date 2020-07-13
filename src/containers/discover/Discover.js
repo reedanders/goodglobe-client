@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -53,6 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
   categoryButton: {
     margin: theme.spacing(3)
+  },
+  categoryFiller: {
+    paddingBottom: theme.spacing(1),
+    color: 'grey'
+  },
+  categoryFillGrid: {
+    minHeight: "35vh"
   },
   media: {
     width: '100%',
@@ -167,11 +175,20 @@ export default function Discover() {
 	  <Container className={classes.cardGrid} maxWidth="md">
 		  {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
 		<Grid container spacing={4} >
-		  {projects.slice(0, 9).map((project) => (
+		  {projects.slice(0, 9).map((project, index) => (
 		    <Grid item key={project.projectId} xs={12} sm={6} md={4}>
 		      <ProjectCard project={project}/>
 		    </Grid>
 		  ))}
+      {projects.length < 9 && !isLoading ? 
+        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center">
+          <Grid item>
+            <Typography align="center" className={classes.categoryFiller} gutterBottom>We need experienced practicioners to build this community.</Typography>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary">Create a Project</Button>
+          </Grid>
+        </Grid> : "" }
 		</Grid>
 	  </Container>      
 
@@ -198,6 +215,15 @@ export default function Discover() {
             </Grid>
             : "" ))
           }
+          {projects.length < 3 && !isLoading ? 
+        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
+          <Grid item>
+            <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary">Create a Project</Button>
+          </Grid>
+        </Grid> : "" }
         </Grid></div>}</a>
         </Container>
         </div>
