@@ -181,7 +181,7 @@ export default function Discover() {
 		    </Grid>
 		  ))}
       {projects.length < 9 && !isLoading ? 
-        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center">
+        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
           <Grid item>
             <Typography align="center" className={classes.categoryFiller} gutterBottom>We need experienced practicioners to build this community.</Typography>
           </Grid>
@@ -215,7 +215,7 @@ export default function Discover() {
             </Grid>
             : "" ))
           }
-          {projects.slice(0, 3).map(project => ( project[section.name] === true)).length < 3 && !isLoading ? 
+          {projects.slice(0, 3).map(project => ( project[section.name] === true).length < 3)  && !isLoading ? 
         <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
           <Grid item>
             <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
