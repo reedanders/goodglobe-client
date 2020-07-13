@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 import AboutStepper from './AboutStepper';
 import ideaPlant from '../assets/images/drawings/idea_plant.png';
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
   stepperTitle: {
     paddingTop: theme.spacing(2)
+  },
+  stepperButton: {
+    paddingBottom: theme.spacing(2)
   },
   content: {
     paddingTop: theme.spacing(4),
@@ -65,6 +69,9 @@ export default function About() {
           <Typography variant="h6" component="h6" align="left" color="textPrimary">How to Submit a Project</Typography>
         </Grid>
         <AboutStepper/>
+        <Grid container item alignItems="center" justify="center" className={classes.stepperButton}>
+          <Button variant="contained" color="primary" href="/dashboard">Start a Project</Button>
+        </Grid>
       </Paper>
 
       <Container maxWidth="md" className={classes.content}>
