@@ -186,7 +186,7 @@ export default function Discover() {
             <Typography align="center" className={classes.categoryFiller} gutterBottom>We need experienced practicioners to build this community.</Typography>
           </Grid>
           <Grid item>
-            <Button variant="contained" color="primary">Create a Project</Button>
+            <Button variant="contained" color="primary" href="/about">Create a Project</Button>
           </Grid>
         </Grid> : "" }
 		</Grid>
@@ -216,14 +216,14 @@ export default function Discover() {
             : "" ))
           }
           {projects.length < 3 && !isLoading ? 
-        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
-          <Grid item>
-            <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" color="primary">Create a Project</Button>
-          </Grid>
-        </Grid> : "" }
+          <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
+            <Grid item>
+              <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
+            </Grid>
+            <Grid item>
+              <Button variant="contained" color="primary" href="/about">Create a Project</Button>
+            </Grid>
+          </Grid> : "" }
         </Grid></div>}</a>
         </Container>
         </div>

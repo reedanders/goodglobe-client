@@ -39,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
   link: {
     margin: theme.spacing(1, 1.5),
   },
+  barAction: {
+    marginRight: theme.spacing(2),
+    color: theme.palette.primary.main
+  },
+  barActionAnchor: {
+    textDecoration: "none !important"
+  },
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: 'auto',
@@ -104,6 +111,7 @@ function App() {
                 <img src={logo} alt="green earth logo" className={classes.logo} />
               </Link>
               <Grid className={classes.title}></Grid>
+              <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Conservation Project</Button></Grid>
               {isAuthenticated ? (
                 <div>
                   <Button color="primary" variant="outlined" size="small" href="/dashboard">
