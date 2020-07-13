@@ -123,7 +123,7 @@ function App() {
                 </div>
               ) : (
                 <div>
-                  <Button href="/signup">
+                  <Button variant="outlined" size="small" href="/signup">
                     Signup
                   </Button>
                   <Button href="/login">
