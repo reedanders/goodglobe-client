@@ -215,15 +215,15 @@ export default function Discover() {
             </Grid>
             : "" ))
           }
-          {projects.length < 3 && !isLoading ? 
-          <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
-            <Grid item>
-              <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary" href="/about">Create a Project</Button>
-            </Grid>
-          </Grid> : "" }
+          {projects.slice(0, 3).map(project => ( project[section.name] === true)).length < 3 && !isLoading ? 
+        <Grid container item xs={12} sm={6} md={4} direction="column" justify="center" alignItems="center" className={classes.categoryFillGrid}>
+          <Grid item>
+            <Typography align="center" className={classes.categoryFiller} gutterBottom>Help us fill in this category by starting a project!</Typography>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" color="primary" href="/about">Create a Project</Button>
+          </Grid>
+        </Grid> : "" }
         </Grid></div>}</a>
         </Container>
         </div>
