@@ -147,7 +147,7 @@ export default function SideBarCard(props) {
 		        	Biodiversity
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Biodiversity — the extraordinary variety of ecosystems, 
+	      			Protects biodiversity — the extraordinary variety of ecosystems, 
 	      			species and genes that surround us — 
 	      			giving us food, fresh water and clean air, shelter and medicine, 
 	      			mitigating natural disasters, pests and diseases and 
@@ -164,7 +164,8 @@ export default function SideBarCard(props) {
 		        	Habitat
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Conservation of a wide range of rare, threatened or endemic animal and plant species, in addition to rare habitat types.
+	      			Conserves any of a wide range of rare, threatened or endemic animal
+	      			 and plant species, in addition to rare habitat types.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -177,7 +178,8 @@ export default function SideBarCard(props) {
 		        	Air
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Air is ... 
+	      			Mitigates the presence of pollutants into the atmosphere that
+	      			 have determintal effects on living organisms and cause damage to the environment.  
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -190,7 +192,7 @@ export default function SideBarCard(props) {
 		        	Waste
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Waste is ... 
+	      			Transforms substances discarded after primary use, which would otherwise harm the environment.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -203,7 +205,8 @@ export default function SideBarCard(props) {
 		        	Water
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Water is ... 
+	      			Safeguards water quality from the presence of pollutants that
+	      			 have determintal effects on living organisms and cause damage to the environment.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -216,7 +219,7 @@ export default function SideBarCard(props) {
 		        	Climate Resilience
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Climate resilience is ... 
+	      			Adapts to changing climate by sustaining human culture and the environment.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -229,7 +232,7 @@ export default function SideBarCard(props) {
 		        	Climate Mitigation
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Climate mitigating is ... 
+	      			Prevents further damage to climate stability by reducing remissions of human created greenhouse gases.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -242,7 +245,7 @@ export default function SideBarCard(props) {
 		        	Awareness Building
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Awareness building ...  
+	      			Builds awareness of environment sustainability and mutual benefit.
 	      		</Typography>
 	      	</Grid>
 	      	<Divider className={classes.divider}/>
@@ -254,7 +257,7 @@ export default function SideBarCard(props) {
 		        	Knowledge Development
 		      	</Typography>
 	      		<Typography variant="subtitle2" component="p">
-	      			Knowledge development is ... 
+	      			Increases knowledge of human roles in the living world.
 	      		</Typography>
 	      	</Grid>
 	      	: ""}
