@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  helper: {
+    marginTop: theme.spacing(1)
+  }
 }));
 
 
@@ -125,6 +128,7 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <div className={classes.innerPaper}>
+      <Typography variant="body1" component="p" className={classes.helper}>Check your email for a confirmation code.</Typography>
       <form className={classes.form} onSubmit={handleConfirmationSubmit}>
         <TextField
           value={fields.confirmationCode}
