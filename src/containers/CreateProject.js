@@ -46,17 +46,41 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  formGroup: {
+    paddingTop: theme.spacing(1),
+    paddingLeft: theme.spacing(2)
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   divider:{
     margin: theme.spacing(2)
   },
+  editor:{
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
+  },
   editorTitle: {
     paddingLeft: theme.spacing(1),
     color: 'rgba(0, 0, 0, 0.5)'
   },
-  objectiveTags : {
+  editorHelper: {
+    paddingTop: theme.spacing(1),
+    paddingLeft: theme.spacing(2),
+    color: 'rgba(0, 0, 0, 0.5)'
+  },
+  objectivesTitle: {
+    paddingBottom: theme.spacing(1),
+    color: 'rgba(0, 0, 0, 0.5)'
+  },
+  objectivesHelper: {
+    paddingLeft: theme.spacing(2),
+    color: 'rgba(0, 0, 0, 0.5)'
+  },
+  objectivesWrapper: {
+    paddingTop: theme.spacing(1)
+  },
+  objectiveTags: {
     marginTop: theme.spacing(2),
     marginRight: theme.spacing(1)
   },
@@ -65,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
     border: 'solid gray 1px',
     borderRadius: theme.spacing(2),
     marginBottom: theme.spacing(2),
+  },
+  imageInput: {
+    padding: theme.spacing(1)
   }
 }));
 
@@ -210,6 +237,7 @@ export default function CreateProject() {
               label="Pitch"
               name="pitch"
               autoComplete="pitch"
+              helperText="Enter a brief summary of your project"
             />
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Background</Typography>
@@ -221,8 +249,11 @@ export default function CreateProject() {
               onChange={editorState => setEditorState(editorState)}
               style={{background: 'blue'}}
             /></div>
+            <Typography variant="caption" className={classes.editorHelper}>Enter a detailed explaining the motivation of your project</Typography>
             <Divider className={classes.divider}/>
-            <Typography variant="h6" component="h6" gutterBottom>Objectives</Typography>
+            <Typography variant="body1" component="p" className={classes.objectivesTitle} gutterBottom>Objectives</Typography>
+            <Typography variant="caption" className={classes.objectivesHelper}>Add objectives needed to complete your project</Typography>
+            <div className={classes.objectivesWrapper}>
             {objectives.map((data, index) => (
               <div key={index} className={classes.objectiveContainer}>
               <Grid container justify="space-between" spacing={3}>
@@ -262,11 +293,12 @@ export default function CreateProject() {
               </div>
             ))}
             <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
-            
+            </div>
+
             <Divider className={classes.divider}/>
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">Select themes</FormLabel>
-              <FormGroup>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Themes</FormLabel>
+              <FormGroup className={classes.formGroup}>
                 <FormControlLabel
                   control={<Checkbox checked={fields.theme_biodiv} onChange={handleFieldChange} id="theme_biodiv" name="theme_biodiv" />}
                   label="Biodiversity"
@@ -306,6 +338,7 @@ export default function CreateProject() {
               </FormGroup>
             </FormControl>
             <Divider className={classes.divider}/>
+            <Typography variant="body1" component="p" className={classes.editorTitle}>Funding</Typography>
             <TextField
               value={fields.target_funding}
               onChange={handleFieldChange}
@@ -319,20 +352,10 @@ export default function CreateProject() {
               name="target_funding"
               autoComplete="target_funding"
             />
-            <TextField
-              value={fields.current_funding}
-              onChange={handleFieldChange}
-              variant="outlined"
-              margin="normal"
-              type="number"
-              required
-              fullWidth
-              id="current_funding"
-              label="Current Funding"
-              name="current_funding"
-              autoComplete="current_funding"
-            />
-            <Input id="file" type="file" onChange={handleFileChange}/>
+            <Divider className={classes.divider}/>
+            <Typography variant="body1" component="p" className={classes.editorTitle}>Project Image</Typography>
+            <Input id="file" type="file" className={classes.imageInput} onChange={handleFileChange}/>
+            <Divider className={classes.divider}/>
             <Button
               type="submit"
               fullWidth
