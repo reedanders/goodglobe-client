@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1.5),
   },
   barAction: {
-    marginRight: theme.spacing(2),
     color: theme.palette.primary.main
   },
   barActionAnchor: {
