@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard(props) {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
+
   const [isBiodiv, setIsBiodiv] = useState("");
   const [isHabitat, setIsHabitat] = useState("");
   const [isAir, setIsAir] = useState("");

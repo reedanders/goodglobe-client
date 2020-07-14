@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'rgba(0, 0, 0, 0.5)'
   },
   objectivesWrapper: {
-    paddingTop: theme.spacing(3)
+    paddingTop: theme.spacing(1)
   },
   objectiveTags: {
     marginTop: theme.spacing(2),
@@ -197,7 +197,7 @@ export default function CreateProject() {
 
   function addObjective () {
     const last = objectives.length - 1;
-    return objectives[last].title !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
+    return objectives[last].title !== "" && objectives[last].description !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Please finish the current objective');
   }
 
   const removeIndex = index => e => {
@@ -283,11 +283,12 @@ export default function CreateProject() {
                     autoComplete="description"
                   />
                 </Grid>
-                <Grid item xs={1} className={classes.objectiveTags}>
-                  <IconButton onClick={removeIndex(index)} aria-label="delete">
-                    <DeleteForeverIcon />
-                  </IconButton>
-                </Grid>
+                { index > 0 ? 
+                  <Grid item xs={1} className={classes.objectiveTags}>
+                    <IconButton onClick={removeIndex(index)} aria-label="delete">
+                      <DeleteForeverIcon />
+                    </IconButton>
+                  </Grid>: ""}
 
               </Grid>
               </div>
