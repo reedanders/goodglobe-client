@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'rgba(0, 0, 0, 0.5)'
   },
   objectivesWrapper: {
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(3)
   },
   objectiveTags: {
     marginTop: theme.spacing(2),
@@ -252,7 +252,7 @@ export default function CreateProject() {
             <Typography variant="caption" className={classes.editorHelper}>Enter a detailed explaining the motivation of your project</Typography>
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.objectivesTitle} gutterBottom>Objectives</Typography>
-            <Typography variant="caption" className={classes.objectivesHelper}>Add objectives needed to complete your project</Typography>
+            <Typography variant="caption" className={classes.objectivesHelper}>Edit objectives needed to complete your project</Typography>
             <div className={classes.objectivesWrapper}>
             {objectives.map((data, index) => (
               <div key={index} className={classes.objectiveContainer}>
