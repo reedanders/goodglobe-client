@@ -40,12 +40,16 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 1.5),
   },
   barAction: {
-    marginLeft: theme.spacing(1)
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     color: theme.palette.primary.main
   },
   barActionAnchor: {
     textDecoration: "none !important"
+  },
+  barButtons: {
+    marginTop: theme.spacing(1)
   },
   footer: {
     padding: theme.spacing(3, 2),
@@ -114,7 +118,7 @@ function App() {
               <Grid className={classes.title}></Grid>
               <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Project</Button></Grid>
               {isAuthenticated ? (
-                <div>
+                <div className={classes.barButtons}>
                   <Button color="primary" variant="outlined" size="small" href="/dashboard">
                     My Account
                   </Button>
@@ -123,7 +127,7 @@ function App() {
                   </Button>
                 </div>
               ) : (
-                <div>
+                <div className={classes.barButtons}>
                   <Button variant="outlined" size="small" href="/signup">
                     Signup
                   </Button>
