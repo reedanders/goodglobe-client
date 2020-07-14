@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  stepper: {
+    backgroundColor: 'inherit'
+  },
   actionsContainer: {
     marginBottom: theme.spacing(2),
   },
@@ -30,7 +33,7 @@ export default function VerticalLinearStepper(props) {
 
   return (
     <div className={classes.root}>
-      <Stepper orientation="vertical">
+      <Stepper orientation="vertical" className={classes.stepper}>
         {props.project.objectives.map((obj, index) => (
           <Step expanded active key={index}>
             <StepLabel>{obj.title}</StepLabel>
