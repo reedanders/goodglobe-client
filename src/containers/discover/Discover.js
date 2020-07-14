@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   	color: theme.palette.common.black,
   },
   categoryButton: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(3),
   },
   categoryFiller: {
     paddingBottom: theme.spacing(1),
@@ -67,7 +67,10 @@ const useStyles = makeStyles((theme) => ({
   },
   customAnchor: {
     textDecoration: "none !important"
-}
+  },
+  projectCard: {
+    paddingTop: theme.spacing(2)
+  }
 }));
 
 
@@ -196,7 +199,9 @@ export default function Discover() {
       <Typography variant="h5" component="h5" align="center" className={classes.categoryMainTitle}>Browse projects by category</Typography>
 	      <Grid container spacing={1} direction="row" justify="center" alignItems="center" className={classes.categoryGrid}>
 	        {icons.map((card) => (
+            <div className={classes.categoryButton}>
             <Grid item key={card.title} className={classes.categoryButton}><DiscoverButton icon={card}/></Grid>
+            </div>
 	        ))}
 	      </Grid>
 	    </Paper>
