@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     borderBottomRightRadius: 3,
     borderTopRightRadius: 3,
+    minHeight: '30vh'
   },
   supporterChip : {
     margin: theme.spacing(2)
