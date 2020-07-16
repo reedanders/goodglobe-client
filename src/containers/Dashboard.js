@@ -147,7 +147,7 @@ export default function Dashboard(props) {
                 </Grid>
                 <Grid item>
                   <Tooltip title="Help">
-                    <IconButton color="inherit">
+                    <IconButton href="mailto:ingmar.staude@idiv.de" color="inherit">
                       <HelpIcon />
                     </IconButton>
                   </Tooltip>
