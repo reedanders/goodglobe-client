@@ -13,7 +13,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
-import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,6 +24,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import { DropzoneArea } from 'material-ui-dropzone';
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
@@ -282,9 +282,9 @@ export default function EditProject() {
     return (title.length > 0 && title.length < 55);
   };
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
-  };
+  function handleFileChange(files) {
+    file.current = files[0];
+  }
 
   const toggleChecked = () => {
     setIsPublic((prev) => !prev);
@@ -442,7 +442,14 @@ export default function EditProject() {
 
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Project Image</Typography>
-            <Input placeholder={project.attachment} id="file" type="file" className={classes.imageInput} onChange={handleFileChange}/>
+            <DropzoneArea
+              acceptedFiles={['image/*']}
+              dropzoneText={"Drag and drop an image here or click"}
+              id="file" 
+              type="file"
+              filesLimit="1"
+              onChange={(files) => handleFileChange(files)}
+            />
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Project status</Typography>
             <FormControlLabel

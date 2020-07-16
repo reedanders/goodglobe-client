@@ -10,7 +10,6 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -26,6 +25,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { DropzoneArea } from 'material-ui-dropzone';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
 import './Editor.css';
@@ -182,8 +182,8 @@ export default function CreateProject() {
     return (fields.title.length > 0 && fields.title.length < 55);
   }
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
+  function handleFileChange(files) {
+    file.current = files[0];
   }
 
   const handleObjectiveChange = index => e => {
@@ -355,7 +355,14 @@ export default function CreateProject() {
             />
             <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Project Image</Typography>
-            <Input id="file" type="file" className={classes.imageInput} onChange={handleFileChange}/>
+            <DropzoneArea
+              acceptedFiles={['image/*']}
+              dropzoneText={"Drag and drop an image here or click"}
+              id="file" 
+              type="file"
+              filesLimit="1"
+              onChange={(files) => handleFileChange(files)}
+            />
             <Divider className={classes.divider}/>
             <Button
               type="submit"

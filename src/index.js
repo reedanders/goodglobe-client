@@ -218,6 +218,20 @@ theme = {
         height: 32,
       },
     },
+    MuiDropzoneArea: {
+      text: {
+        color: theme.palette.primary.main,
+        fontSize: 20,
+      },
+      icon: {
+        color: theme.palette.primary.main,
+        height: 40,
+      },
+      successAlert: {
+        backgroundColor: "#FAA",
+        color: "#000"
+      },
+    },
   },
 };
 
