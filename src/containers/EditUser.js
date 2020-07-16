@@ -7,12 +7,15 @@ import { s3Upload } from "../libs/awsLib";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Title from '../containers/Title';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+
+import { DropzoneArea } from 'material-ui-dropzone';
 import config from "../config";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  divider:{
+    margin: theme.spacing(2)
+  },
+  editorTitle: {
+    paddingLeft: theme.spacing(1),
+    color: 'rgba(0, 0, 0, 0.5)'
+  }
 }));
 
 
@@ -88,7 +98,7 @@ export default function EditUser() {
         practioner_profile: profile,
       });
 
-      history.push("/");
+      history.push("/dashboard");
     } catch (error) {
       onError(error);
     }
@@ -100,8 +110,8 @@ export default function EditUser() {
     });
   }
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
+  function handleFileChange(files) {
+    file.current = files[0];
   }
 
   return (
@@ -123,7 +133,6 @@ export default function EditUser() {
           label="Nickname"
           name="nickname"
           autoComplete="nickname"
-          autoFocus
         />
         <TextField
           value={fullname}
@@ -136,7 +145,6 @@ export default function EditUser() {
           label="Full name"
           name="fullname"
           autoComplete="fullname"
-          autoFocus
         />
         <TextField
           value={profile}
@@ -150,9 +158,18 @@ export default function EditUser() {
           label="Profile"
           name="profile"
           autoComplete="profile"
-          autoFocus
         />
-        <Input id="file" type="file" onChange={handleFileChange}/>
+        <Divider className={classes.divider}/>
+        <Typography variant="body1" component="p" className={classes.editorTitle}>Profile picture</Typography>
+        <DropzoneArea
+          acceptedFiles={['image/*']}
+          dropzoneText={""}
+          id="file" 
+          type="file"
+          filesLimit="1"
+          useChipsForPreview={true}
+          onChange={(files) => handleFileChange(files)}
+        />
         <Button
           type="submit"
           fullWidth
