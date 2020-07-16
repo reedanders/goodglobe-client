@@ -301,7 +301,7 @@ export default function EditProject() {
 
   function addObjective () {
     const last = objectives.length - 1;
-    return objectives[last].title !== "" && objectives[last].description !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Nope!');
+    return objectives[last].title !== "" && objectives[last].description !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Please finish the current objective');
   };
 
   const removeIndex = index => e => {
