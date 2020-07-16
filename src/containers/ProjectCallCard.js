@@ -58,14 +58,21 @@ export default function MediaControlCard(props) {
   const [isMitigation, setIsMitigation] = useState("");
   const [isAwareness, setIsAwareness] = useState("");
   const [isKnowledge, setIsKnowledge] = useState("");
-  const [donors, setDonors] = useState(0);
+  const [donors, setDonors] = useState("0");
 
   function fakeDonors (funding) {
     if (funding > 0) {
-      return Math.round(funding/15);
+      return numberWithCommas(Math.round(funding/15));
     } else {
-      return 0;
+      return "0";
     }
+  }
+
+  function numberWithCommas(x) {
+    if (x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } else {return}
+      
   }
 
   useEffect(() => {

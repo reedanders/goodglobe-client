@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
@@ -54,6 +54,19 @@ export default function Login() {
   function validateForm() {
     return fields.email.length > 0 && fields.password.length > 0;
   }
+
+  const message = "If you like, you can login as a guest to see additional features ( Username: demo@goodglobe.org / Password: Demo@gg20 )";
+
+  useEffect(() => {
+    enqueueSnackbar(message , {
+        variant: 'info',
+        persist: true,
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'left',
+        },
+      });
+    }, [enqueueSnackbar]);
 
   function alertError(msg) {
     enqueueSnackbar(msg , {
