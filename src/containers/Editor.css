@@ -3,12 +3,14 @@ div.DraftEditor-root {
   border-color: rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   border-width: 1px;
-  height: 200px;
+  min-height: 200px;
+  height: 100%;
   width: 100%;
   overflow-y: auto;
 }
 div.DraftEditor-editorContainer,
 div.public-DraftEditor-content {
+  min-height: 200px;
   height: 100%;
   color: rgba(0, 0, 0, 0.87);
   cursor: text;
