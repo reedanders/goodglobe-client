@@ -58,6 +58,15 @@ export default function MediaControlCard(props) {
   const [isMitigation, setIsMitigation] = useState("");
   const [isAwareness, setIsAwareness] = useState("");
   const [isKnowledge, setIsKnowledge] = useState("");
+  const [donors, setDonors] = useState(0);
+
+  function fakeDonors (funding) {
+    if (funding > 0) {
+      return Math.round(funding/15);
+    } else {
+      return 0;
+    }
+  }
 
   useEffect(() => {
 
@@ -71,6 +80,7 @@ export default function MediaControlCard(props) {
       setIsMitigation(props.project.theme_mitigation);
       setIsAwareness(props.project.theme_awareness);
       setIsKnowledge(props.project.theme_knowledge);
+      setDonors(fakeDonors(props.project.current_funding))
     }
 
     onLoad();
@@ -177,7 +187,7 @@ export default function MediaControlCard(props) {
       </Grid>
 
       <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment})` }} md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`}>
-        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label="7 supporters"/></Grid>
+        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label={`${donors} supporters`}/></Grid>
         <Grid item className={classes.supporterFill}/>
       </Grid>
     </Grid>
