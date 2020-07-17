@@ -21,6 +21,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -92,8 +95,36 @@ const useStyles = makeStyles((theme) => ({
   },
   imageInput: {
     padding: theme.spacing(1)
+  },
+  stepper: {
+    width: '100%'
   }
 }));
+
+function getSteps() {
+  return ['Project name', 'Background', 'Objectives', 'Themes', 'Photos', 'Funding'];
+}
+
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return 'Select campaign settings...';
+    case 1:
+      return 'What is an ad group anyways?';
+    case 2:
+      return 'This is the bit I really care about!';
+    case 3:
+      return 'This is the bit I really care about!';
+    case 4:
+      return 'This is the bit I really care about!';
+    case 5:
+      return 'This is the bit I really care about!';
+    case 6:
+      return 'This is the bit I really care about!';
+    default:
+      return 'Unknown stepIndex';
+  }
+}
 
 export default function CreateProject() {
   const classes = useStyles();
@@ -106,7 +137,7 @@ export default function CreateProject() {
   );
 
   const editor = useRef(null);
-
+  const [activeStep, setActiveStep] = React.useState(0);
   const [fields, handleFieldChange] = useFormFields({
     title: "",
     pitch: "",
@@ -135,7 +166,6 @@ export default function CreateProject() {
     "description" : "",
     "status" : ""
   }
-
   const [objectives, setObjectives] = useState([emptyObjective])
 
   async function handleSubmit(event) {
@@ -204,13 +234,62 @@ export default function CreateProject() {
     setObjectives(objectives.filter((_, i2) => i2 !== index));
   }
 
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
   return (
-    <Container className="CreateProject, {classes.paper}" maxWidth="sm">
+    <Container className="CreateProject, {classes.paper}" maxWidth="md">
       <CssBaseline />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Create Project
           </Typography>
+
+          <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+
+          <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+
+          <div>
+            {activeStep === steps.length ? (
+              <div>
+                <Typography className={classes.instructions}>All steps completed</Typography>
+                <Button onClick={handleReset}>Reset</Button>
+              </div>
+            ) : (
+              <div>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.backButton}
+                  >
+                    Back
+                  </Button>
+                  <Button variant="contained" color="primary" onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
               value={fields.title}
