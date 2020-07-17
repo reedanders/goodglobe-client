@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
+  footerGrid: {
+    paddingBottom: theme.spacing(5)
+  }
 }));
 
 function Copyright() {
@@ -161,8 +164,22 @@ function App() {
 
         {/* Footer */}
         <footer className={classes.footer}>
-          <Container maxWidth="sm">
-            
+          <Container maxWidth="md">
+            <Grid container spacing={2} className={classes.footerGrid}>
+              <Grid container item sm={6} direction="column">
+                <Grid item><Typography variant="subtitle1" gutterBottom>GoodGlobe</Typography></Grid>
+                <Grid item><Typography variant="subtitle2">Help us build a simple, efficient process for experienced conservation practitioners to get grassroots funding.</Typography></Grid>
+              </Grid>
+              <Grid container item sm={3} direction="column">
+                <Grid item><Typography variant="overline" gutterBottom>About GoodGlobe</Typography></Grid>
+                <Grid item><Link variant="subtitle2" href="/about">About us</Link></Grid>
+              </Grid>
+              <Grid container item sm={3} direction="column">
+                <Grid item><Typography variant="overline" gutterBottom>Projects</Typography></Grid>
+                <Grid item><Link variant="subtitle2" href="/dashboard">Start a Project</Link></Grid>
+                <Grid item><Link variant="subtitle2" href="/discover">Fund a Project</Link></Grid>
+              </Grid>
+            </Grid>
             <Copyright />
           </Container>
         </footer>
