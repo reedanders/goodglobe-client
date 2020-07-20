@@ -172,15 +172,12 @@ function App() {
               </Grid>
               <Grid container item sm={3} direction="column">
                 <Grid item><Typography variant="overline" gutterBottom>About GoodGlobe</Typography></Grid>
-                <Grid item><Link variant="subtitle2" href="/team">Team</Link></Grid>
                 <Grid item><Link variant="subtitle2" href="/about">About us</Link></Grid>
-                <Grid item><Link variant="subtitle2">FAQ</Link></Grid>
               </Grid>
               <Grid container item sm={3} direction="column">
                 <Grid item><Typography variant="overline" gutterBottom>Projects</Typography></Grid>
                 <Grid item><Link variant="subtitle2" href="/dashboard">Start a Project</Link></Grid>
                 <Grid item><Link variant="subtitle2" href="/discover">Fund a Project</Link></Grid>
-                <Grid item><Link variant="subtitle2" href="/team">Become a reviewer</Link></Grid>
               </Grid>
             </Grid>
             <Copyright />

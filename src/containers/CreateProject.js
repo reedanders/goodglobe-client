@@ -143,7 +143,7 @@ export default function CreateProject() {
     pitch: "",
     content: "",
     attachment: null,
-    target_funding: 0,
+    target_funding: 1,
     current_funding: 0,
     theme_biodiv: false,
     theme_habitat: false,
@@ -439,7 +439,7 @@ export default function CreateProject() {
               dropzoneText={"Drag and drop an image here or click"}
               id="file" 
               type="file"
-              filesLimit="1"
+              filesLimit={1}
               onChange={(files) => handleFileChange(files)}
             />
             <Divider className={classes.divider}/>
