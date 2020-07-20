@@ -117,6 +117,7 @@ export default function EditProject() {
   
   const [title, setTitle] = useState("");
   const [pitch, setPitch] = useState("");
+  const [target_funding, setTarget_funding] = useState(1);
   const [is_public, setIsPublic] = useState(false);
 
   const [theme_biodiv, setTheme_biodiv] = useState("");
@@ -156,6 +157,7 @@ export default function EditProject() {
                 is_public, 
                 attachment, 
                 objectives,
+                target_funding,
                 theme_biodiv,
                 theme_habitat,
                 theme_air,
@@ -176,6 +178,7 @@ export default function EditProject() {
         setPitch(pitch);
         setIsPublic(is_public);
         setObjectives(objectives);
+        setTarget_funding(target_funding)
         setTheme_biodiv(theme_biodiv);
         setTheme_habitat(theme_habitat);
         setTheme_air(theme_air);
@@ -225,6 +228,7 @@ export default function EditProject() {
         content: stateToHTML(editorState.getCurrentContent()),
         pitch, 
         is_public,
+        target_funding,
         theme_biodiv,
         theme_habitat,
         theme_air,
@@ -240,6 +244,7 @@ export default function EditProject() {
       history.push("/dashboard");
     } catch (e) {
       setIsLoading(false);
+      console.log(e);
       onError(e);
     }
   };
@@ -441,13 +446,28 @@ export default function EditProject() {
             </FormControl>
 
             <Divider className={classes.divider}/>
+            <Typography variant="body1" component="p" className={classes.editorTitle}>Funding</Typography>
+            <TextField
+              value={target_funding}
+              onChange={e => setTarget_funding(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              type="number"
+              required
+              fullWidth
+              id="target_funding"
+              label="Target Funding"
+              name="target_funding"
+              autoComplete="target_funding"
+            />
+            <Divider className={classes.divider}/>
             <Typography variant="body1" component="p" className={classes.editorTitle}>Project Image</Typography>
             <DropzoneArea
               acceptedFiles={['image/*']}
               dropzoneText={"Drag and drop an image here or click"}
               id="file" 
               type="file"
-              filesLimit="1"
+              filesLimit={1}
               onChange={(files) => handleFileChange(files)}
             />
             <Divider className={classes.divider}/>
