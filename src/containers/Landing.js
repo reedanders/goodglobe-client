@@ -63,7 +63,7 @@ export default function Landing() {
 	      	<Grid item container md={7} direction="column" justify="center">
 	      		<Grid item>
 	      			<Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>
-		      		Grassroots Funding for Conservation
+		      		Help us build
 		      		</Typography>
 	      		</Grid>
 	      		<Grid item>
