@@ -7,6 +7,7 @@ import { s3Upload } from "../libs/awsLib";
 import config from "../config";
 
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
@@ -32,6 +33,9 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
 import './Editor.css';
+
+import InitProject from './InitProject.js'
+import EditBackground from './EditBackground.js'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -98,32 +102,19 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     width: '100%'
-  }
+  },
+  stepperPaper: {
+    position: 'relative',
+    width: '100%',
+    height: '50vh',
+    backgroundColor: theme.palette.common.white,
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+  },
 }));
 
 function getSteps() {
   return ['Project name', 'Background', 'Objectives', 'Themes', 'Photos', 'Funding'];
-}
-
-function getStepContent(stepIndex) {
-  switch (stepIndex) {
-    case 0:
-      return 'Select campaign settings...';
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'This is the bit I really care about!';
-    case 3:
-      return 'This is the bit I really care about!';
-    case 4:
-      return 'This is the bit I really care about!';
-    case 5:
-      return 'This is the bit I really care about!';
-    case 6:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown stepIndex';
-  }
 }
 
 export default function CreateProject() {
@@ -167,6 +158,25 @@ export default function CreateProject() {
     "status" : ""
   }
   const [objectives, setObjectives] = useState([emptyObjective])
+
+  function getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return <InitProject/>;
+      case 1:
+        return <EditBackground projectId="95774400-caa5-11ea-8c7b-b1377c1f5cf4"/>;
+      case 2:
+        return 'Objectives';
+      case 3:
+        return 'Themes';
+      case 4:
+        return 'Photos';
+      case 5:
+        return 'Funding';
+      default:
+        return 'Unknown stepIndex';
+    }
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -256,7 +266,12 @@ export default function CreateProject() {
             Create Project
           </Typography>
 
-          <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+          <Paper className={classes.stepperPaper}>
+            <Grid container item alignItems="center" justify="center" className={classes.stepperTitle}>
+              <Typography variant="h6" component="h6" align="left" color="textPrimary">{getStepContent(activeStep)}</Typography>
+            </Grid>
+            
+          </Paper>
 
           <Stepper activeStep={activeStep} className={classes.stepper} alternativeLabel>
             {steps.map((label) => (
