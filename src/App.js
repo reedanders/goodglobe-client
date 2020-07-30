@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import CookieConsent from "react-cookie-consent";
@@ -17,6 +17,12 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: theme.spacing(1, 1.5),
+  },
+  dropdown: {
+    display: 'flex',
+  },
+  dropdownPaper: {
+    marginRight: theme.spacing(2),
   },
   barAction: {
     marginTop: theme.spacing(1),
@@ -76,22 +88,39 @@ function Copyright() {
 }
 
 function App() {
-
+  const classes = useStyles();
   const history = useHistory();
+  const anchorRef = useRef(null);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [isFirst, setIsFirst] = useState(true);
+  const [user, setUser] = useState("");
+  const [open, setOpen] = useState(false);
 
-  const classes = useStyles();
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
 
   useEffect(() => {
     onLoad();
-  }, []);
+  }, [open]);
 
   async function onLoad() {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
+      const user = await Auth.currentUserInfo();
+      setUser(user)
     }
     catch(e) {
       if (e !== 'No current user') {
@@ -102,10 +131,16 @@ function App() {
     setIsAuthenticating(false);
   }
 
-  async function handleLogout() {
+  async function handleLogout(event) {
     await Auth.signOut();
     userHasAuthenticated(false);
+    handleClose(event)
     history.push("/login");
+  }
+
+  function handleDashRedirect(event) {
+    handleClose(event)
+    history.push("/dashboard");
   }
 
   return (
@@ -121,13 +156,34 @@ function App() {
               <Grid className={classes.title}></Grid>
               <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Project</Button></Grid>
               {isAuthenticated ? (
-                <div className={classes.barButtons}>
-                  <Button color="primary" variant="outlined" size="small" href="/dashboard">
-                    My Account
+                <div className={classes.dropdown}>
+                  <Button
+                    ref={anchorRef}
+                    aria-controls={open ? 'menu-list-grow' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    className={classes.barButtons}
+                    variant="outlined"
+                  >
+                    Hi, {user && user.attributes.nickname}
                   </Button>
-                  <Button onClick={handleLogout}>
-                    Logout
-                  </Button>
+                  <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                    {({ TransitionProps, placement }) => (
+                      <Grow
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                      >
+                        <Paper>
+                          <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                              <MenuItem onClick={handleDashRedirect}>My account</MenuItem>
+                              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            </MenuList>
+                          </ClickAwayListener>
+                        </Paper>
+                      </Grow>
+                    )}
+                  </Popper>
                 </div>
               ) : (
                 <div className={classes.barButtons}>
@@ -144,7 +200,7 @@ function App() {
           {/* End Header */}
 
         <ErrorBoundary>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated, isFirst, setIsFirst }}>
+          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
           <SnackbarProvider maxSnack={1}>
             <Routes />
           </SnackbarProvider>
