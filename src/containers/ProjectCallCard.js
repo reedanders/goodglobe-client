@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
+  detailsFiller: {
+    flex: 'auto'
+  },
   detailsPlace: {
     paddingTop: theme.spacing(0),
     paddingLeft: theme.spacing(2),
@@ -108,6 +111,7 @@ export default function MediaControlCard(props) {
             {props.project.pitch}
           </Typography>
         </Grid>
+        <Grid item className={classes.detailsFiller}></Grid>
         <Grid container item spacing={2} className={classes.detailsSubtext}>
 
           {isBiodiv ?  
