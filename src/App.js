@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     minHeight: '100vh',
   },
+  appbar: {
+    marginBottom: theme.spacing(1),
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -148,7 +151,7 @@ function App() {
       <Container  maxWidth="md" fixed>
         <div className={classes.root}>
         {/* Header */}
-          <AppBar position="static" color="transparent" elevation={0}>
+          <AppBar position="static" color="transparent" elevation={0} className={classes.appbar}>
             <Toolbar variant="dense">
               <Link href="/">
                 <img src={logo} alt="green earth logo" className={classes.logo} />
@@ -165,7 +168,7 @@ function App() {
                     className={classes.barButtons}
                     variant="outlined"
                   >
-                    Hi, {user && user.attributes.nickname}
+                    {user ? `Hi, ${user.attributes.nickname}` : `Account` }
                   </Button>
                   <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (

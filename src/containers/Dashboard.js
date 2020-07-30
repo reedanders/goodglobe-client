@@ -142,7 +142,7 @@ export default function Dashboard(props) {
                 <Grid item><Avatar className={classes.avatar} alt={user && user.attributes.name} src={user && user.attributes.picture} /></Grid>
                 <Grid item xs>
                   <Typography color="inherit" variant="h5" component="h1">
-                    {user && user.attributes.name}
+                    {user ? `Hi, ${user.attributes.name}` : `Welcome Back` }
                   </Typography>
                 </Grid>
                 <Grid item>
