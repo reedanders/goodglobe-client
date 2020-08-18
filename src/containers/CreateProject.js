@@ -183,7 +183,9 @@ export default function CreateProject() {
   }
 
   function handleFileChange(files) {
-    file.current = files[0];
+    console.log(files)
+    file.current = files;
+    console.log(file)
   }
 
   const handleObjectiveChange = index => e => {
@@ -360,7 +362,7 @@ export default function CreateProject() {
               dropzoneText={"Drag and drop an image here or click"}
               id="file" 
               type="file"
-              filesLimit={1}
+              filesLimit={3}
               onChange={(files) => handleFileChange(files)}
             />
             <Divider className={classes.divider}/>
