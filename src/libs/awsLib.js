@@ -1,7 +1,16 @@
 import { Storage } from "aws-amplify";
 import config from '../config';
 
+
+
+export async function s3Stage(files) {
+  const [first, ...remaining] = files
+  return remaining.length ? 
+}
+
 export async function s3Upload(file) {
+
+
   const filename = `${Date.now()}-${file.name}`;
 
   Storage.configure({ level: 'public' });
@@ -13,7 +22,8 @@ export async function s3Upload(file) {
   });
 
   const result = `https://${config.s3.BUCKET}.s3.amazonaws.com/public/${stored.key}`;
-  console.log(result);
+
+
   return result;
 }
 
