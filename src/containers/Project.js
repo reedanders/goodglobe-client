@@ -59,28 +59,30 @@ export default function Blog() {
       <Container maxWidth="lg">
         <main>
           <ProjectCallCard project={project}/>
-          <Grid 
-            container 
-            spacing={2} 
-            justify="space-between" 
-            direction={ matches ? `row` : `column-reverse`} 
-            className={classes.mainGrid}>
-            <Grid item md={8}>
-              <Typography variant="h6" gutterBottom>
-                Background
-              </Typography>
-              <Divider />
-              <Typography dangerouslySetInnerHTML={{ __html: project.content }} gutterBottom/>
-              <Typography variant="h6" gutterBottom>
-                Objectives
-              </Typography>
-              <Divider />
-              <ObjectiveStepper project={project}/>
+          <Container maxWidth="md">
+            <Grid 
+              container 
+              spacing={2} 
+              justify="space-between" 
+              direction={ matches ? `row` : `column-reverse`} 
+              className={classes.mainGrid}>
+              <Grid item md={8}>
+                <Typography variant="h6" gutterBottom>
+                  Background
+                </Typography>
+                <Divider />
+                <Typography dangerouslySetInnerHTML={{ __html: project.content }} gutterBottom/>
+                <Typography variant="h6" gutterBottom>
+                  Objectives
+                </Typography>
+                <Divider />
+                <ObjectiveStepper project={project}/>
+              </Grid>
+              <Grid item md={4}>
+                <SidebarCard project={project}/>
+              </Grid>
             </Grid>
-            <Grid item md={4}>
-              <SidebarCard project={project}/>
-            </Grid>
-          </Grid>
+          </Container>
         </main>
       </Container>
       )}

@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     marginTop: theme.spacing(1),
+    minHeight: '50vh'
   },
   detailsText: {
     paddingTop: theme.spacing(2),
@@ -100,6 +101,10 @@ export default function MediaControlCard(props) {
   return (
     <Paper className={classes.root}>
     <Grid container spacing={0}>
+      <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment})` }} md={6} sm={12} justify="flex-start" alignItems={!matches ? `flex-start` : `flex-end`}>
+        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label={`${donors} supporters`}/></Grid>
+        <Grid item className={classes.supporterFill}/>
+      </Grid>
       <Grid container item direction="column" md={6}>
         <Grid item className={classes.detailsText}>
           <Typography component="h5" variant="h5">
@@ -196,11 +201,6 @@ export default function MediaControlCard(props) {
             /> 
           </Grid> : ""}
         </Grid>
-      </Grid>
-
-      <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment})` }} md={6} sm={12} justify="flex-end" alignItems={matches ? `flex-start` : `flex-end`}>
-        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label={`${donors} supporters`}/></Grid>
-        <Grid item className={classes.supporterFill}/>
       </Grid>
     </Grid>
     </Paper>

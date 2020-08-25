@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import featured_image from "../assets/images/featured_image.jpg"
+import featured_image from "../assets/images/background_benjamin_wong.png"
 
 import MainFeatureCard from './MainFeatureCard';
 

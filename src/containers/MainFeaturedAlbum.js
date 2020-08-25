@@ -47,7 +47,7 @@ export default function MainFeaturedAlbum() {
   };
 
   return (
-    <Container className={classes.cardGrid} maxWidth="xl">
+    <Container className={classes.cardGrid} maxWidth="lg">
       <Typography component="h3" variant="h5" align="left" color="textPrimary" gutterBottom>Popular Projects</Typography>
       {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
       <Grid container spacing={2}>

@@ -64,15 +64,17 @@ export default function About() {
 	      </Grid>
       </Container>
 
-      <Paper className={classes.stepperPaper}>
-        <Grid container item alignItems="center" justify="center" className={classes.stepperTitle}>
-          <Typography variant="h6" component="h6" align="left" color="textPrimary">How to Submit a Project</Typography>
-        </Grid>
-        <AboutStepper/>
-        <Grid container item alignItems="center" justify="center" className={classes.stepperButton}>
-          <Button variant="contained" color="primary" href="/dashboard">Start a Project</Button>
-        </Grid>
-      </Paper>
+      <Container maxWidth="md">
+        <Paper className={classes.stepperPaper}>
+          <Grid container item alignItems="center" justify="center" className={classes.stepperTitle}>
+            <Typography variant="h6" component="h6" align="left" color="textPrimary">How to Submit a Project</Typography>
+          </Grid>
+          <AboutStepper/>
+          <Grid container item alignItems="center" justify="center" className={classes.stepperButton}>
+            <Button variant="contained" color="primary" href="/dashboard">Start a Project</Button>
+          </Grid>
+        </Paper>
+      </Container>
 
       <Container maxWidth="md" className={classes.content}>
         <Grid container direction="row">
@@ -83,24 +85,28 @@ export default function About() {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography component="h6" variant="h6" align="left" gutterBottom>
+              <Typography variant="body1" align="left" gutterBottom>
               <p>Is there are need for GoodGlobe? In the below graphic we outline a few of our motivations. One benefit we see in this platform 
               is <i>fast</i> planning and action. Another need we hope to address is more discussion between people observing in the field and people 
               observing through data, which is somewhere in the <i>knowledge</i> and <i>community</i> bubbles. 
               While this is just a sketch, we'd like to hear why you think GoodGlobe is (or isn't) needed in conservation.</p>
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item container justify="space-between">
+            <Grid item></Grid>
+            <Grid item md={8}>
               <img src={needsDiagram} alt="network showing interactions in conservation" className={classes.aboutImage}/>
             </Grid>
+            <Grid item></Grid>
+            </Grid>
             <Grid item>
-              <Typography component="h6" variant="h6" align="left" gutterBottom>
+              <Typography variant="body1" align="left" gutterBottom>
               <p>There is a balance we will need to strike between the power of the internet and quality. We would require that practitioners have a professor or expert with track-record as collaborator in the project start. 
               Drafted projects would be reviewed by conservation scientists and accepted before we put them online.</p>
               </Typography>
             </Grid>
             <Grid item>
-              <Typography component="h6" variant="h6" align="center" gutterBottom>
+              <Typography variant="body1" align="center" gutterBottom>
               <p>As always, please contact Ingmar if you have any questions.</p>
               </Typography>
             </Grid>
