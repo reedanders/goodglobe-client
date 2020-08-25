@@ -12,7 +12,7 @@ import ProjectCard from './ProjectCard';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(8),
     minHeight:"65vh"
   },
@@ -29,7 +29,7 @@ export default function MainFeaturedAlbum() {
       try {
         const projects = await loadProjects();
         if (projects) {
-          setProjects(projects.slice(0, 3));
+          setProjects(projects.slice(0, 4));
         }
       } catch (e) {
         console.log(e);
@@ -47,12 +47,12 @@ export default function MainFeaturedAlbum() {
   };
 
   return (
-    <Container className={classes.cardGrid} maxWidth="md">
-      <Typography component="h2" variant="h4" align="center" color="textPrimary" gutterBottom>Just Launched</Typography>
+    <Container className={classes.cardGrid} maxWidth="xl">
+      <Typography component="h3" variant="h5" align="left" color="textPrimary" gutterBottom>Popular Projects</Typography>
       {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         {projects.map((project) => (
-          <Grid item key={project.projectId} xs={12} sm={6} md={4}>
+          <Grid item key={project.projectId} xs={12} sm={6} md={3}>
             <ProjectCard project={project}/>
           </Grid>
         ))}

@@ -65,7 +65,7 @@ export default function ProjectCard(props) {
           title="Image title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h6">
             {project.title}
           </Typography>
         </CardContent>

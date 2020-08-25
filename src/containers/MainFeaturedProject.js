@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    height: '50vh',
+  },
+  mainFeaturedGrid: {
+    height: '50vh'
   },
   overlay: {
     position: 'absolute',
@@ -30,8 +34,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(6),
-      paddingRight: 0,
+      padding: theme.spacing(6)
     },
   },
 }));
@@ -45,12 +48,14 @@ export default function MainFeaturedProject(props) {
       {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
-      <Grid container>
-        <Grid item md={4}>
+      <Grid container direction="column" justify="space-between" alignItems="flex-end" className={classes.mainFeaturedGrid}>
+        <Grid item></Grid>
+        <Grid item md={5}>
           <div className={classes.mainFeaturedProjectContent}>
             <MainFeatureCard />
           </div>
         </Grid>
+        <Grid item></Grid>
       </Grid>
     </Paper>
   );

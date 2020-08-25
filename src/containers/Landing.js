@@ -38,7 +38,6 @@ export default function Landing() {
 	return (
     <div className="Landing">
       <MainFeaturedProject post={mainFeaturedProject} />
-      <MainQuickAbout/>
       <MainFeaturedAlbum/>
 
       <Container maxWidth="md" className={classes.cardGrid}>
@@ -57,6 +56,8 @@ export default function Landing() {
 	      	</Grid>
 	      </Grid>
       </Container>
+
+      <MainQuickAbout/>
 
       <Container maxWidth="md" className={classes.cardGrid}>
 	      <Grid container>
