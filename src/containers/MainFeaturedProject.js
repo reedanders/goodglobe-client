@@ -50,7 +50,7 @@ export default function MainFeaturedProject(props) {
       <div className={classes.overlay} />
       <Grid container direction="column" justify="space-between" alignItems="flex-end" className={classes.mainFeaturedGrid}>
         <Grid item></Grid>
-        <Grid item md={5}>
+        <Grid item md={7} lg={5} xl={4}>
           <div className={classes.mainFeaturedProjectContent}>
             <MainFeatureCard />
           </div>

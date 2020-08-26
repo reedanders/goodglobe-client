@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import  face_thought_SMALL  from "../assets/images/drawings/face_thought_SMALL.png"
 
@@ -32,23 +33,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainFeatureCard() {
   const classes = useStyles();
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Grid container alignItems="center">
-          <Grid item xs={7}>
+        <Grid container alignItems="center" justify="space-around">
+          <Grid item xs={12} sm={7}>
             <Typography gutterBottom variant="h5" component="h2">
               Science-Driven
             </Typography>
             <Typography variant="body1" component="p" color="textSecondary">
-              Help sustain our planet for future generations.
+              Crowdfunding projects sustaining our planet for future generations.
             </Typography>
             <Button href="/discover"className={classes.button} variant="outlined" color="primary" size="small">Explore projects</Button>
           </Grid>
+          { matches ? 
           <Grid item>
             <img src={face_thought_SMALL} alt="Thinking face" className={classes.cardMedia}/>
-          </Grid>
+          </Grid>  : ""} 
         </Grid>
       </CardContent>
     </Card>

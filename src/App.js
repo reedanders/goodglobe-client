@@ -23,6 +23,7 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -94,6 +95,7 @@ function App() {
   const classes = useStyles();
   const history = useHistory();
   const anchorRef = useRef(null);
+  const matches = useMediaQuery('(min-width:600px)');
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [user, setUser] = useState("");
@@ -157,7 +159,7 @@ function App() {
                 <img src={logo} alt="green earth logo" className={classes.logo} />
               </Link>
               <Grid className={classes.title}></Grid>
-              <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Project</Button></Grid>
+              { matches ? <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Project</Button></Grid> : ""}
               {isAuthenticated ? (
                 <div className={classes.dropdown}>
                   <Button

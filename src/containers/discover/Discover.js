@@ -195,6 +195,7 @@ export default function Discover() {
 		</Grid>
 	  </Container>      
 
+    <Container maxWidth="md">
       <Paper className={classes.categoryPaper} >
       <Typography variant="h5" component="h5" align="center" className={classes.categoryMainTitle}>Browse projects by category</Typography>
 	      <Grid container spacing={1} direction="row" justify="center" alignItems="center" className={classes.categoryGrid}>
@@ -205,6 +206,7 @@ export default function Discover() {
 	        ))}
 	      </Grid>
 	    </Paper>
+    </Container>
 
       {icons.map((section) => (
         <div key={section.title}>
