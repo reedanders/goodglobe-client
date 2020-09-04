@@ -70,7 +70,7 @@ export default function ProjectCard(props) {
             {project.title}
           </Typography>
           <Typography gutterBottom variant="body2">
-            {pitch.length >= 50 ? `${pitch} ...` : pitch}
+            {pitch.length > 50 ? `${pitch} ...` : pitch}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
