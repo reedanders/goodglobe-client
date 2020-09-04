@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectCard(props) {
   const classes = useStyles();
   const { project } = props;
+  const pitch = project.pitch.substring(0,80);
 
   function setProgressValue(current, target) {
     return (100*(current/target));
@@ -67,6 +68,9 @@ export default function ProjectCard(props) {
         <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h6" component="h6">
             {project.title}
+          </Typography>
+          <Typography gutterBottom variant="body1">
+            {pitch.length >= 80 ? `${pitch} ...` : pitch}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
