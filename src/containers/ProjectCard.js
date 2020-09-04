@@ -47,8 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectCard(props) {
   const classes = useStyles();
   const { project } = props;
-  const subPitch = project.pitch.substring(0,80);
-  const pitch = subPitch.replace(/^(.{79}[^\s]*).*/, "$1");
+  const pitch = project.pitch.replace(/^(.{80}[^\s]*).*/, "$1");
 
   function setProgressValue(current, target) {
     return (100*(current/target));
