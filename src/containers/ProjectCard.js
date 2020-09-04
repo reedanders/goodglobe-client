@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectCard(props) {
   const classes = useStyles();
   const { project } = props;
-  const pitch = project.pitch.substring(0,90);
+  const pitch = project.pitch.replace(/^(.{80}[^\s]*).*/, "$1");
 
   function setProgressValue(current, target) {
     return (100*(current/target));
@@ -70,7 +70,7 @@ export default function ProjectCard(props) {
             {project.title}
           </Typography>
           <Typography gutterBottom variant="body2">
-            {pitch.length >= 90 ? `${pitch} ...` : pitch}
+            {pitch.length >= 80 ? `${pitch} ...` : pitch}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardActions}>
