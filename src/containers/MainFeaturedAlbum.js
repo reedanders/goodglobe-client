@@ -8,15 +8,44 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 import ProjectCard from './ProjectCard';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(8),
-    minHeight:"65vh"
+    minHeight: "50vh"
   },
+  cardCarousel: {
+    padding: theme.spacing(1)
+  }
 }));
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+    slidesToSlide: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 export default function MainFeaturedAlbum() {
   const classes = useStyles();
@@ -29,7 +58,7 @@ export default function MainFeaturedAlbum() {
       try {
         const projects = await loadProjects();
         if (projects) {
-          setProjects(projects.slice(0, 4));
+          setProjects(projects.slice(0, 8));
         }
       } catch (e) {
         console.log(e);
@@ -50,13 +79,13 @@ export default function MainFeaturedAlbum() {
     <Container className={classes.cardGrid} maxWidth="lg">
       <Typography component="h3" variant="h5" align="left" color="textPrimary" gutterBottom>Popular Projects</Typography>
       {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : ''}
-      <Grid container spacing={2}>
+      <Carousel 
+      itemClass={classes.cardCarousel}
+      responsive={responsive}>
         {projects.map((project) => (
-          <Grid item key={project.projectId} xs={12} sm={6} md={3}>
-            <ProjectCard project={project}/>
-          </Grid>
+          <ProjectCard className={classes.cardCarousel}project={project}/>
         ))}
-      </Grid>
+      </Carousel>
     </Container>
   );
 }
