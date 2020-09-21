@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    height: '30vh',
+    height: '40vh',
   },
   mainFeaturedGrid: {
-    height: '30vh'
+    height: '40vh'
   },
   overlay: {
     position: 'absolute',
@@ -49,13 +49,11 @@ export default function MainFeaturedProject(props) {
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
       <Grid container direction="column" justify="center" alignItems="center" className={classes.mainFeaturedGrid}>
-        <Grid item></Grid>
-        <Grid item md={8} lg={5} xl={4}>
+        <Grid item md={12} lg={6} xl={4}>
           <div className={classes.mainFeaturedProjectContent}>
             <MainFeatureCard />
           </div>
         </Grid>
-        <Grid item></Grid>
       </Grid>
     </Paper>
   );
