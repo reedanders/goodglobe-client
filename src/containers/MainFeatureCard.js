@@ -7,11 +7,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import  face_thought_SMALL  from "../assets/images/drawings/face_thought_SMALL.png"
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 275,
     padding: theme.spacing(2)
   },
   bullet: {
@@ -22,13 +19,9 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12
   },
-  button: {
-    marginTop: theme.spacing(2),
-  },
-  cardMedia: {
-    height: 128,
-    width: 128,
-  },
+  cardRight: {
+    paddingTop: theme.spacing(1)
+  }
 }));
 
 export default function MainFeatureCard() {
@@ -38,20 +31,27 @@ export default function MainFeatureCard() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Grid container alignItems="center" justify="space-around">
-          <Grid item xs={12} sm={7}>
+        <Grid container>
+          <Grid item>
+            {matches ? <div>
             <Typography gutterBottom variant="h5" component="h2">
-              Science-Driven
+              Science-Driven Crowdfunding
             </Typography>
             <Typography variant="body1" component="p" color="textSecondary">
-              Crowdfunding projects sustaining our planet for future generations.
-            </Typography>
-            <Button href="/discover"className={classes.button} variant="outlined" color="primary" size="small">Explore projects</Button>
+              We're building a simple, efficient process for experienced conservation practitioners to get funding for conservation projects.
+            </Typography></div>
+            : 
+            <div><Typography gutterBottom variant="h5" component="h2">
+                Science-Driven
+              </Typography>
+              <Typography variant="body1" component="p" color="textSecondary">
+                Crowdfunding projects sustaining our planet for future generations.
+              </Typography></div>}
+
           </Grid>
-          { matches ? 
-          <Grid item>
-            <img src={face_thought_SMALL} alt="Thinking face" className={classes.cardMedia}/>
-          </Grid>  : ""} 
+          <Grid container item justify="flex-end" className={classes.cardRight}>
+            <Button href="/discover" variant="contained" color="secondary" size="medium">Explore projects</Button>
+          </Grid>
         </Grid>
       </CardContent>
     </Card>
