@@ -22,8 +22,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
     marginBottom: theme.spacing(4),
-    backgroundColor: theme.palette.primary.main,
-    color: 'white',
+    backgroundColor: theme.palette.primary.light,
 	borderRadius: '4px'
   },
   media: {
@@ -48,10 +47,10 @@ export default function Landing() {
       <MainFeaturedProject post={mainFeaturedProject} />
       <MainFeaturedAlbum/>
 
-      <Container maxWidth="md" className={classes.cardGridColor}>
+      <Container className={classes.cardGridColor}>
 	      <Grid container direction="column" alignItems='center'>
 	      	<Grid item>
-	      		<Typography component="h2" variant="h4" align="center" color="white" gutterBottom>
+	      		<Typography component="h2" variant="h4" align="center" gutterBottom>
 	      		Grassroots Funding for Conservation
 	      		</Typography>
 	      	</Grid>
