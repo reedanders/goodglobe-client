@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
   },
   appbar: {
-    marginBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -153,7 +153,7 @@ function App() {
       <Container  maxWidth="xl" fixed>
         <div className={classes.root}>
         {/* Header */}
-          <AppBar position="static" color="transparent" elevation={0} className={classes.appbar}>
+          <AppBar position="sticky" color="default" elevation={0} className={classes.appbar}>
             <Toolbar variant="dense">
               <Link href="/">
                 <img src={logo} alt="green earth logo" className={classes.logo} />
