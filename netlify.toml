@@ -12,10 +12,10 @@
 [build.processing]
   skip_processing = false
 [build.processing.css]
-  bundle = false
+  bundle = true
   minify = true
 [build.processing.js]
-  bundle = false
+  bundle = true
   minify = true
 [build.processing.html]
   pretty_urls = true
