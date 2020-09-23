@@ -74,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const icons = [
   {
     title: 'Biodiversity',
