@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { onError } from "../libs/errorLib";
 import { useParams } from "react-router-dom";
 import { API } from "aws-amplify";
@@ -11,14 +11,18 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import ProjectCallCard from './ProjectCallCard';
 import SidebarCard from './SidebarCard';
 import ObjectiveStepper from './ObjectiveStepper';
+
+const ProjectCallCard = lazy(() => import('./ProjectCallCard'));
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
   },
+  projectCallCardLoading: {
+    height: '50vh'
+  }
 }));
 
 export default function Blog() {
@@ -58,7 +62,9 @@ export default function Blog() {
       {!isLoading && project && (
       <Container maxWidth="lg">
         <main>
-          <ProjectCallCard project={project}/>
+          <Suspense fallback = {<div className={classes.projectCallCardLoading}></div>} >
+              <ProjectCallCard project={project}/>
+          </Suspense>
           <Container maxWidth="md">
             <Grid 
               container 
