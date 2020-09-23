@@ -19,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const loadStripeJS = () => {
+//   const script = document.createElement("script");
+//   script.src = "https://js.stripe.com/v3/"
+//   script.async = true;
+
+//   document.body.appendChild(script);
+// }
+
 export default function Payment() {
   const history = useHistory();
   const classes = useStyles();
