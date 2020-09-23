@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparent',
   },
   cardMedia: {
-    height: 128,
-    width: 128,
+    height: 160,
+    width: 160,
   },
   cardContent: {
     flexGrow: 1,
@@ -54,7 +54,7 @@ export default function MainFeaturedAlbum() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.cardGrid} maxWidth="md">
+    <Container className={classes.cardGrid}>
       <Grid container spacing={4}>
         {cards.map((card) => (
           <Grid container item key={card.title} xs={12} sm={6} md={4} alignItems='center'>

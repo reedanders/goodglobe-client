@@ -77,7 +77,7 @@ export default function Landing() {
 	      <MainQuickAbout/>
 	  </Suspense>
 
-      <Container maxWidth="md" className={classes.cardGrid}>
+      <Container className={classes.cardGrid}>
 	      <Grid container>
 	      	<Grid item container md={7} direction="column" justify="center">
 	      		<Grid item>
