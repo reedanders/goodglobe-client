@@ -1,8 +1,11 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,7 +79,7 @@ export default function ButtonBases(props) {
         >
           <span className={classes.imageButton}>
             <Grid container direction="column" justify="center" alignItems="center">
-            <Grid item><img src={icon.image} alt={icon.attribution} className={classes.imageGrid}/></Grid>
+            <Grid item><LazyLoadImage src={icon.image} alt={icon.attribution} className={classes.imageGrid}/></Grid>
             <Grid item>
               <Typography
                 variant="h6" 

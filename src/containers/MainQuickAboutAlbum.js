@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 import  idea_bulbs_SMALL  from "../assets/images/drawings/idea_bulbs_SMALL.png"
 import  face_thought_SMALL  from "../assets/images/drawings/face_thought_SMALL.png"
 import  trumpet_social  from "../assets/images/drawings/trumpet_social.png"
@@ -60,7 +62,7 @@ export default function MainFeaturedAlbum() {
                 <Grid container alignItems='center' justify='center'>
                   <Grid item></Grid>
                   <Grid item>
-                    <img src={card.image} alt="Project" className={classes.cardMedia}/>
+                    <LazyLoadImage src={card.image} alt="Project" className={classes.cardMedia}/>
                   </Grid>
                   <Grid item></Grid>
                 </Grid>

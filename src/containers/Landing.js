@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import featured_image from "../assets/images/featured_image.jpg"
 import idea_plant from "../assets/images/drawings/idea_plant.png"
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const MainFeaturedProject = lazy(() => import('./MainFeaturedProject'));
 const MainFeaturedAlbum = lazy(() => import('./MainFeaturedAlbum'));
@@ -100,7 +101,7 @@ export default function Landing() {
 		        </Grid>
 	      	</Grid>
 	      	<Grid item md={5}>
-	      		<img src={idea_plant} alt="idea watering plant" className={classes.media}/>
+	      		<LazyLoadImage src={idea_plant} alt="idea watering plant" className={classes.media}/>
 	      	</Grid>
 	      </Grid>
       </Container>

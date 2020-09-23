@@ -23,6 +23,7 @@ import Mitigation from "../../assets/icons/mitigation.png"
 import Awareness from "../../assets/icons/awareness.png"
 import Knowledge from "../../assets/icons/knowledge.png"
 
+
 const useStyles = makeStyles((theme) => ({
   header: {
     paddingTop: theme.spacing(8),
