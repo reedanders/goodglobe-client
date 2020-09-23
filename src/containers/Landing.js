@@ -1,4 +1,5 @@
-import React from "react";
+import React, { lazy, Suspense } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -6,12 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import MainFeaturedProject from './MainFeaturedProject';
-import MainQuickAbout from './MainQuickAbout';
-import MainFeaturedAlbum from './MainFeaturedAlbum';
-
 import featured_image from "../assets/images/featured_image.jpg"
 import idea_plant from "../assets/images/drawings/idea_plant.png"
+
+
+const MainFeaturedProject = lazy(() => import('./MainFeaturedProject'));
+const MainFeaturedAlbum = lazy(() => import('./MainFeaturedAlbum'));
+const MainQuickAbout = lazy(() => import('./MainQuickAbout'));
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -28,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: '100%',
   },
+  featuredLoading: {
+  	height: '100vh'
+  }
 }));
 
 const mainFeaturedProject = {
@@ -44,8 +49,11 @@ export default function Landing() {
 
 	return (
     <div className="Landing">
-      <MainFeaturedProject post={mainFeaturedProject} />
-      <MainFeaturedAlbum/>
+      <Suspense fallback = {<div className={classes.featuredLoading}></div>} >
+	      <MainFeaturedProject post={mainFeaturedProject} />
+	      <MainFeaturedAlbum/>
+	  </Suspense>
+
 
       <Container className={classes.cardGridColor}>
 	      <Grid container direction="column" alignItems='center'>
@@ -64,7 +72,9 @@ export default function Landing() {
 	      </Grid>
       </Container>
 
-      <MainQuickAbout/>
+      <Suspense fallback = {<div></div>} >
+	      <MainQuickAbout/>
+	  </Suspense>
 
       <Container maxWidth="md" className={classes.cardGrid}>
 	      <Grid container>
