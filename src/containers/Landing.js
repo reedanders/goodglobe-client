@@ -63,12 +63,16 @@ export default function Landing() {
 	      		Grassroots Funding for Conservation
 	      		</Typography>
 	      	</Grid>
-	      	<Grid item>
+	      	<Grid item container justify="space-between">
+	      		<Grid item></Grid>
+	      		<Grid item sm={8}>
 	      		<Typography component="p" variant="body1" align="center" gutterBottom>
 	      		We are creating a community of environmental stewards and a platform on which messages 
 	      		and ideas can spread around the world. To make nature conservation initiatives more 
 	      		sustainable and efficient scientists review project proposals and transfers knowledge as needed.
 	      		</Typography>
+	      		</Grid>
+	      		<Grid item></Grid>
 	      	</Grid>
 	      </Grid>
       </Container>
