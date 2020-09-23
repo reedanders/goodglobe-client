@@ -62,7 +62,7 @@ export default function MainFeaturedAlbum() {
                 <Grid container alignItems='center' justify='center'>
                   <Grid item></Grid>
                   <Grid item>
-                    <LazyLoadImage src={card.image} alt="Project" className={classes.cardMedia}/>
+                    <LazyLoadImage src={card.image} alt={card.title} className={classes.cardMedia}/>
                   </Grid>
                   <Grid item></Grid>
                 </Grid>
