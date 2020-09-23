@@ -79,7 +79,7 @@ export default function ButtonBases(props) {
         >
           <span className={classes.imageButton}>
             <Grid container direction="column" justify="center" alignItems="center">
-            <Grid item><LazyLoadImage src={icon.image} alt={icon.attribution} className={classes.imageGrid}/></Grid>
+            <Grid item><LazyLoadImage src={require(`../../assets/icons/${icon.title.toLowerCase()}.png`)} alt={icon.attribution} className={classes.imageGrid}/></Grid>
             <Grid item>
               <Typography
                 variant="h6" 

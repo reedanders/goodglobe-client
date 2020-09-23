@@ -13,17 +13,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DiscoverButton from './DiscoverButton';
 import ProjectCard from '../ProjectCard';
 
-import Biodiversity from "../../assets/icons/biodiversity.png"
-import Habitat from "../../assets/icons/habitat.png"
-import Air from "../../assets/icons/air.png"
-import Waste from "../../assets/icons/waste.png"
-import Water from "../../assets/icons/water.png"
-import Resilience from "../../assets/icons/resilience.png"
-import Mitigation from "../../assets/icons/mitigation.png"
-import Awareness from "../../assets/icons/awareness.png"
-import Knowledge from "../../assets/icons/knowledge.png"
-
-
 const useStyles = makeStyles((theme) => ({
   header: {
     paddingTop: theme.spacing(8),
@@ -74,58 +63,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 const icons = [
   {
     title: 'Biodiversity',
-    image: Biodiversity,
     attribution: "relationship by Nithinan Tatah from the Noun Project",
     name: 'theme_biodiv'
   },
   {
     title: 'Habitat',
-    image: Habitat,
     attribution: "wildlife by Nithinan Tatah from the Noun Project",
     name: 'theme_habitat'
   },
   {
     title: 'Air',
-    image: Air,
     attribution: "Air by Lars Meiertoberens from the Noun Project",
     name: 'theme_air'
   },
   {
     title: 'Waste',
-    image: Waste,
     attribution: "plastic mountain by supalerk laipawat from the Noun Project",
     name: 'theme_waste'
   },
   {
     title: 'Water',
-    image: Water,
     attribution: "Water by Smalllike from the Noun Project",
     name: 'theme_water'
   },
   {
     title: 'Resilience',
-    image: Resilience,
     attribution: "Resilience by Attilio Baghino from the Noun Project",
     name: 'theme_resilience'
   },
   {
     title: 'Mitigation',
-    image: Mitigation,
     attribution: "heat wave by Wichai Wi from the Noun Project",
     name: 'theme_mitigation'
   },
   {
     title: 'Awareness',
-    image: Awareness,
     attribution: "adapt by Oleksandr Panasovskyi from the Noun Project",
     name: 'theme_awareness'
   },
   {
     title: 'Knowledge',
-    image: Knowledge,
     attribution: "Share by Adrien Coquet from the Noun Project",
     name: 'theme_knowledge'
   },
