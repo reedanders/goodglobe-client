@@ -1,53 +1,86 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Landing from "./containers/Landing";
-import Login from "./containers/Login";
-import Signup from "./containers/Signup";
-import Project from "./containers/Project";
-import CreateProject from "./containers/CreateProject";
-import EditProject from "./containers/EditProject";
-import Payment from "./containers/Payment";
-import Dashboard from "./containers/Dashboard";
-import Discover from "./containers/discover/Discover";
-import About from "./containers/About";
-import NotFound from "./containers/NotFound";
+import asyncComponent from "./components/AsyncComponent";
+
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
-import ResetPassword from "./containers/ResetPassword";
+import Dashboard from "./containers/Dashboard";
+import NotFound from "./containers/NotFound";
 
-export default function Routes() {
-  return (
+
+const AsyncLanding = asyncComponent(() => import("./containers/Landing"));
+const AsyncLogin = asyncComponent(() => import("./containers/Login"));
+const AsyncSignup = asyncComponent(() => import("./containers/Signup"));
+const AsyncProject = asyncComponent(() => import("./containers/Project"));
+const AsyncCreateProject = asyncComponent(() => import("./containers/CreateProject"));
+const AsyncEditProject = asyncComponent(() => import("./containers/EditProject"));
+const AsyncPayment = asyncComponent(() => import("./containers/Payment"));
+const AsyncDiscover = asyncComponent(() => import("./containers/discover/Discover"));
+const AsyncAbout = asyncComponent(() => import("./containers/About"));
+const AsyncResetPassword = asyncComponent(() => import("./containers/ResetPassword"));
+
+
+export default ({ childProps }) => 
     <Switch>
-      <Route exact path="/">
-        <Landing />
-      </Route>
-      <Route exact path="/project/:id">
-        <Project />
-      </Route>
-      <Route exact path="/discover">
-        <Discover />
-      </Route>
-      <Route exact path="/about">
-        <About />
-      </Route>
-      <UnauthenticatedRoute exact path="/login">
-        <Login />
-      </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="/signup">
-        <Signup />
-      </UnauthenticatedRoute>
-      <UnauthenticatedRoute exact path="/login/reset">
-        <ResetPassword />
-      </UnauthenticatedRoute>
-      <AuthenticatedRoute exact path="/projects/new">
-        <CreateProject />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/projects/edit/:id">
-        <EditProject />
-      </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/payment">
-        <Payment />
-      </AuthenticatedRoute>
+      <Route 
+        exact 
+        path="/"
+        component={AsyncLanding}
+        props={childProps} />
+      <Route 
+        exact 
+        path="/discover"
+        component={AsyncDiscover}
+        props={childProps}
+      />
+      <Route 
+        exact 
+        path="/project/:id"
+        component={AsyncProject}
+        props={childProps}
+      />
+      <Route 
+        exact 
+        path="/about"
+        component={AsyncAbout}
+        props={childProps}
+      />
+      <UnauthenticatedRoute 
+        exact 
+        path="/login"
+        component={AsyncLogin}
+        props={childProps}
+      />
+      <UnauthenticatedRoute 
+        exact 
+        path="/signup"
+        component={AsyncSignup}
+        props={childProps}
+      />
+      <UnauthenticatedRoute 
+        exact 
+        path="/login/reset"
+        component={AsyncResetPassword}
+        props={childProps}
+      />
+      <AuthenticatedRoute 
+        exact 
+        path="/projects/new"
+        component={AsyncCreateProject}
+        props={childProps}
+      />
+      <AuthenticatedRoute 
+        exact 
+        path="/projects/edit/:id"
+        component={AsyncEditProject}
+        props={childProps}
+      />
+      <AuthenticatedRoute 
+        exact 
+        path="/payment"
+        component={AsyncPayment}
+        props={childProps}
+      />
       <Redirect exact from="/dashboard" to="/dashboard/home" />
       <AuthenticatedRoute exact path="/dashboard/:page?" render={props => <Dashboard {...props} />}/>
       {/* Finally, catch all unmatched routes */}
@@ -55,6 +88,3 @@ export default function Routes() {
   	    <NotFound />
   	  </Route>
     </Switch>
-
-  );
-}
