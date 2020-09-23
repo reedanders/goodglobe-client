@@ -8,20 +8,6 @@
   publish = "build"
   command = "REACT_APP_STAGE=dev npm run build"
 
-# If skip_processing = true, all other settings are ignored
-[build.processing]
-  skip_processing = false
-[build.processing.css]
-  bundle = true
-  minify = true
-[build.processing.js]
-  bundle = true
-  minify = true
-[build.processing.html]
-  pretty_urls = true
-[build.processing.images]
-  compress = true
-
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
