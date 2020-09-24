@@ -52,7 +52,7 @@ export default function Blog() {
                 description: project.pitch,
                 canonical: `http://goodglobe.org/project/${project.readable_url}`,
                 meta: {
-                  property: "og:image",
+                  property: "og:image:secure_url",
                   content: project.attachment
                 }
               }
