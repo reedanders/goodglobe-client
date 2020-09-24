@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 import featured_image from "../assets/images/featured_image.jpg"
 import idea_plant from "../assets/images/drawings/idea_plant.png"
@@ -26,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
     marginBottom: theme.spacing(4),
     backgroundColor: theme.palette.primary.light,
-	borderRadius: '4px'
   },
   media: {
     width: '100%',
@@ -56,7 +56,7 @@ export default function Landing() {
 	  </Suspense>
 
 
-      <Container className={classes.cardGridColor}>
+      <Paper className={classes.cardGridColor}>
 	      <Grid container direction="column" alignItems='center'>
 	      	<Grid item>
 	      		<Typography component="h2" variant="h4" align="center" gutterBottom>
@@ -75,7 +75,7 @@ export default function Landing() {
 	      		<Grid item></Grid>
 	      	</Grid>
 	      </Grid>
-      </Container>
+      </Paper>
 
       <Suspense fallback = {<div></div>} >
 	      <MainQuickAbout/>
