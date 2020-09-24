@@ -3,6 +3,8 @@ import { onError } from "../libs/errorLib";
 import { useParams } from "react-router-dom";
 import { API } from "aws-amplify";
 
+import DocumentMeta from 'react-document-meta';
+
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -30,6 +32,7 @@ export default function Blog() {
   const matches = useMediaQuery('(min-width:960px)');
   const { readableUrl } = useParams();
   const [project, setProject] = useState(null);
+  const [meta, setMeta] = useState({})
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -37,27 +40,40 @@ export default function Blog() {
       return API.get("goodglobe", `/projects/view/${readableUrl}`, {
         'body': { "projectId" : readableUrl }
       });
-    }
+    };
 
     function checkLoading() {
       return typeof matches === 'boolean' ? setIsLoading(false) : "";
-    }
+    };
+
+    function writeMeta(project) {
+       return {
+                title: `GoodGlobe | ${project.title}`,
+                description: project.pitch,
+                canonical: `http://goodglobe.org/project/${project.readable_url}`,
+                meta: {
+                  property: "og:image",
+                  content: project.attachment
+                }
+              }
+      };
 
     async function onLoad() {
       try {
         const project = await loadProject();
         setProject(project);
+        setMeta(writeMeta(project));
         checkLoading()
       } catch (e) {
         onError(e);
       }
-    }
+    };
 
     onLoad();
-  }, [readableUrl, matches]);
+  }, [readableUrl, matches, project]);
 
   return (
-    <React.Fragment>
+    <DocumentMeta {...meta}>
       <CssBaseline />
       {!isLoading && project && (
       <Container maxWidth="lg">
@@ -92,6 +108,6 @@ export default function Blog() {
         </main>
       </Container>
       )}
-    </React.Fragment>
+    </DocumentMeta>
   );
 }
