@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   logo: {
+    paddingTop: theme.spacing(1),
     maxWidth: 160,
   },
   link: {
