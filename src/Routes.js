@@ -16,6 +16,7 @@ const AsyncEditProject = asyncComponent(() => import("./containers/EditProject")
 const AsyncPayment = asyncComponent(() => import("./containers/Payment"));
 const AsyncDiscover = asyncComponent(() => import("./containers/discover/Discover"));
 const AsyncAbout = asyncComponent(() => import("./containers/About"));
+const AsyncTeam = asyncComponent(() => import("./containers/Team"));
 const AsyncResetPassword = asyncComponent(() => import("./containers/ResetPassword"));
 
 
@@ -42,6 +43,12 @@ export default ({ childProps }) =>
         exact 
         path="/about"
         component={AsyncAbout}
+        props={childProps}
+      />
+      <Route 
+        exact 
+        path="/team"
+        component={AsyncTeam}
         props={childProps}
       />
       <UnauthenticatedRoute 
