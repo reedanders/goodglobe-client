@@ -49,7 +49,7 @@ export default function MainFeaturedProject(props) {
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
       <Grid container direction="column" justify="center" alignItems="center" className={classes.mainFeaturedGrid}>
-        <Grid item md={12} lg={6} xl={4}>
+        <Grid item md={12} lg={6} xl={6}>
           <div className={classes.mainFeaturedProjectContent}>
             <MainFeatureCard />
           </div>
