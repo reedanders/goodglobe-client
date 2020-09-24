@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Blog() {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
-  const { id } = useParams();
+  const { readableUrl } = useParams();
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     function loadProject() {
-      return API.get("goodglobe", `/projects/view/${id}`, {
-        'body': { "projectId" : id }
+      return API.get("goodglobe", `/projects/view/${readableUrl}`, {
+        'body': { "projectId" : readableUrl }
       });
     }
 
@@ -54,7 +54,7 @@ export default function Blog() {
     }
 
     onLoad();
-  }, [id, matches]);
+  }, [readableUrl, matches]);
 
   return (
     <React.Fragment>

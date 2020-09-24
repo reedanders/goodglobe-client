@@ -59,7 +59,7 @@ export default function ProjectCard(props) {
 
   return (
       <Card className={classes.card}>
-        <CardActionArea href={`/project/${project.projectId}`}>
+        <CardActionArea href={`/project/${project.readable_url}`}>
         <CardMedia
           className={classes.cardMedia}
           image={project.attachment}

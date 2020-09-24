@@ -100,7 +100,7 @@ export default function DashboardTable(props) {
                   <TableRow key={row.projectId}>
                     <TableCell>{row.title}</TableCell>
                     <TableCell>{row.pitch}</TableCell>
-                    <TableCell>{ row.is_public ? <Button variant="outlined" color="secondary" size="small" href={`/project/${row.projectId}`}>Public</Button>: <Button disabled size="small">Private</Button> }</TableCell>
+                    <TableCell>{ row.is_public ? <Button variant="outlined" color="secondary" size="small" href={`/project/${row.readable_url}`}>Public</Button>: <Button disabled size="small">Private</Button> }</TableCell>
                     <TableCell align="right"><Button variant="contained" color="secondary" size="small" href={`/projects/edit/${row.projectId}`}>Edit</Button></TableCell>
                   </TableRow>
                 ))}

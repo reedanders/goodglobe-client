@@ -7,7 +7,6 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import Dashboard from "./containers/Dashboard";
 import NotFound from "./containers/NotFound";
 
-
 const AsyncLanding = asyncComponent(() => import("./containers/Landing"));
 const AsyncLogin = asyncComponent(() => import("./containers/Login"));
 const AsyncSignup = asyncComponent(() => import("./containers/Signup"));
@@ -35,7 +34,7 @@ export default ({ childProps }) =>
       />
       <Route 
         exact 
-        path="/project/:id"
+        path="/project/:readableUrl"
         component={AsyncProject}
         props={childProps}
       />

@@ -116,6 +116,7 @@ export default function EditProject() {
   const editor = useRef(null);
   
   const [title, setTitle] = useState("");
+  const [readable_url, setReadable_url] = useState("");
   const [pitch, setPitch] = useState("");
   const [target_funding, setTarget_funding] = useState(1);
   const [is_public, setIsPublic] = useState(false);
@@ -174,6 +175,7 @@ export default function EditProject() {
         }
 
         setTitle(title);
+        setReadable_url(createReadableUrl(title));
         setEditorState(EditorState.createWithContent(stateFromHTML(content)));
         setPitch(pitch);
         setIsPublic(is_public);
@@ -225,6 +227,7 @@ export default function EditProject() {
 
       await saveProject({
       	title,
+        readable_url,
         content: stateToHTML(editorState.getCurrentContent()),
         pitch, 
         is_public,
@@ -271,6 +274,10 @@ export default function EditProject() {
       onError(e);
     }
 
+  };
+
+  function createReadableUrl(newTitle) {
+    return newTitle.replace(/\s+/g, '-').toLowerCase();
   };
 
   function saveProject(project) {
