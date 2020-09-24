@@ -3,7 +3,7 @@ import { onError } from "../libs/errorLib";
 import { useParams } from "react-router-dom";
 import { API } from "aws-amplify";
 
-import DocumentMeta from 'react-document-meta';
+import {Helmet} from "react-helmet";
 
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -32,7 +32,6 @@ export default function Blog() {
   const matches = useMediaQuery('(min-width:960px)');
   const { readableUrl } = useParams();
   const [project, setProject] = useState(null);
-  const [meta, setMeta] = useState({})
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -40,43 +39,36 @@ export default function Blog() {
       return API.get("goodglobe", `/projects/view/${readableUrl}`, {
         'body': { "projectId" : readableUrl }
       });
-    };
+    }
 
     function checkLoading() {
       return typeof matches === 'boolean' ? setIsLoading(false) : "";
-    };
-
-    function writeMeta(project) {
-       return {
-                title: `GoodGlobe | ${project.title}`,
-                description: project.pitch,
-                canonical: `http://goodglobe.org/project/${project.readable_url}`,
-                meta: {
-                  property: "og:image:secure_url",
-                  content: project.attachment
-                }
-              }
-      };
+    }
 
     async function onLoad() {
       try {
         const project = await loadProject();
         setProject(project);
-        setMeta(writeMeta(project));
         checkLoading()
       } catch (e) {
         onError(e);
       }
-    };
+    }
 
     onLoad();
-  }, [readableUrl, matches, project]);
+  }, [readableUrl, matches]);
 
   return (
-    <DocumentMeta {...meta}>
+    <React.Fragment>
       <CssBaseline />
       {!isLoading && project && (
       <Container maxWidth="lg">
+        <Helmet>
+            <title>GoodGlobe | {project.title}</title>
+            <meta name="description" content={project.pitch} />
+            <meta property="og:image" content={project.attachment} />
+            <meta property="og:image:secure_url" content={project.attachment} />
+        </Helmet>
         <main>
           <Suspense fallback = {<div className={classes.projectCallCardLoading}></div>} >
               <ProjectCallCard project={project}/>
@@ -108,6 +100,6 @@ export default function Blog() {
         </main>
       </Container>
       )}
-    </DocumentMeta>
+    </React.Fragment>
   );
 }
