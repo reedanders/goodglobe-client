@@ -150,7 +150,7 @@ function App() {
 
   return (
     !isAuthenticating && (
-      <Container  maxWidth="xl" fixed>
+      <Container  maxWidth="lg" fixed>
         <div className={classes.root}>
         {/* Header */}
           <AppBar position="sticky" color="default" elevation={0} className={classes.appbar}>

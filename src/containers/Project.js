@@ -65,7 +65,7 @@ export default function Blog() {
           <Suspense fallback = {<div className={classes.projectCallCardLoading}></div>} >
               <ProjectCallCard project={project}/>
           </Suspense>
-          <Container maxWidth="md">
+          <Container>
             <Grid 
               container 
               spacing={2} 
