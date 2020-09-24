@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 import AboutStepper from './AboutStepper';
 import ideaPlant from '../assets/images/drawings/idea_plant.png';
 import needsDiagram from '../assets/images/needs_diagram.png';
@@ -59,7 +61,7 @@ export default function About() {
             </Grid>
 	      	</Grid>
           <Grid item md={6}>
-            <img src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
+            <LazyLoadImage height="504" src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
           </Grid>
 	      </Grid>
       </Container>
