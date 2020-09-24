@@ -13,6 +13,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 285,
+    paddingBottom: theme.spacing(8)
   },
   image: {
     paddingBottom: theme.spacing(2)

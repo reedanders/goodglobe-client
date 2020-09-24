@@ -65,7 +65,7 @@ export default function Team() {
             </Grid>
             <Grid item><Divider variant="middle" className={classes.divider}/></Grid>
             <Grid item>
-            <Typography component="body1" align="center" color="textPrimary" gutterBottom>
+            <Typography align="center" gutterBottom>
               We're building a simple, efficient process the fund the work of experienced conservation practitioners.
             </Typography>
             </Grid>
