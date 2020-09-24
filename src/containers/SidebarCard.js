@@ -6,12 +6,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import {
+	FacebookIcon,
+  	TwitterIcon,
+  	WhatsappIcon,
+  	FacebookShareButton,
+  	TwitterShareButton,
+  	WhatsappShareButton,
+	} from "react-share";
 
 import { useSnackbar } from 'notistack';
 
@@ -65,6 +69,7 @@ function numberWithCommas(x) {
 
 export default function SideBarCard(props) {
   const classes = useStyles();
+  const { project } = props;
   const [humanCurrent, setHumanCurrent] = useState("");
   const [humanTarget, setHumanTarget] = useState("");
   const [progressValue, setProgressValue] = useState(0);
@@ -75,9 +80,9 @@ export default function SideBarCard(props) {
 
   useEffect(() => {
     async function onLoad() {
-    	setHumanTarget(numberWithCommas(props.project.target_funding));
-    	setHumanCurrent(numberWithCommas(props.project.current_funding));
-    	setProgressValue(100*(props.project.current_funding/props.project.target_funding));
+    	setHumanTarget(numberWithCommas(project.target_funding));
+    	setHumanCurrent(numberWithCommas(project.current_funding));
+    	setProgressValue(100*(project.current_funding/project.target_funding));
     }
 
     onLoad();
@@ -114,9 +119,31 @@ export default function SideBarCard(props) {
 	        </Button>
 	        </Grid>
 	        <Grid container item spacing={1} justify="center" alignItems="stretch">
-	        	<Grid item><Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" color="inherit"><FacebookIcon/></Link></Grid>
-	        	<Grid item><Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" color="inherit"><TwitterIcon/></Link></Grid>
-	        	<Grid item><Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" color="inherit"><InstagramIcon/></Link></Grid>
+	        	<Grid item>
+					<FacebookShareButton
+						url={`https://goodglobe.org/project/${project.readable_url}`}
+						quote={project.title}
+						>
+						<FacebookIcon size={32} round />
+					</FacebookShareButton>
+	        	</Grid>
+	        	<Grid item>
+	        		<TwitterShareButton
+						url={`https://goodglobe.org/project/${project.readable_url}`}
+						quote={project.title}
+						>
+						<TwitterIcon size={32} round />
+					</TwitterShareButton>
+	        	</Grid>
+	        	<Grid item>
+	        		<WhatsappShareButton
+						url={`https://goodglobe.org/project/${project.readable_url}`}
+						quote={project.title}
+						separator=":: "
+						>
+						<WhatsappIcon size={32} round />
+					</WhatsappShareButton>
+	        	</Grid>
 	        </Grid>
         </Grid> 
 	    </CardContent>
@@ -126,12 +153,12 @@ export default function SideBarCard(props) {
 	      </Typography>
 	      <Grid container direction="column" spacing={1}>
 	      	<Grid container item spacing={1} alignItems="center">
-	      		<Grid item><Avatar className={classes.large} alt={props.project.practioner_fullname} src={props.project.practioner_image} /></Grid>
-	      		<Grid item><Typography variant="subtitle1" component="h6">{props.project.practioner_fullname}</Typography>
+	      		<Grid item><Avatar className={classes.large} alt={project.practioner_fullname} src={project.practioner_image} /></Grid>
+	      		<Grid item><Typography variant="subtitle1" component="h6">{project.practioner_fullname}</Typography>
 	      		</Grid>
 	      	</Grid>
 	      	<Grid item>
-	      		<Typography variant="subtitle2" component="p" className={classes.profileOffset}>{props.project.practioner_profile}</Typography>
+	      		<Typography variant="subtitle2" component="p" className={classes.profileOffset}>{project.practioner_profile}</Typography>
 	      	</Grid>
 	      </Grid>
 	    </CardContent>
@@ -140,7 +167,7 @@ export default function SideBarCard(props) {
 	        Themes addressed
 	      </Typography>
 	      <Grid container direction="column" spacing={1} className={classes.themeInfo}>
-	      {props.project.theme_biodiv ? 
+	      {project.theme_biodiv ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -157,7 +184,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_habitat ? 
+	      	{project.theme_habitat ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -171,7 +198,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_air ? 
+	      	{project.theme_air ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -185,7 +212,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_waste ? 
+	      	{project.theme_waste ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -198,7 +225,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_water ? 
+	      	{project.theme_water ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -212,7 +239,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_resilience ? 
+	      	{project.theme_resilience ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -225,7 +252,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_mitigation ? 
+	      	{project.theme_mitigation ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -238,7 +265,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_awareness ? 
+	      	{project.theme_awareness ? 
 	      	<div>
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
@@ -251,7 +278,7 @@ export default function SideBarCard(props) {
 	      	<Divider className={classes.divider}/>
 	      	</div>
 	      	: ""}
-	      	{props.project.theme_knowledge ? 
+	      	{project.theme_knowledge ? 
 	      	<Grid item>
 		      	<Typography variant="overline" component="h6">
 		        	Knowledge Development
