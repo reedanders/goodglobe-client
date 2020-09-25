@@ -66,9 +66,7 @@ export default function Signup() {
     return (
       fields.email.length > 0 &&
       fields.password.length > 0 &&
-      fields.password === fields.confirmPassword &&
-      fields.nick_name.length > 0 &&
-      fields.full_name.length > 0
+      fields.password === fields.confirmPassword
     );
   }
 
@@ -97,8 +95,8 @@ export default function Signup() {
         username: fields.email,
         password: fields.password,
         attributes: {
-          nickname: fields.nick_name,
-          name: fields.full_name,
+          nickname: fields.nick_name !== "" ? fields.nick_name : fields.email.split("@")[0],
+          name: fields.full_name !== "" ? fields.full_name : fields.email.split("@")[0],
           picture: `https://avatars.dicebear.com/api/jdenticon/${avatar}.svg`,
           updated_at: String(Date.now()),
         },
@@ -179,30 +177,6 @@ export default function Signup() {
             autoComplete="email"
             autoFocus
           />
-        <TextField
-          value={fields.nick_name}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="nick_name"
-          label="Nick Name"
-          name="nick_name"
-          autoComplete="nick_name"
-        />
-        <TextField
-          value={fields.full_name}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="full_name"
-          label="Full Name"
-          name="full_name"
-          autoComplete="full_name"
-        />
         <TextField
           value={fields.password}
           onChange={handleFieldChange}
