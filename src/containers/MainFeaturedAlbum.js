@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -84,7 +83,7 @@ export default function MainFeaturedAlbum() {
       itemClass={classes.cardCarousel}
       responsive={responsive}>
         {projects.map((project) => (
-          <ProjectCard className={classes.cardCarousel}project={project}/>
+          <ProjectCard className={classes.cardCarousel} project={project}/>
         ))}
       </Carousel>
     </Container>

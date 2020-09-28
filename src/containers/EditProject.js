@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { API, Storage } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
+import { uploadAll } from "../libs/awsLib";
 import config from "../config";
 
 import Button from '@material-ui/core/Button';
@@ -220,7 +220,7 @@ export default function EditProject() {
       setIsLoading(true);
       
       if (file.current) {
-        attachment = await s3Upload(file.current);
+        attachment = await uploadAll(file.current);
       }
 
       // setContent(stateToHTML(editorState.getCurrentContent()));
@@ -295,7 +295,7 @@ export default function EditProject() {
   };
 
   function handleFileChange(files) {
-    file.current = files[0];
+    file.current = files;
   }
 
   const toggleChecked = () => {
@@ -474,7 +474,7 @@ export default function EditProject() {
               dropzoneText={"Drag and drop an image here or click"}
               id="file" 
               type="file"
-              filesLimit={1}
+              filesLimit={3}
               onChange={(files) => handleFileChange(files)}
             />
             <Divider className={classes.divider}/>

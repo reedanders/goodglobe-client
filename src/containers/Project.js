@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Blog() {
+export default function Project() {
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
   const { readableUrl } = useParams();

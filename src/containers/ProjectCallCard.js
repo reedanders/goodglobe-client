@@ -6,6 +6,10 @@ import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -46,11 +50,25 @@ const useStyles = makeStyles((theme) => ({
   },
   supporterFill : {
     minHeight: '150px'
+  },
+  fill: {
+    objectFit: 'cover',
+    height: '50vh',
+  },
+  fillCarousel: {
+    height: '100%',
+    display: 'flex',
+    borderBottomLeftRadius: '3px',
+    borderTopLeftRadius: '3px'
+  },
+  fillWrapper: {
+    minHeight: '50vh',
   }
 }));
 
 
 export default function MediaControlCard(props) {
+  const { project } = props;
   const classes = useStyles();
   const matches = useMediaQuery('(min-width:960px)');
 
@@ -83,37 +101,55 @@ export default function MediaControlCard(props) {
   useEffect(() => {
 
     async function onLoad() {
-      setIsBiodiv(props.project.theme_biodiv);
-      setIsHabitat(props.project.theme_habitat);
-      setIsAir(props.project.theme_air);
-      setIsWaste(props.project.theme_waste);
-      setIsWater(props.project.theme_water);
-      setIsResilience(props.project.theme_resilience);
-      setIsMitigation(props.project.theme_mitigation);
-      setIsAwareness(props.project.theme_awareness);
-      setIsKnowledge(props.project.theme_knowledge);
-      setDonors(fakeDonors(props.project.current_funding))
+      setIsBiodiv(project.theme_biodiv);
+      setIsHabitat(project.theme_habitat);
+      setIsAir(project.theme_air);
+      setIsWaste(project.theme_waste);
+      setIsWater(project.theme_water);
+      setIsResilience(project.theme_resilience);
+      setIsMitigation(project.theme_mitigation);
+      setIsAwareness(project.theme_awareness);
+      setIsKnowledge(project.theme_knowledge);
+      setDonors(fakeDonors(project.current_funding))
     }
 
     onLoad();
   }, );
 
   return (
+    <div>
     <Paper className={classes.root}>
     <Grid container spacing={0}>
-      <Grid container item className={classes.image} style={{ backgroundImage: `url(${props.project.attachment})` }} md={6} sm={12} justify="flex-start" alignItems={!matches ? `flex-start` : `flex-end`}>
-        <Grid item><Chip className={classes.supporterChip} variant="default" color="secondary" label={`${donors} supporters`}/></Grid>
-        <Grid item className={classes.supporterFill}/>
+      <Grid container item md={6} sm={12} justify="flex-start" alignItems={!matches ? `flex-start` : `flex-end`}>
+        <Carousel 
+          showArrows={false}
+          showStatus={false}
+          showThumbs={false}
+          stopOnHover
+          swipeable
+          infiniteLoop
+          autoPlay
+          donors={donors}
+          className={classes.fillCarousel}>
+          {project.attachment.map((img) => (
+            <div className={classes.fillWrapper}>
+            <LazyLoadImage
+            src={img} 
+            alt="idea watering plant"
+            className={classes.fill}/>
+            </div>
+            ))}
+        </Carousel>
       </Grid>
       <Grid container item direction="column" md={6}>
         <Grid item className={classes.detailsText}>
           <Typography component="h5" variant="h5">
-            {props.project.title}
+            {project.title}
           </Typography>
         </Grid>
         <Grid item className={classes.detailsSubtext}>
           <Typography variant="subtitle1" color="textSecondary">
-            {props.project.pitch}
+            {project.pitch}
           </Typography>
         </Grid>
         <Grid item className={classes.detailsFiller}></Grid>
@@ -204,5 +240,6 @@ export default function MediaControlCard(props) {
       </Grid>
     </Grid>
     </Paper>
+    </div>
   );
 }
