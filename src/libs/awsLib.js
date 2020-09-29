@@ -2,12 +2,10 @@ import { Storage } from "aws-amplify";
 import config from '../config';
 
 export async function uploadAll(file) {
-  console.log("FILE", file, "...FILE", ...file);
   return Promise.all(file.map(image => s3Upload(image)))
 }
 
 export async function s3Upload(image) {
-  console.log("IMAGE", image)
 
   const filename = `${Date.now()}-${image.name}`;
 
