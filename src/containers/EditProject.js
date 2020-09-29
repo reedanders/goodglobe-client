@@ -3,7 +3,6 @@ import { useParams, useHistory } from "react-router-dom";
 import { onError } from "../libs/errorLib";
 import { API, Storage } from "aws-amplify";
 import { uploadAll } from "../libs/awsLib";
-import config from "../config";
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -171,7 +170,7 @@ export default function EditProject() {
               } = project;
 
         if (attachment) {
-          project.attachmentURL = await Storage.vault.get(attachment);
+          project.attachment = await Storage.vault.get(attachment);
         }
 
         setTitle(title);
@@ -206,15 +205,6 @@ export default function EditProject() {
   	let attachment
 
     event.preventDefault();
-
-    if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
-      alert(
-        `Please pick a file smaller than ${
-          config.MAX_ATTACHMENT_SIZE / 1000000
-        } MB.`
-      );
-      return;
-    }
 
     try {
       setIsLoading(true);
@@ -473,6 +463,7 @@ export default function EditProject() {
               acceptedFiles={['image/*']}
               dropzoneText={"Drag and drop an image here or click"}
               id="file" 
+              initialFiles={project.attachment}
               type="file"
               filesLimit={3}
               onChange={(files) => handleFileChange(files)}
