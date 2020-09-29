@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
@@ -146,21 +145,6 @@ export default function SideBarCard(props) {
 	        	</Grid>
 	        </Grid>
         </Grid> 
-	    </CardContent>
-	    <CardContent>
-	      <Typography gutterBottom variant="h6" component="h6">
-	        Practioner 
-	      </Typography>
-	      <Grid container direction="column" spacing={1}>
-	      	<Grid container item spacing={1} alignItems="center">
-	      		<Grid item><Avatar className={classes.large} alt={project.practioner_fullname} src={project.practioner_image} /></Grid>
-	      		<Grid item><Typography variant="subtitle1" component="h6">{project.practioner_fullname}</Typography>
-	      		</Grid>
-	      	</Grid>
-	      	<Grid item>
-	      		<Typography variant="subtitle2" component="p" className={classes.profileOffset}>{project.practioner_profile}</Typography>
-	      	</Grid>
-	      </Grid>
 	    </CardContent>
 	    <CardContent>
 	      <Typography gutterBottom variant="h6" component="h6">

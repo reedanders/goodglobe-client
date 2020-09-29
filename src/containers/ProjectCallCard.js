@@ -10,6 +10,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+import PractionerAvatar from './PractionerAvatar'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -63,6 +65,15 @@ const useStyles = makeStyles((theme) => ({
   },
   fillWrapper: {
     minHeight: '50vh',
+  },
+  practioner: {
+    paddingTop: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingBottom: theme.spacing(0),
+    paddingRight: theme.spacing(2),
+  },
+  divider: {
+    width: '80%'
   }
 }));
 
@@ -151,6 +162,9 @@ export default function MediaControlCard(props) {
           <Typography variant="subtitle1" color="textSecondary">
             {project.pitch}
           </Typography>
+        </Grid>
+        <Grid item className={classes.practioner}>
+          <PractionerAvatar project={ project }/>
         </Grid>
         <Grid item className={classes.detailsFiller}></Grid>
         <Grid container item spacing={2} className={classes.detailsSubtext}>
