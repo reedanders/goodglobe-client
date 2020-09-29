@@ -60,7 +60,7 @@ export default function Team() {
           <Grid item container direction="column" justify="center" alignItems="center">
             <Grid item>
             <Typography component="h5" variant="h5" align="center" color="textPrimary" gutterBottom>
-              Meet our leadership team
+              Meet the GoodGlobe team
             </Typography>
             </Grid>
             <Grid item><Divider variant="middle" className={classes.divider}/></Grid>
