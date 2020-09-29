@@ -62,7 +62,7 @@ export default function ProjectCard(props) {
         <CardActionArea href={`/project/${project.readable_url}`}>
         <CardMedia
           className={classes.cardMedia}
-          image={project.attachment}
+          image={project.attachment[0]}
           title="Image title"
         />
         <CardContent className={classes.cardContent}>
