@@ -67,10 +67,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '50vh',
   },
   practioner: {
-    paddingTop: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingBottom: theme.spacing(0),
-    paddingRight: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   divider: {
     width: '80%'
@@ -163,10 +160,6 @@ export default function MediaControlCard(props) {
             {project.pitch}
           </Typography>
         </Grid>
-        <Grid item className={classes.practioner}>
-          <PractionerAvatar project={ project }/>
-        </Grid>
-        <Grid item className={classes.detailsFiller}></Grid>
         <Grid container item spacing={2} className={classes.detailsSubtext}>
 
           {isBiodiv ?  
@@ -250,6 +243,10 @@ export default function MediaControlCard(props) {
               label="Knowledge"
             /> 
           </Grid> : ""}
+        </Grid>
+        <Grid item className={classes.detailsFiller}></Grid>
+        <Grid item className={classes.practioner}>
+          <PractionerAvatar project={ project }/>
         </Grid>
       </Grid>
     </Grid>
