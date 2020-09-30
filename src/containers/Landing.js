@@ -13,9 +13,9 @@ import idea_plant from "../assets/images/drawings/idea_plant.png"
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-const MainFeaturedProject = lazy(() => import('./MainFeaturedProject'));
-const MainFeaturedAlbum = lazy(() => import('./MainFeaturedAlbum'));
-const MainQuickAbout = lazy(() => import('./MainQuickAbout'));
+const MainFeaturedProject = lazy(() => import('../components/MainFeaturedProject'));
+const MainFeaturedAlbum = lazy(() => import('../components/MainFeaturedAlbum'));
+const MainQuickAbout = lazy(() => import('../components/MainQuickAbout'));
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {

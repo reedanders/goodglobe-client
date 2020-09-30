@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import featured_image from "../assets/images/hero-background.png"
 
-import MainFeatureCard from './MainFeatureCard';
+import MainFeatureCard from '../components/MainFeatureCard';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedProject: {

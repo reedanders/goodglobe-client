@@ -11,7 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import ProjectCard from './ProjectCard';
+import ProjectCard from '../containers/ProjectCard';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
