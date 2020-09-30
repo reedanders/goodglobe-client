@@ -9,13 +9,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Title from '../containers/Title';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import { DropzoneArea } from 'material-ui-dropzone';
+import Title from '../components/Title';
 import config from "../config";
 
 const useStyles = makeStyles((theme) => ({

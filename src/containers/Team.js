@@ -10,7 +10,7 @@ import reed_profile from '../assets/images/team/reed_profile.png';
 import ingmar_profile from '../assets/images/team/ingmar_profile.png';
 import roxanne_profile from '../assets/images/team/roxanne_profile.png';
 
-import TeamCard from './TeamCard';
+import TeamCard from '../components/TeamCard';
 
 const useStyles = makeStyles((theme) => ({
   header: {

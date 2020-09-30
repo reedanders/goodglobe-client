@@ -11,7 +11,7 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import DiscoverButton from '../components/DiscoverButton';
-import ProjectCard from './ProjectCard';
+import ProjectCard from '../components/ProjectCard';
 
 const useStyles = makeStyles((theme) => ({
   header: {

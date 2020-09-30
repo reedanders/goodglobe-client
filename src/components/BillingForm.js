@@ -8,7 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Title from '../containers/Title';
+
+import Title from './Title';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
