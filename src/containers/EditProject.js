@@ -27,7 +27,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 import {stateFromHTML} from 'draft-js-import-html';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
-import './Editor.css';
+import '../components/Editor.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

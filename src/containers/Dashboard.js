@@ -16,7 +16,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import DashboardTable from './DashboardTable';
+import DashboardTable from '../components/DashboardTable';
 import EditUser from './EditUser';
 import Payment from './Payment';
 import TabPanel from '../components/TabPanel';

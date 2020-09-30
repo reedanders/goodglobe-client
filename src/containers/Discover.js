@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { onError } from "../../libs/errorLib";
+import { onError } from "../libs/errorLib";
 import { API } from "aws-amplify";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,8 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import DiscoverButton from './DiscoverButton';
-import ProjectCard from '../ProjectCard';
+import DiscoverButton from '../components/DiscoverButton';
+import ProjectCard from './ProjectCard';
 
 const useStyles = makeStyles((theme) => ({
   header: {

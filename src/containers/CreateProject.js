@@ -28,7 +28,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { DropzoneArea } from 'material-ui-dropzone';
 import {stateToHTML} from 'draft-js-export-html';
 import {Editor, EditorState} from 'draft-js';
-import './Editor.css';
+import '../components/Editor.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

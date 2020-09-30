@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import AboutStepper from './AboutStepper';
+import AboutStepper from '../components/AboutStepper';
 import ideaPlant from '../assets/images/drawings/idea_plant.png';
 import needsDiagram from '../assets/images/needs_diagram.png';
 

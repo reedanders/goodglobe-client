@@ -14,7 +14,7 @@ const AsyncProject = asyncComponent(() => import("./containers/Project"));
 const AsyncCreateProject = asyncComponent(() => import("./containers/CreateProject"));
 const AsyncEditProject = asyncComponent(() => import("./containers/EditProject"));
 const AsyncPayment = asyncComponent(() => import("./containers/Payment"));
-const AsyncDiscover = asyncComponent(() => import("./containers/discover/Discover"));
+const AsyncDiscover = asyncComponent(() => import("./containers/Discover"));
 const AsyncAbout = asyncComponent(() => import("./containers/About"));
 const AsyncTeam = asyncComponent(() => import("./containers/Team"));
 const AsyncResetPassword = asyncComponent(() => import("./containers/ResetPassword"));
