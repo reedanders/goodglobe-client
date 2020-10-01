@@ -30,11 +30,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
+  const { project } = props;
 
   return (
     <div className={classes.root}>
       <Stepper orientation="vertical" className={classes.stepper}>
-        {props.project.objectives.map((obj, index) => (
+        {project.objectives.map((obj, index) => (
           <Step expanded active key={index}>
             <StepLabel>{obj.title}</StepLabel>
             <StepContent>
