@@ -42,7 +42,7 @@ const team = [
   },
   { name: "Roxanne Leberger, PhD",
     position: "Project Development",
-    website: "https://www.idiv.de/en",
+    website: "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C23&q=%22R+Leberger%22&btnG=",
     linkedin: "",
     image: roxanne_profile
   },
