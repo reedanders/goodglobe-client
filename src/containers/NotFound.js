@@ -33,7 +33,7 @@ export default function NotFound() {
 	  		<LazyLoadImage src={human_knot} alt="Tangled human 404" height="254"/>
 	  	</Grid>
 	  	<Grid item>
-	  		<Typography variant="h6">Hmmmmm! Looks like the page you are looking for does not exist.</Typography>
+	  		<Typography variant="h6" align="center">Hmmmmm! Looks like the page you are looking for does not exist.</Typography>
 	  	</Grid>
 	  </Grid>
 	</div>
