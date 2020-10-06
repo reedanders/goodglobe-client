@@ -47,8 +47,8 @@ export default function About() {
     <div className="Discover">
 
       <Container maxWidth="md" className={classes.header}>
-	      <Grid container direction="row">
-	      	<Grid container item direction="column" justify="center"spacing={2} md={6}>
+	      <Grid container direction="row" justify="center">
+	      	<Grid container item direction="column" justify="center" spacing={2} md={6}>
             <Grid item>
   	      		<Typography component="h4" variant="h4" align="left" color="textPrimary" gutterBottom>
   	      		About GoodGlobe
@@ -61,7 +61,7 @@ export default function About() {
             </Grid>
 	      	</Grid>
           <Grid item md={6}>
-            <LazyLoadImage height="504" src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
+            <LazyLoadImage height="100%" src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
           </Grid>
 	      </Grid>
       </Container>
