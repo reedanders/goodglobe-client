@@ -191,8 +191,8 @@ export default function Discover() {
 
       {icons.map((section) => (
         <div key={section.title}>
-        <Container className={classes.cardGrid} maxWidth="md">
         <a href={`/discover#${section.title}`} name={section.title} className={classes.customAnchor}>
+        <Container className={classes.cardGrid} maxWidth="md">
         {isLoading ? <Grid container justify="center" alignItems="center"><Grid item><CircularProgress /></Grid></Grid> : 
         <div><Typography component="h2" variant="h4" align="left" color="textPrimary" gutterBottom>{section.title}</Typography>
         <Grid container spacing={4}>
@@ -212,8 +212,8 @@ export default function Discover() {
             <Button variant="contained" color="primary" href="/about">Create a Project</Button>
           </Grid>
         </Grid> : "" }
-        </Grid></div>}</a>
-        </Container>
+        </Grid></div>}
+        </Container></a>
         </div>
       ))}
 
