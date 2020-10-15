@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   practionerImage: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+  },
+  summary: {
+    flexShrink: 1
   }
 }));
 
@@ -24,12 +27,12 @@ export default function PractionerAvatar(props) {
   return (
     <div className={classes.root}>
         <Grid container direction="row" alignItems="center">
-          <Grid item>
+          <Grid item md={2} lg={1}>
             <Avatar className={classes.practionerImage} alt={project.practioner_fullname} src={project.practioner_image} />
           </Grid>
-          <Grid item>
+          <Grid item xs={10}>
             <Container>
-            <Grid container direction="column">
+            <Grid container direction="column" className={classes.summary}>
               <Grid item><Typography variant="subtitle1" component="h6">{project.practioner_fullname}</Typography></Grid>
               <Grid item><Typography variant="subtitle2" component="p">{project.practioner_profile}</Typography></Grid>
             </Grid>
