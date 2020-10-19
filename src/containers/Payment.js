@@ -26,7 +26,7 @@ export default function Payment() {
   const [stripe, setStripe] = useState(null);
 
   const { enqueueSnackbar } = useSnackbar();
-  const message = "Heads up! This is a demo website. We'll accept payments soon.";
+  const message = "Heads up! We'll accept payments soon.";
 
   useEffect(() => {
     setStripe(window.Stripe(config.STRIPE_KEY));
