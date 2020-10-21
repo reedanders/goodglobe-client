@@ -1,6 +1,6 @@
 ---
-title: Now Publishing With Netlify CMS!
-author: Will Jay
+title: Now (Really) Publishing With Netlify CMS!
+author: Ingmar Staude
 date: 2020-01-05T07:18:52.042Z
 thumbnail: /images/science-profile.jpg
 ---
