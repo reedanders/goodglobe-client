@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
   publishDate: {
     paddingTop: theme.spacing(1)
+  },
+  content: {
+    paddingTop: theme.spacing(2)
   }
 }));
 
@@ -65,9 +68,9 @@ export default function Post(props) {
         <Container className={classes.header}>
           <Grid container justify="space-between">
 
-          <Grid item sm={3}></Grid>
+          <Grid item sm={2}></Grid>
 
-          <Grid item container direction="column" sm={6}>
+          <Grid item container direction="column" sm={8}>
             <Grid item>
             <Typography component="h4" variant="h4" color="textPrimary" gutterBottom>
               {fetchedPost.title}
@@ -81,7 +84,7 @@ export default function Post(props) {
                   {fetchedPost.author}
                 </Typography></Grid>
             </Grid>
-            <Grid item>
+            <Grid item className={classes.content}>
             <Markdown source={fetchedPost.content} escapeHtml={false} />
             </Grid>
             <Grid item className={classes.publishDate}><Typography variant="caption" color="textPrimary" gutterBottom>
@@ -89,7 +92,7 @@ export default function Post(props) {
             </Typography></Grid>
           </Grid>
 
-          <Grid item sm={3}></Grid>
+          <Grid item sm={2}></Grid>
 
           </Grid>
         </Container>
