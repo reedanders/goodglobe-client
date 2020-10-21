@@ -17,6 +17,8 @@ const AsyncPayment = asyncComponent(() => import("./containers/Payment"));
 const AsyncDiscover = asyncComponent(() => import("./containers/Discover"));
 const AsyncAbout = asyncComponent(() => import("./containers/About"));
 const AsyncTeam = asyncComponent(() => import("./containers/Team"));
+const AsyncBlog = asyncComponent(() => import("./containers/Blog"));
+const AsyncPost = asyncComponent(() => import("./containers/Post"));
 const AsyncResetPassword = asyncComponent(() => import("./containers/ResetPassword"));
 
 
@@ -49,6 +51,18 @@ export default ({ childProps }) =>
         exact 
         path="/team"
         component={AsyncTeam}
+        props={childProps}
+      />
+      <Route 
+        exact 
+        path="/blog"
+        component={AsyncBlog}
+        props={childProps}
+      />
+      <Route 
+        exact 
+        path="/post/:id"
+        component={AsyncPost}
         props={childProps}
       />
       <UnauthenticatedRoute 

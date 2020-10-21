@@ -236,6 +236,7 @@ function App() {
                 <Grid item><Typography variant="overline" gutterBottom>GoodGlobe</Typography></Grid>
                 <Grid item><Link variant="subtitle2" href="/about">About</Link></Grid>
                 <Grid item><Link variant="subtitle2" href="/team">Team</Link></Grid>
+                <Grid item><Link variant="subtitle2" href="/blog">Blog</Link></Grid>
               </Grid>
               <Grid container item sm={3} direction="column">
                 <Grid item><Typography variant="overline" gutterBottom>Projects</Typography></Grid>
