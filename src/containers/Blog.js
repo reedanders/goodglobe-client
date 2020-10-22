@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 
-import PostList from "../components/PostList"
+import PostCard from "../components/PostCard"
+import postlist from "../posts.json";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -17,22 +18,21 @@ const useStyles = makeStyles((theme) => ({
     width: '164px',
     marginBottom: theme.spacing(1)
   },
-  teamContainer: {
-    paddingTop: theme.spacing(5)
-  }
+  postlist: {
+    paddingTop: theme.spacing(5),
+  },
 }));
 
 
 
-export default function Team() {
+export default function Blog() {
 	const classes = useStyles();
 
 	return (
     <div>
 
       <Container className={classes.header}>
-        <Grid container direction="column" justify="center" alignItems="center">
-          <Grid item container direction="column" justify="center" alignItems="center">
+          <Grid container direction="column" justify="center" alignItems="center">
             <Grid item>
             <Typography component="h5" variant="h5" align="center" color="textPrimary" gutterBottom>
               Updates about GoodGlobe
@@ -40,10 +40,12 @@ export default function Team() {
             </Grid>
             <Grid item><Divider variant="middle" className={classes.divider}/></Grid>
           </Grid>
-          <Grid item>
-            <PostList />
-          </Grid>
-        </Grid>
+          <div className={classes.postlist}>
+          {postlist.length && postlist.map((post, index) => (
+              <PostCard key={index} post={post} />
+          ))}
+          </div>
+          
       </Container>
 
 
