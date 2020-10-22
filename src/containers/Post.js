@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
   },
+  coverImage: {
+    height: "100vh"
+  },
   publishDate: {
     paddingTop: theme.spacing(1)
   },
@@ -69,14 +72,14 @@ export default function Post(props) {
         <div>
         <Container className={classes.header}>
 
-            <Grid container>
+            <Grid container direction="column">
               <Grid item>
                 <Typography component="h3" variant="h3" color="textPrimary" gutterBottom>
                   {fetchedPost.title}
                 </Typography>
               </Grid>
               <Grid item>
-                <LazyLoadImage width="100%" src={fetchedPost.cover} alt="" className={classes.aboutImage} />
+                <LazyLoadImage width="100%" src={fetchedPost.cover} alt="" />
               </Grid>
               <Grid item>
                 <Typography variant="caption" color="textPrimary" gutterBottom>
