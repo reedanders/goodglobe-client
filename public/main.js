@@ -83,6 +83,7 @@ const getPosts = () => {
                     date: publishedDate ? publishedDate : "No date given",
                     time: parsedDate["time"],
                     thumbnail: metadata.thumbnail,
+                    cover: metadata.cover,
                     content: content ? content : "No content given",
                 }
                 postlist.push(post)

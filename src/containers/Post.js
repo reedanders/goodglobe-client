@@ -6,9 +6,10 @@ import Markdown from "react-markdown"
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import PostAvatar from "../components/PostAvatar"
 import postlist from "../posts.json"
 
 
@@ -67,35 +68,38 @@ export default function Post(props) {
     return (
         <div>
         <Container className={classes.header}>
-          <Grid container justify="space-between">
 
-          <Grid item sm={2}>{fetchedPost.cover}</Grid>
-
-          <Grid item container direction="column" sm={8}>
-            <Grid item>
-            <Typography component="h4" variant="h4" color="textPrimary" gutterBottom>
-              {fetchedPost.title}
-            </Typography>
+            <Grid container>
+              <Grid item>
+                <Typography component="h3" variant="h3" color="textPrimary" gutterBottom>
+                  {fetchedPost.title}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <LazyLoadImage width="100%" src={fetchedPost.cover} alt="" className={classes.aboutImage} />
+              </Grid>
+              <Grid item>
+                <Typography variant="caption" color="textPrimary" gutterBottom>
+                  The endangered Wolverine.
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item container direction="row" alignItems="center" spacing={2}>
+            
+            <Grid container>
+              <Grid item lg={3}>
+              </Grid>
+              <Grid container item lg={6}>
                 <Grid item>
-                 <Avatar className={classes.authorImage} alt={fetchedPost.author} src={fetchedPost.thumbnail} />
+                  <PostAvatar fetchedPost={fetchedPost} />
                 </Grid>
-                <Grid item><Typography variant="overline" color="textPrimary" gutterBottom>
-                  {fetchedPost.author}
-                </Typography></Grid>
+                <Grid item>
+                  <Typography><Markdown source={fetchedPost.content} escapeHtml={false} /></Typography>
+                </Grid>
+              </Grid>
+              <Grid item lg={3}>
+              </Grid>
             </Grid>
-            <Grid item className={classes.content}>
-            <Markdown source={fetchedPost.content} escapeHtml={false} />
-            </Grid>
-            <Grid item className={classes.publishDate}><Typography variant="caption" color="textPrimary" gutterBottom>
-              Published on {fetchedPost.date}
-            </Typography></Grid>
-          </Grid>
 
-          <Grid item sm={2}></Grid>
-
-          </Grid>
         </Container>
         </div>
     );
