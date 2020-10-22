@@ -1,6 +1,6 @@
 ---
 title: Welcome to our blog!
-author: GoodGlobe Team
+author: GoodGlobe
 date: 2020-10-21T21:37:20.821Z
 thumbnail: /images/android-chrome-256x256.png
 cover: /images/wolverines_cbcca.jpg
