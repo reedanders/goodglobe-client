@@ -56,6 +56,7 @@ export default function Post(props) {
             fetchedPost.author = post.author ? post.author : "No author given"
             fetchedPost.content = post.content ? post.content : "No content given"
             fetchedPost.thumbnail = post.thumbnail ? post.thumbnail : "No thumbnail given"
+            fetchedPost.cover = post.cover ? post.cover : "No cover image given"
             postExists = true
         }
     })
@@ -68,7 +69,7 @@ export default function Post(props) {
         <Container className={classes.header}>
           <Grid container justify="space-between">
 
-          <Grid item sm={2}></Grid>
+          <Grid item sm={2}>{fetchedPost.cover}</Grid>
 
           <Grid item container direction="column" sm={8}>
             <Grid item>
