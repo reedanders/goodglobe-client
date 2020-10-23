@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   focusVisible: {},
   imageGrid: {
-    width: '100%'
+    width: '100%',
   },
   imageButton: {
     position: 'absolute',
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.black,
   },
   imageTitle: {
-    position: 'relative'
+    position: 'relative',
   },
   imageMarked: {
     height: 3,
@@ -66,23 +66,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonBases(props) {
   const classes = useStyles();
-  const {icon} = props;
+  const { icon } = props;
 
   return (
     <div className={classes.root}>
       <ButtonBase
-          focusRipple
-          key={icon.title}
-          className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          href={`/discover#${icon.title}`}
-        >
-          <span className={classes.imageButton}>
-            <Grid container direction="column" justify="center" alignItems="center">
-            <Grid item><LazyLoadImage src={require(`../assets/icons/${icon.title.toLowerCase()}.png`)} alt={icon.attribution} className={classes.imageGrid}/></Grid>
+        focusRipple
+        key={icon.title}
+        className={classes.image}
+        focusVisibleClassName={classes.focusVisible}
+        href={`/discover#${icon.title}`}
+      >
+        <span className={classes.imageButton}>
+          <Grid container direction="column" justify="center" alignItems="center">
+            <Grid item>
+              <LazyLoadImage
+                src={require(`../assets/icons/${icon.title.toLowerCase()}.png`)}
+                alt={icon.attribution}
+                className={classes.imageGrid}
+              />
+            </Grid>
             <Grid item>
               <Typography
-                variant="h6" 
+                variant="h6"
                 component="h6"
                 color="inherit"
                 className={classes.imageTitle}
@@ -90,9 +96,9 @@ export default function ButtonBases(props) {
                 {icon.title}
               </Typography>
             </Grid>
-            </Grid>
-          </span>
-        </ButtonBase>
+          </Grid>
+        </span>
+      </ButtonBase>
     </div>
   );
 }

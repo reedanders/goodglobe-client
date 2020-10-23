@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
-import { Auth } from "aws-amplify";
-import CookieConsent from "react-cookie-consent";
+import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
+import CookieConsent from 'react-cookie-consent';
 import { SnackbarProvider } from 'notistack';
 
-import { AppContext } from "./libs/contextLib";
-import { onError } from "./libs/errorLib";
-import Routes from "./Routes";
-import ErrorBoundary from "./components/ErrorBoundary";
+import { AppContext } from './libs/contextLib';
+import { onError } from './libs/errorLib';
+import Routes from './Routes';
+import ErrorBoundary from './components/ErrorBoundary';
 import logo from './assets/images/logo_small.png';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -60,13 +60,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   barActionAnchor: {
-    textDecoration: "none !important"
+    textDecoration: 'none !important',
   },
   barButtons: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   footer: {
     padding: theme.spacing(3, 2),
@@ -75,8 +75,8 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
   footerGrid: {
-    paddingBottom: theme.spacing(5)
-  }
+    paddingBottom: theme.spacing(5),
+  },
 }));
 
 function Copyright() {
@@ -99,7 +99,7 @@ function App() {
   const matches = useMediaQuery('(min-width:600px)');
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
@@ -126,9 +126,8 @@ function App() {
       await Auth.currentSession();
       userHasAuthenticated(true);
       const user = await Auth.currentUserInfo();
-      setUser(user)
-    }
-    catch(e) {
+      setUser(user);
+    } catch (e) {
       if (e !== 'No current user') {
         onError(e);
       }
@@ -140,27 +139,35 @@ function App() {
   async function handleLogout(event) {
     await Auth.signOut();
     userHasAuthenticated(false);
-    handleClose(event)
-    history.push("/login");
+    handleClose(event);
+    history.push('/login');
   }
 
   function handleDashRedirect(event) {
-    handleClose(event)
-    history.push("/dashboard");
+    handleClose(event);
+    history.push('/dashboard');
   }
 
   return (
     !isAuthenticating && (
-      <Container  maxWidth="lg" fixed>
+      <Container maxWidth="lg" fixed>
         <div className={classes.root}>
-        {/* Header */}
+          {/* Header */}
           <AppBar position="sticky" color="default" elevation={0} className={classes.appbar}>
             <Toolbar variant="dense">
               <Link href="/">
                 <img src={logo} alt="green earth logo" className={classes.logo} />
               </Link>
               <Grid className={classes.title}></Grid>
-              { matches ? <Grid className={classes.barAction}><Button color="primary" href="/discover">Fund a Project</Button></Grid> : ""}
+              {matches ? (
+                <Grid className={classes.barAction}>
+                  <Button color="primary" href="/discover">
+                    Fund a Project
+                  </Button>
+                </Grid>
+              ) : (
+                ''
+              )}
               {isAuthenticated ? (
                 <div className={classes.dropdown}>
                   <Button
@@ -171,17 +178,29 @@ function App() {
                     className={classes.barButtons}
                     variant="outlined"
                   >
-                    {user ? `Hi, ${user.attributes.nickname}` : `Account` }
+                    {user ? `Hi, ${user.attributes.nickname}` : `Account`}
                   </Button>
-                  <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                  <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
+                  >
                     {({ TransitionProps, placement }) => (
                       <Grow
                         {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        style={{
+                          transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                        }}
                       >
                         <Paper>
                           <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                            <MenuList
+                              autoFocusItem={open}
+                              id="menu-list-grow"
+                              onKeyDown={handleListKeyDown}
+                            >
                               <MenuItem onClick={handleDashRedirect}>My account</MenuItem>
                               <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             </MenuList>
@@ -196,58 +215,95 @@ function App() {
                   <Button variant="outlined" size="small" href="/signup">
                     Signup
                   </Button>
-                  <Button href="/login">
-                    Login
-                  </Button>
+                  <Button href="/login">Login</Button>
                 </div>
               )}
             </Toolbar>
           </AppBar>
           {/* End Header */}
 
-        <ErrorBoundary>
-          <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <SnackbarProvider maxSnack={1}>
-            <Routes />
-          </SnackbarProvider>
-          </AppContext.Provider>
-        </ErrorBoundary>
+          <ErrorBoundary>
+            <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+              <SnackbarProvider maxSnack={1}>
+                <Routes />
+              </SnackbarProvider>
+            </AppContext.Provider>
+          </ErrorBoundary>
 
-        <CookieConsent
-          location="bottom"
-          buttonText="Accept"
-          cookieName="GoodGlobeCookieConsent"
-          style={{ fontFamily: "Lato,Arial,sans-serif", background: "#2B373B" }}
-          buttonStyle={{ backgroundColor: "#CCC5E8", fontFamily: "Lato,Arial,sans-serif", fontSize: "13px" }}
-          expires={150}
-        >
-          This website uses cookies to enhance your experience.{" "}
-        </CookieConsent>
+          <CookieConsent
+            location="bottom"
+            buttonText="Accept"
+            cookieName="GoodGlobeCookieConsent"
+            style={{ fontFamily: 'Lato,Arial,sans-serif', background: '#2B373B' }}
+            buttonStyle={{
+              backgroundColor: '#CCC5E8',
+              fontFamily: 'Lato,Arial,sans-serif',
+              fontSize: '13px',
+            }}
+            expires={150}
+          >
+            This website uses cookies to enhance your experience.{' '}
+          </CookieConsent>
 
-        {/* Footer */}
-        <footer className={classes.footer}>
-          <Container maxWidth="md">
-            <Grid container spacing={2} className={classes.footerGrid}>
-              <Grid container item sm={6} direction="column">
-                <Grid item><Typography variant="subtitle1" gutterBottom></Typography></Grid>
-                <Grid item><Typography variant="subtitle2">Help us build a simple, efficient process for experienced conservation practitioners to get grassroots funding.</Typography></Grid>
+          {/* Footer */}
+          <footer className={classes.footer}>
+            <Container maxWidth="md">
+              <Grid container spacing={2} className={classes.footerGrid}>
+                <Grid container item sm={6} direction="column">
+                  <Grid item>
+                    <Typography variant="subtitle1" gutterBottom></Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle2">
+                      Help us build a simple, efficient process for experienced conservation
+                      practitioners to get grassroots funding.
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Grid container item sm={3} direction="column">
+                  <Grid item>
+                    <Typography variant="overline" gutterBottom>
+                      GoodGlobe
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Link variant="subtitle2" href="/about">
+                      About
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link variant="subtitle2" href="/team">
+                      Team
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link variant="subtitle2" href="/blog">
+                      Blog
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Grid container item sm={3} direction="column">
+                  <Grid item>
+                    <Typography variant="overline" gutterBottom>
+                      Projects
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Link variant="subtitle2" href="/dashboard">
+                      Start a Project
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link variant="subtitle2" href="/discover">
+                      Fund a Project
+                    </Link>
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid container item sm={3} direction="column">
-                <Grid item><Typography variant="overline" gutterBottom>GoodGlobe</Typography></Grid>
-                <Grid item><Link variant="subtitle2" href="/about">About</Link></Grid>
-                <Grid item><Link variant="subtitle2" href="/team">Team</Link></Grid>
-                <Grid item><Link variant="subtitle2" href="/blog">Blog</Link></Grid>
-              </Grid>
-              <Grid container item sm={3} direction="column">
-                <Grid item><Typography variant="overline" gutterBottom>Projects</Typography></Grid>
-                <Grid item><Link variant="subtitle2" href="/dashboard">Start a Project</Link></Grid>
-                <Grid item><Link variant="subtitle2" href="/discover">Fund a Project</Link></Grid>
-              </Grid>
-            </Grid>
-            <Copyright />
-          </Container>
-        </footer>
-        {/* End Footer */}
+              <Copyright />
+            </Container>
+          </footer>
+          {/* End Footer */}
         </div>
       </Container>
     )

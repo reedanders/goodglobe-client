@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   button: {
     marginTop: theme.spacing(1),
@@ -22,15 +22,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = [{
-          title: "Practitioners draft an environmental conservation project and submit it for review by GoodGlobe",
-        },
-        {
-          title: "GoodGlobe provides feedback and accepts projects",
-        },
-        {
-          title: "Individuals and institutions provide direct funding to projects"
-        }];
+const steps = [
+  {
+    title:
+      'Practitioners draft an environmental conservation project and submit it for review by GoodGlobe',
+  },
+  {
+    title: 'GoodGlobe provides feedback and accepts projects',
+  },
+  {
+    title: 'Individuals and institutions provide direct funding to projects',
+  },
+];
 
 export default function HorizontalLinearStepper(props) {
   const classes = useStyles();

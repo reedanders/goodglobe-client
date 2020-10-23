@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Auth } from "aws-amplify";
-import LoaderButton from "./LoaderButton";
+import React, { Component } from 'react';
+import { Auth } from 'aws-amplify';
+import LoaderButton from './LoaderButton';
 
 function waitForInit() {
   return new Promise((res, rej) => {
@@ -20,7 +20,7 @@ export default class FacebookButton extends Component {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -29,8 +29,8 @@ export default class FacebookButton extends Component {
     this.setState({ isLoading: false });
   }
 
-  statusChangeCallback = response => {
-    if (response.status === "connected") {
+  statusChangeCallback = (response) => {
+    if (response.status === 'connected') {
       this.handleResponse(response.authResponse);
     } else {
       this.handleError(response);
@@ -42,7 +42,7 @@ export default class FacebookButton extends Component {
   };
 
   handleClick = () => {
-    window.FB.login(this.checkLoginState, {scope: "public_profile,email"});
+    window.FB.login(this.checkLoginState, { scope: 'public_profile,email' });
   };
 
   handleError(error) {
@@ -57,11 +57,7 @@ export default class FacebookButton extends Component {
     this.setState({ isLoading: true });
 
     try {
-      const response = await Auth.federatedSignIn(
-        "facebook",
-        { token, expires_at },
-        user
-      );
+      const response = await Auth.federatedSignIn('facebook', { token, expires_at }, user);
       this.setState({ isLoading: false });
       this.props.onLogin(response);
     } catch (e) {

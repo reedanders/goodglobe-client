@@ -9,14 +9,14 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
   stepper: {
-    backgroundColor: 'inherit'
+    backgroundColor: 'inherit',
   },
   actionsContainer: {
     marginBottom: theme.spacing(2),
@@ -25,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-
-
 
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();

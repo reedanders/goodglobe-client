@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import featured_image from "../assets/images/hero-background.png"
+import featured_image from '../assets/images/hero-background.png';
 
 import MainFeatureCard from '../components/MainFeatureCard';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     height: '40vh',
   },
   mainFeaturedGrid: {
-    height: '40vh'
+    height: '40vh',
   },
   overlay: {
     position: 'absolute',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(6)
+      padding: theme.spacing(6),
     },
   },
 }));
@@ -44,11 +44,20 @@ export default function MainFeaturedProject(props) {
   const { post } = props;
 
   return (
-    <Paper className={classes.mainFeaturedProject} style={{ backgroundImage: `url(${post.image})` }}>
+    <Paper
+      className={classes.mainFeaturedProject}
+      style={{ backgroundImage: `url(${post.image})` }}
+    >
       {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
-      <Grid container direction="column" justify="center" alignItems="center" className={classes.mainFeaturedGrid}>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.mainFeaturedGrid}
+      >
         <Grid item md={12} lg={6} xl={6}>
           <div className={classes.mainFeaturedProjectContent}>
             <MainFeatureCard />

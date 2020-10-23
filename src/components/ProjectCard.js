@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
-    minHeight:"65vh"
+    minHeight: '65vh',
   },
   card: {
     height: '100%',
@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
-    height: '15vh'
+    height: '15vh',
   },
   cardActions: {
     flexGrow: 1,
-    padding: 0
+    padding: 0,
   },
   cardActionGrid: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   cardHeaderSubtitle: {
     fontWeight: 700,
@@ -47,19 +47,19 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectCard(props) {
   const classes = useStyles();
   const { project } = props;
-  const pitch = project.pitch.replace(/^(.{50}[^\s]*).*/, "$1");
+  const pitch = project.pitch.replace(/^(.{50}[^\s]*).*/, '$1');
 
   function setProgressValue(current, target) {
-    return (100*(current/target));
-  };
+    return 100 * (current / target);
+  }
 
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
   return (
-      <Card className={classes.card}>
-        <CardActionArea href={`/project/${project.readable_url}`}>
+    <Card className={classes.card}>
+      <CardActionArea href={`/project/${project.readable_url}`}>
         <CardMedia
           className={classes.cardMedia}
           image={project.attachment[0]}
@@ -76,13 +76,27 @@ export default function ProjectCard(props) {
         <CardActions className={classes.cardActions}>
           <Grid container className={classes.cardActionGrid} direction="column">
             <Grid item>
-            <Typography className={classes.cardHeaderSubtitle} gutterBottom variant="subtitle1" component="h2">
-              EUR {numberWithCommas(project.current_funding)}<Typography variant="caption"> raised of EUR {numberWithCommas(project.target_funding)} goal</Typography>
-            </Typography></Grid>
-            <Grid item><ProgressFunding value={setProgressValue(project.current_funding, project.target_funding)}/></Grid>
+              <Typography
+                className={classes.cardHeaderSubtitle}
+                gutterBottom
+                variant="subtitle1"
+                component="h2"
+              >
+                EUR {numberWithCommas(project.current_funding)}
+                <Typography variant="caption">
+                  {' '}
+                  raised of EUR {numberWithCommas(project.target_funding)} goal
+                </Typography>
+              </Typography>
+            </Grid>
+            <Grid item>
+              <ProgressFunding
+                value={setProgressValue(project.current_funding, project.target_funding)}
+              />
+            </Grid>
           </Grid>
         </CardActions>
-        </CardActionArea>
-      </Card>
+      </CardActionArea>
+    </Card>
   );
 }

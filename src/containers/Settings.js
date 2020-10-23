@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { API } from "aws-amplify";
-import { onError } from "../libs/errorLib";
-import { Elements, StripeProvider } from "react-stripe-elements";
-import BillingForm from "../components/BillingForm";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { API } from 'aws-amplify';
+import { onError } from '../libs/errorLib';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import BillingForm from '../components/BillingForm';
 
-import EditUser  from '/EditUser';
-import config from "../config";
+import EditUser from '/EditUser';
+import config from '../config';
 
 export default function Settings() {
   const history = useHistory();
@@ -18,8 +18,8 @@ export default function Settings() {
   }, []);
 
   function billUser(details) {
-    return API.post("goodglobe", "/billing", {
-      body: details
+    return API.post('goodglobe', '/billing', {
+      body: details,
     });
   }
 
@@ -34,11 +34,11 @@ export default function Settings() {
     try {
       await billUser({
         storage,
-        source: token.id
+        source: token.id,
       });
 
-      alert("Your card has been charged successfully!");
-      history.push("/");
+      alert('Your card has been charged successfully!');
+      history.push('/');
     } catch (e) {
       onError(e);
       setIsLoading(false);
