@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { onError } from "../libs/errorLib";
-import { API, Storage } from "aws-amplify";
-import { uploadAll } from "../libs/awsLib";
+import React, { useRef, useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { onError } from '../libs/errorLib';
+import { API, Storage } from 'aws-amplify';
+import { uploadAll } from '../libs/awsLib';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -24,9 +24,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import { DropzoneArea } from 'material-ui-dropzone';
-import {stateFromHTML} from 'draft-js-import-html';
-import {stateToHTML} from 'draft-js-export-html';
-import {Editor, EditorState} from 'draft-js';
+import { stateFromHTML } from 'draft-js-import-html';
+import { stateToHTML } from 'draft-js-export-html';
+import { Editor, EditorState } from 'draft-js';
 import '../components/Editor.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,17 +47,17 @@ const useStyles = makeStyles((theme) => ({
   },
   formGroup: {
     paddingTop: theme.spacing(1),
-    paddingLeft: theme.spacing(2)
+    paddingLeft: theme.spacing(2),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  divider:{
-    margin: theme.spacing(2)
+  divider: {
+    margin: theme.spacing(2),
   },
-  objectiveTags : {
+  objectiveTags: {
     marginTop: theme.spacing(2),
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   objectiveContainer: {
     padding: theme.spacing(2),
@@ -66,36 +66,35 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   objectivesWrapper: {
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(1),
   },
   objectivesTitle: {
     paddingBottom: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
   },
   objectivesHelper: {
     paddingLeft: theme.spacing(2),
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
   },
-  editor:{
+  editor: {
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   editorTitle: {
     paddingLeft: theme.spacing(1),
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
   },
   editorHelper: {
     paddingTop: theme.spacing(1),
     paddingLeft: theme.spacing(2),
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
   },
   imageInput: {
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   toggle: {
-    paddingLeft: theme.spacing(2)
-  }
-
+    paddingLeft: theme.spacing(2),
+  },
 }));
 
 export default function EditProject() {
@@ -108,42 +107,39 @@ export default function EditProject() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [editorState, setEditorState] = useState(
-    EditorState.createEmpty()
-  );
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const editor = useRef(null);
-  
-  const [title, setTitle] = useState("");
-  const [readable_url, setReadable_url] = useState("");
-  const [pitch, setPitch] = useState("");
+
+  const [title, setTitle] = useState('');
+  const [readable_url, setReadable_url] = useState('');
+  const [pitch, setPitch] = useState('');
   const [target_funding, setTarget_funding] = useState(1);
   const [is_public, setIsPublic] = useState(false);
 
-  const [theme_biodiv, setTheme_biodiv] = useState("");
-  const [theme_habitat, setTheme_habitat] = useState("");
-  const [theme_air, setTheme_air] = useState("");
-  const [theme_waste, setTheme_waste] = useState("");
-  const [theme_water, setTheme_water] = useState("");
-  const [theme_resilience, setTheme_resilience] = useState("");
-  const [theme_mitigation, setTheme_mitigation] = useState("");
-  const [theme_awareness, setTheme_awareness] = useState("");
-  const [theme_knowledge, setTheme_knowledge] = useState("");
+  const [theme_biodiv, setTheme_biodiv] = useState('');
+  const [theme_habitat, setTheme_habitat] = useState('');
+  const [theme_air, setTheme_air] = useState('');
+  const [theme_waste, setTheme_waste] = useState('');
+  const [theme_water, setTheme_water] = useState('');
+  const [theme_resilience, setTheme_resilience] = useState('');
+  const [theme_mitigation, setTheme_mitigation] = useState('');
+  const [theme_awareness, setTheme_awareness] = useState('');
+  const [theme_knowledge, setTheme_knowledge] = useState('');
 
   const emptyObjective = {
-    "title" : "",
-    "description" : "",
-    "status" : ""
-  }
-  const [objectives, setObjectives] = useState([emptyObjective])
-
+    title: '',
+    description: '',
+    status: '',
+  };
+  const [objectives, setObjectives] = useState([emptyObjective]);
 
   useEffect(() => {
     function loadProject() {
-      return API.get("goodglobe", `/projects/edit/${id}`, {
-        'queryStringParameters': {
-          'projectId': id
-        }
+      return API.get('goodglobe', `/projects/edit/${id}`, {
+        queryStringParameters: {
+          projectId: id,
+        },
       });
     }
 
@@ -151,23 +147,24 @@ export default function EditProject() {
       try {
         const project = await loadProject();
         setProject(project);
-        const { title,
-                pitch,
-                content, 
-                is_public, 
-                attachment, 
-                objectives,
-                target_funding,
-                theme_biodiv,
-                theme_habitat,
-                theme_air,
-                theme_waste,
-                theme_water,
-                theme_resilience,
-                theme_mitigation,
-                theme_awareness,
-                theme_knowledge,
-              } = project;
+        const {
+          title,
+          pitch,
+          content,
+          is_public,
+          attachment,
+          objectives,
+          target_funding,
+          theme_biodiv,
+          theme_habitat,
+          theme_air,
+          theme_waste,
+          theme_water,
+          theme_resilience,
+          theme_mitigation,
+          theme_awareness,
+          theme_knowledge,
+        } = project;
 
         if (attachment) {
           project.attachment = await Storage.vault.get(attachment);
@@ -179,7 +176,7 @@ export default function EditProject() {
         setPitch(pitch);
         setIsPublic(is_public);
         setObjectives(objectives);
-        setTarget_funding(target_funding)
+        setTarget_funding(target_funding);
         setTheme_biodiv(theme_biodiv);
         setTheme_habitat(theme_habitat);
         setTheme_air(theme_air);
@@ -190,25 +187,22 @@ export default function EditProject() {
         setTheme_awareness(theme_awareness);
         setTheme_knowledge(theme_knowledge);
         setProject(project);
-
       } catch (e) {
         onError(e);
       }
     }
 
     onLoad();
-  }, [id] );
-
+  }, [id]);
 
   async function handleSubmit(event) {
-
-  	let attachment
+    let attachment;
 
     event.preventDefault();
 
     try {
       setIsLoading(true);
-      
+
       if (file.current) {
         attachment = await uploadAll(file.current);
       }
@@ -216,10 +210,10 @@ export default function EditProject() {
       // setContent(stateToHTML(editorState.getCurrentContent()));
 
       await saveProject({
-      	title,
+        title,
         readable_url,
         content: stateToHTML(editorState.getCurrentContent()),
-        pitch, 
+        pitch,
         is_public,
         target_funding,
         theme_biodiv,
@@ -232,24 +226,20 @@ export default function EditProject() {
         theme_awareness,
         theme_knowledge,
         attachment: attachment || project.attachment,
-        objectives
+        objectives,
       });
-      history.push("/dashboard");
+      history.push('/dashboard');
     } catch (e) {
       setIsLoading(false);
       console.log(e);
       onError(e);
     }
-  };
-
+  }
 
   async function handleDelete(event) {
-
     event.preventDefault();
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
+    const confirmed = window.confirm('Are you sure you want to delete this project?');
 
     if (!confirmed) {
       return;
@@ -258,31 +248,30 @@ export default function EditProject() {
     try {
       setIsDeleting(true);
       await deleteProject();
-      history.push("/dashboard");
+      history.push('/dashboard');
     } catch (e) {
       setIsDeleting(false);
       onError(e);
     }
-
-  };
+  }
 
   function createReadableUrl(newTitle) {
     return newTitle.replace(/\s+/g, '-').toLowerCase();
-  };
+  }
 
   function saveProject(project) {
-    return API.put("goodglobe", `/projects/${id}`, {
-      body: project
+    return API.put('goodglobe', `/projects/${id}`, {
+      body: project,
     });
-  };
+  }
 
   function deleteProject() {
-    return API.del("goodglobe", `/projects/${id}`);
-  };
+    return API.del('goodglobe', `/projects/${id}`);
+  }
 
   function validateForm() {
-    return (title.length > 0 && title.length < 55);
-  };
+    return title.length > 0 && title.length < 55;
+  }
 
   function handleFileChange(files) {
     file.current = files;
@@ -292,35 +281,37 @@ export default function EditProject() {
     setIsPublic((prev) => !prev);
   };
 
-  const handleObjectiveChange = index => e => {
-
+  const handleObjectiveChange = (index) => (e) => {
     const prop_name = e.target.name;
     let newArr = [...objectives];
-    newArr[index][prop_name] = e.target.value; 
+    newArr[index][prop_name] = e.target.value;
 
     setObjectives(newArr);
   };
 
-  function addObjective () {
+  function addObjective() {
     const last = objectives.length - 1;
-    return objectives[last].title !== "" && objectives[last].description !== "" ? setObjectives(objectives => objectives.concat(emptyObjective)) : alert('Please finish the current objective');
-  };
-
-  const removeIndex = index => e => {
-    setObjectives(objectives.filter((_, i2) => i2 !== index));
+    return objectives[last].title !== '' && objectives[last].description !== ''
+      ? setObjectives((objectives) => objectives.concat(emptyObjective))
+      : alert('Please finish the current objective');
   }
+
+  const removeIndex = (index) => (e) => {
+    setObjectives(objectives.filter((_, i2) => i2 !== index));
+  };
 
   return (
     <Container className="EditProject, {classes.paper}" maxWidth="sm">
       <CssBaseline />
-        {project && (<div className={classes.paper}>
+      {project && (
+        <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Edit Project
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -332,7 +323,7 @@ export default function EditProject() {
             />
             <TextField
               value={pitch}
-              onChange={e => setPitch(e.target.value)}
+              onChange={(e) => setPitch(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -343,110 +334,197 @@ export default function EditProject() {
               autoComplete="pitch"
               helperText="Enter a brief summary of your project"
             />
-            <Typography variant="body1" component="p" className={classes.editorTitle}>Background</Typography>
+            <Typography variant="body1" component="p" className={classes.editorTitle}>
+              Background
+            </Typography>
             <div className={classes.editor}>
-            <Editor
-              spellCheck
-              ref={editor}
-              editorState={editorState}
-              onChange={editorState => setEditorState(editorState)}
-            />
+              <Editor
+                spellCheck
+                ref={editor}
+                editorState={editorState}
+                onChange={(editorState) => setEditorState(editorState)}
+              />
             </div>
-            <Typography variant="caption" className={classes.editorHelper}>Enter a detailed explaining the motivation of your project</Typography>
-            <Divider className={classes.divider}/>
+            <Typography variant="caption" className={classes.editorHelper}>
+              Enter a detailed explaining the motivation of your project
+            </Typography>
+            <Divider className={classes.divider} />
             <div className={classes.objectivesWrapper}>
-            <Typography variant="body1" component="p" className={classes.objectivesTitle} gutterBottom>Objectives</Typography>
-            <Typography variant="caption" className={classes.objectivesHelper}>Add objectives needed to complete your project</Typography>
+              <Typography
+                variant="body1"
+                component="p"
+                className={classes.objectivesTitle}
+                gutterBottom
+              >
+                Objectives
+              </Typography>
+              <Typography variant="caption" className={classes.objectivesHelper}>
+                Add objectives needed to complete your project
+              </Typography>
               {objectives.map((data, index) => (
                 <div key={index} className={classes.objectiveContainer}>
-                <Grid container justify="space-between" spacing={3}>
-                  <Grid item xs={10}>
-                    <TextField
-                      value={data.title}
-                      onChange={handleObjectiveChange(index)}
-                      variant="outlined"
-                      margin="normal"
-                      type="text"
-                      fullWidth
-                      id="title"
-                      label="Objective Title"
-                      name="title"
-                      autoComplete="title"
-                    />
-                    <TextField
-                      value={data.description}
-                      onChange={handleObjectiveChange(index)}
-                      variant="outlined"
-                      margin="normal"
-                      type="text"
-                      fullWidth
-                      id="description"
-                      label="Objective Description"
-                      name="description"
-                      autoComplete="description"
-                    />
+                  <Grid container justify="space-between" spacing={3}>
+                    <Grid item xs={10}>
+                      <TextField
+                        value={data.title}
+                        onChange={handleObjectiveChange(index)}
+                        variant="outlined"
+                        margin="normal"
+                        type="text"
+                        fullWidth
+                        id="title"
+                        label="Objective Title"
+                        name="title"
+                        autoComplete="title"
+                      />
+                      <TextField
+                        value={data.description}
+                        onChange={handleObjectiveChange(index)}
+                        variant="outlined"
+                        margin="normal"
+                        type="text"
+                        fullWidth
+                        id="description"
+                        label="Objective Description"
+                        name="description"
+                        autoComplete="description"
+                      />
+                    </Grid>
+                    {index > 0 ? (
+                      <Grid item xs={1} className={classes.objectiveTags}>
+                        <IconButton onClick={removeIndex(index)} aria-label="delete">
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
                   </Grid>
-                  { index > 0 ? 
-                  <Grid item xs={1} className={classes.objectiveTags}>
-                    <IconButton onClick={removeIndex(index)} aria-label="delete">
-                      <DeleteForeverIcon />
-                    </IconButton>
-                  </Grid>: ""}
-
-                </Grid>
                 </div>
               ))}
-            <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={addObjective}>Add Objective</Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                startIcon={<AddCircleIcon />}
+                onClick={addObjective}
+              >
+                Add Objective
+              </Button>
             </div>
-            <Divider className={classes.divider}/>
+            <Divider className={classes.divider} />
 
             <FormControl component="fieldset">
               <FormLabel component="legend">Themes</FormLabel>
               <FormGroup className={classes.formGroup}>
                 <FormControlLabel
-                  control={<Checkbox checked={theme_biodiv} onChange={e => setTheme_biodiv(e.target.checked)} id="theme_biodiv" name="theme_biodiv" />}
+                  control={
+                    <Checkbox
+                      checked={theme_biodiv}
+                      onChange={(e) => setTheme_biodiv(e.target.checked)}
+                      id="theme_biodiv"
+                      name="theme_biodiv"
+                    />
+                  }
                   label="Biodiversity"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_habitat} onChange={e => setTheme_habitat(e.target.checked)} id="theme_habitat" name="theme_habitat" />}
+                  control={
+                    <Checkbox
+                      checked={theme_habitat}
+                      onChange={(e) => setTheme_habitat(e.target.checked)}
+                      id="theme_habitat"
+                      name="theme_habitat"
+                    />
+                  }
                   label="Habitat"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_air} onChange={e => setTheme_air(e.target.checked)} id="theme_air" name="theme_air" />}
+                  control={
+                    <Checkbox
+                      checked={theme_air}
+                      onChange={(e) => setTheme_air(e.target.checked)}
+                      id="theme_air"
+                      name="theme_air"
+                    />
+                  }
                   label="Air"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_waste} onChange={e => setTheme_waste(e.target.checked)} id="theme_waste" name="theme_waste" />}
+                  control={
+                    <Checkbox
+                      checked={theme_waste}
+                      onChange={(e) => setTheme_waste(e.target.checked)}
+                      id="theme_waste"
+                      name="theme_waste"
+                    />
+                  }
                   label="Waste"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_water} onChange={e => setTheme_water(e.target.checked)} id="theme_water" name="theme_water" />}
+                  control={
+                    <Checkbox
+                      checked={theme_water}
+                      onChange={(e) => setTheme_water(e.target.checked)}
+                      id="theme_water"
+                      name="theme_water"
+                    />
+                  }
                   label="Water"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_resilience} onChange={e => setTheme_resilience(e.target.checked)} id="theme_resilience"  name="theme_resilience" />}
+                  control={
+                    <Checkbox
+                      checked={theme_resilience}
+                      onChange={(e) => setTheme_resilience(e.target.checked)}
+                      id="theme_resilience"
+                      name="theme_resilience"
+                    />
+                  }
                   label="Climate Resilience"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_mitigation} onChange={e => setTheme_mitigation(e.target.checked)} id="theme_mitigation" name="theme_mitigation" />}
+                  control={
+                    <Checkbox
+                      checked={theme_mitigation}
+                      onChange={(e) => setTheme_mitigation(e.target.checked)}
+                      id="theme_mitigation"
+                      name="theme_mitigation"
+                    />
+                  }
                   label="Climate Mitigation"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_awareness} onChange={e => setTheme_awareness(e.target.checked)} id="theme_awareness" name="theme_awareness" />}
+                  control={
+                    <Checkbox
+                      checked={theme_awareness}
+                      onChange={(e) => setTheme_awareness(e.target.checked)}
+                      id="theme_awareness"
+                      name="theme_awareness"
+                    />
+                  }
                   label="Awareness"
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={theme_knowledge} onChange={e => setTheme_knowledge(e.target.checked)} id="theme_knowledge" name="theme_knowledge" />}
+                  control={
+                    <Checkbox
+                      checked={theme_knowledge}
+                      onChange={(e) => setTheme_knowledge(e.target.checked)}
+                      id="theme_knowledge"
+                      name="theme_knowledge"
+                    />
+                  }
                   label="Knowledge"
                 />
               </FormGroup>
             </FormControl>
 
-            <Divider className={classes.divider}/>
-            <Typography variant="body1" component="p" className={classes.editorTitle}>Funding</Typography>
+            <Divider className={classes.divider} />
+            <Typography variant="body1" component="p" className={classes.editorTitle}>
+              Funding
+            </Typography>
             <TextField
               value={target_funding}
-              onChange={e => setTarget_funding(e.target.value)}
+              onChange={(e) => setTarget_funding(e.target.value)}
               variant="outlined"
               margin="normal"
               type="number"
@@ -457,25 +535,29 @@ export default function EditProject() {
               name="target_funding"
               autoComplete="target_funding"
             />
-            <Divider className={classes.divider}/>
-            <Typography variant="body1" component="p" className={classes.editorTitle}>Project Image</Typography>
+            <Divider className={classes.divider} />
+            <Typography variant="body1" component="p" className={classes.editorTitle}>
+              Project Image
+            </Typography>
             <DropzoneArea
               acceptedFiles={['image/*']}
-              dropzoneText={"Drag and drop an image here or click"}
-              id="file" 
+              dropzoneText={'Drag and drop an image here or click'}
+              id="file"
               initialFiles={project.attachment}
               type="file"
               filesLimit={3}
               onChange={(files) => handleFileChange(files)}
             />
-            <Divider className={classes.divider}/>
-            <Typography variant="body1" component="p" className={classes.editorTitle}>Project status</Typography>
+            <Divider className={classes.divider} />
+            <Typography variant="body1" component="p" className={classes.editorTitle}>
+              Project status
+            </Typography>
             <FormControlLabel
               id="is_public"
-    		      control={<Switch checked={is_public} onChange={toggleChecked} color="primary"/>}
-    		      label={is_public ? "Public" : "Private"}
+              control={<Switch checked={is_public} onChange={toggleChecked} color="primary" />}
+              label={is_public ? 'Public' : 'Private'}
               className={classes.toggle}
-    		    />
+            />
             <Button
               type="submit"
               fullWidth
@@ -483,7 +565,13 @@ export default function EditProject() {
               color="primary"
               className={classes.submit}
               disabled={!validateForm()}
-              endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
+              endIcon={
+                isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  <div style={{ width: '20px' }} />
+                )
+              }
             >
               Submit
             </Button>
@@ -491,12 +579,19 @@ export default function EditProject() {
               fullWidth
               variant="contained"
               onClick={handleDelete}
-              endIcon={isDeleting ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
+              endIcon={
+                isDeleting ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  <div style={{ width: '20px' }} />
+                )
+              }
             >
               Delete
             </Button>
           </form>
-        </div>)}
+        </div>
+      )}
     </Container>
   );
 }

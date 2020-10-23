@@ -6,19 +6,18 @@ import Container from '@material-ui/core/Container';
 import MainQuickAboutAlbum from './MainQuickAboutAlbum';
 
 export default function MainQuickAbout() {
-
-	return (
+  return (
+    <div>
+      <Container>
+        <MainQuickAboutAlbum />
         <div>
-          <Container>
-            <MainQuickAboutAlbum/>
-            <div>
-              <Grid container item spacing={0} justify="center">
-                  <Button variant="contained" size="large" color="primary" href="/about">
-                    See how it works
-                  </Button>
-              </Grid>
-            </div>
-          </Container>
+          <Grid container item spacing={0} justify="center">
+            <Button variant="contained" size="large" color="primary" href="/about">
+              See how it works
+            </Button>
+          </Grid>
         </div>
-		);
+      </Container>
+    </div>
+  );
 }

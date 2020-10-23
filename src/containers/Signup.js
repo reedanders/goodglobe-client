@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
-import { Auth } from "aws-amplify";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useAppContext } from '../libs/contextLib';
+import { useFormFields } from '../libs/hooksLib';
+import { onError } from '../libs/errorLib';
+import { Auth } from 'aws-amplify';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSnackbar } from 'notistack';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,20 +40,19 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   helper: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
-
 
 export default function Signup() {
   const classes = useStyles();
   const [fields, handleFieldChange] = useFormFields({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    nick_name: "",
-    full_name: "",
-    confirmationCode: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
+    nick_name: '',
+    full_name: '',
+    confirmationCode: '',
   });
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -75,11 +73,11 @@ export default function Signup() {
   }
 
   function alertError(msg) {
-    enqueueSnackbar(msg , {
+    enqueueSnackbar(msg, {
       variant: 'error',
       anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'center',
+        vertical: 'bottom',
+        horizontal: 'center',
       },
     });
   }
@@ -95,8 +93,8 @@ export default function Signup() {
         username: fields.email,
         password: fields.password,
         attributes: {
-          nickname: fields.nick_name !== "" ? fields.nick_name : fields.email.split("@")[0],
-          name: fields.full_name !== "" ? fields.full_name : fields.email.split("@")[0],
+          nickname: fields.nick_name !== '' ? fields.nick_name : fields.email.split('@')[0],
+          name: fields.full_name !== '' ? fields.full_name : fields.email.split('@')[0],
           picture: `https://avatars.dicebear.com/api/jdenticon/${avatar}.svg`,
           updated_at: String(Date.now()),
         },
@@ -116,7 +114,7 @@ export default function Signup() {
       await Auth.signIn(fields.email, fields.password);
 
       userHasAuthenticated(true);
-      history.push("/");
+      history.push('/');
     } catch (e) {
       const msg = onError(e);
       alertError(msg);
@@ -126,32 +124,34 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <div className={classes.innerPaper}>
-      <Typography variant="body1" component="p" className={classes.helper}>Check your email for a confirmation code.</Typography>
-      <form className={classes.form} onSubmit={handleConfirmationSubmit}>
-        <TextField
-          value={fields.confirmationCode}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="confirmationCode"
-          label="Confirmation Code"
-          name="confirmationCode"
-          type="tel"
-          autoFocus
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          disabled={!validateConfirmationForm()}
-        >
-          Verify
-        </Button>
-      </form>
+        <Typography variant="body1" component="p" className={classes.helper}>
+          Check your email for a confirmation code.
+        </Typography>
+        <form className={classes.form} onSubmit={handleConfirmationSubmit}>
+          <TextField
+            value={fields.confirmationCode}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="confirmationCode"
+            label="Confirmation Code"
+            name="confirmationCode"
+            type="tel"
+            autoFocus
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateConfirmationForm()}
+          >
+            Verify
+          </Button>
+        </form>
       </div>
     );
   }
@@ -159,12 +159,12 @@ export default function Signup() {
   function renderForm() {
     return (
       <div className={classes.innerPaper}>
-      <Typography component="h1" variant="h5">
-        Signup
-      </Typography>
+        <Typography component="h1" variant="h5">
+          Signup
+        </Typography>
 
-      <form className={classes.form} onSubmit={handleSubmit}>
-        <TextField
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
             value={fields.email}
             onChange={handleFieldChange}
             variant="outlined"
@@ -177,42 +177,48 @@ export default function Signup() {
             autoComplete="email"
             autoFocus
           />
-        <TextField
-          value={fields.password}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-        />
-        <TextField
-          value={fields.confirmPassword}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          id="confirmPassword"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          disabled={!validateForm()}
-          endIcon={isLoading ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
-        >
-          Signup
-        </Button>
-      </form>
+          <TextField
+            value={fields.password}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+          />
+          <TextField
+            value={fields.confirmPassword}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateForm()}
+            endIcon={
+              isLoading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                <div style={{ width: '20px' }} />
+              )
+            }
+          >
+            Signup
+          </Button>
+        </form>
       </div>
     );
   }
@@ -221,10 +227,10 @@ export default function Signup() {
     <Container className="Signup" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
-      {newUser === null ? renderForm() : renderConfirmationForm()}
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        {newUser === null ? renderForm() : renderConfirmationForm()}
       </div>
     </Container>
   );

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Auth } from "aws-amplify";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Auth } from 'aws-amplify';
+import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -13,8 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
+import { useFormFields } from '../libs/hooksLib';
+import { onError } from '../libs/errorLib';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,17 +40,17 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   success: {
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default function ResetPassword() {
   const classes = useStyles();
   const [fields, handleFieldChange] = useFormFields({
-    code: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    code: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [codeSent, setCodeSent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -89,11 +89,7 @@ export default function ResetPassword() {
     setIsConfirming(true);
 
     try {
-      await Auth.forgotPasswordSubmit(
-        fields.email,
-        fields.code,
-        fields.password
-      );
+      await Auth.forgotPasswordSubmit(fields.email, fields.code, fields.password);
       setConfirmed(true);
     } catch (error) {
       onError(error);
@@ -105,19 +101,19 @@ export default function ResetPassword() {
     return (
       <form onSubmit={handleSendCodeClick}>
         <TextField
-            value={fields.email}
-            onChange={handleFieldChange}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            helperText="We'll attempt to send a reset email to this email address."
-          />
+          value={fields.email}
+          onChange={handleFieldChange}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          helperText="We'll attempt to send a reset email to this email address."
+        />
         <Button
           type="submit"
           fullWidth
@@ -125,7 +121,13 @@ export default function ResetPassword() {
           color="primary"
           className={classes.submit}
           disabled={!validateCodeForm()}
-          endIcon={isSendingCode ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
+          endIcon={
+            isSendingCode ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              <div style={{ width: '20px' }} />
+            )
+          }
         >
           Send Confirmation
         </Button>
@@ -136,56 +138,62 @@ export default function ResetPassword() {
   function renderConfirmationForm() {
     return (
       <div className={classes.innerPaper}>
-      <form className={classes.form} onSubmit={handleConfirmClick}>
-        <TextField
-          value={fields.code}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="code"
-          label="Confirmation Code"
-          name="code"
-          type="tel"
-          autoFocus
-        />
-        <TextField
-          value={fields.password}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-        />
-        <TextField
-          value={fields.confirmPassword}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          id="confirmPassword"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          disabled={!validateResetForm()}
-          endIcon={isConfirming ? <CircularProgress size={20} color="inherit"/> : <div style={{width:"20px"}}/>}
-        >
-          Confirm
-        </Button>
-      </form>
+        <form className={classes.form} onSubmit={handleConfirmClick}>
+          <TextField
+            value={fields.code}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="code"
+            label="Confirmation Code"
+            name="code"
+            type="tel"
+            autoFocus
+          />
+          <TextField
+            value={fields.password}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+          />
+          <TextField
+            value={fields.confirmPassword}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            id="confirmPassword"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateResetForm()}
+            endIcon={
+              isConfirming ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                <div style={{ width: '20px' }} />
+              )
+            }
+          >
+            Confirm
+          </Button>
+        </form>
       </div>
     );
   }
@@ -193,21 +201,17 @@ export default function ResetPassword() {
   function renderSuccessMessage() {
     return (
       <div className={classes.success}>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-        >
-        <Grid item>
-          <Typography variant="subtitle1" component="h6">Your password has been reset.</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="body1" component="p">
-            <Link to="/login">
-              Click here to login with your new credentials.
-            </Link>
-          </Typography>
-        </Grid>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <Typography variant="subtitle1" component="h6">
+              Your password has been reset.
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1" component="p">
+              <Link to="/login">Click here to login with your new credentials.</Link>
+            </Typography>
+          </Grid>
         </Grid>
       </div>
     );
@@ -215,23 +219,22 @@ export default function ResetPassword() {
 
   return (
     <div className="ResetPassword">
-    <Container className="Login, {classes.paper}" maxWidth="xs">
-    <CssBaseline />
-      <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Reset Password
-      </Typography>
-      {!codeSent
-        ? renderRequestCodeForm()
-        : !confirmed
-        ? renderConfirmationForm()
-        : renderSuccessMessage()}
-      </div>
-    </Container>
+      <Container className="Login, {classes.paper}" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Reset Password
+          </Typography>
+          {!codeSent
+            ? renderRequestCodeForm()
+            : !confirmed
+            ? renderConfirmationForm()
+            : renderSuccessMessage()}
+        </div>
+      </Container>
     </div>
-
   );
 }

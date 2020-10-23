@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from '../libs/contextLib';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,8 +21,7 @@ export default function TransitionAlerts() {
   const [open, setOpen] = React.useState(true);
   const { isNotified, setIsNotified } = useAppContext();
 
-  return (
-    (!isNotified ? 
+  return !isNotified ? (
     <div className={classes.root}>
       <Collapse in={open}>
         <Alert
@@ -40,10 +39,11 @@ export default function TransitionAlerts() {
             </IconButton>
           }
         >
-          Hi there! This is a demo website for GoodGlobe. 
+          Hi there! This is a demo website for GoodGlobe.
         </Alert>
       </Collapse>
     </div>
-    : "")
+  ) : (
+    ''
   );
 }

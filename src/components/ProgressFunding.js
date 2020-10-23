@@ -12,9 +12,7 @@ function LinearProgressWithLabel(props) {
         <LinearProgress variant="determinate" value={props.value > 100 ? 100 : props.value} />
       </Box>
       <Box minWidth={35}>
-        <Typography variant="body2" >{`${Math.round(
-          props.value,
-        )}%`}</Typography>
+        <Typography variant="body2">{`${Math.round(props.value)}%`}</Typography>
       </Box>
     </Box>
   );
@@ -37,10 +35,9 @@ const useStyles = makeStyles({
 export default function LinearWithValueLabel(props) {
   const classes = useStyles();
 
-
   return (
     <div className={classes.root}>
-      <LinearProgressWithLabel value={props.value} color="primary"/>
+      <LinearProgressWithLabel value={props.value} color="primary" />
     </div>
   );
 }

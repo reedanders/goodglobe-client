@@ -13,65 +13,82 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 285,
-    paddingBottom: theme.spacing(8)
+    paddingBottom: theme.spacing(8),
   },
   image: {
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   roundedImage: {
-    borderRadius: '50%'
+    borderRadius: '50%',
   },
   links: {
-    paddingTop: theme.spacing(1)
-  }
+    paddingTop: theme.spacing(1),
+  },
 }));
 
 export default function TeamCard(props) {
   const classes = useStyles();
-  const { member } = props; 
+  const { member } = props;
 
   return (
     <Container className={classes.root}>
-    <Grid container direction="column" justify="center" alignItems="center">
-
-      <Grid item className={classes.image}>
-        
-          <LazyLoadImage 
-            src={member.image} 
-            alt={member.name} 
+      <Grid container direction="column" justify="center" alignItems="center">
+        <Grid item className={classes.image}>
+          <LazyLoadImage
+            src={member.image}
+            alt={member.name}
             height="150"
             width="150"
-            className={classes.roundedImage}/>
-      </Grid>
+            className={classes.roundedImage}
+          />
+        </Grid>
 
-      <Grid item>
-        <Typography variant="h6" component="h6"  align="center" color="textPrimary" gutterBottom>
-          {member.name}
-        </Typography>
-      </Grid>
-
-      <Grid item>
-        <Typography variant="caption" align="center" color="textPrimary" gutterBottom>
-          {member.position}
-        </Typography>
-      </Grid>
-
-      <Grid item container direction="row" justify="center" alignItems="center" spacing={1} className={classes.links}>
-        { member.linkedin !== "" ?
         <Grid item>
-          <Link href={member.linkedin} target="_blank" rel="noopener noreferrer" color="primary">
-            <LinkedInIcon/>
-          </Link>
-        </Grid>: "" }
-        { member.website !== "" ?
-        <Grid item>
-          <Link href={member.website} target="_blank" rel="noopener noreferrer" color="primary">
-            <LanguageIcon/>
-          </Link>
-        </Grid>: "" }
-      </Grid>
+          <Typography variant="h6" component="h6" align="center" color="textPrimary" gutterBottom>
+            {member.name}
+          </Typography>
+        </Grid>
 
-    </Grid>
+        <Grid item>
+          <Typography variant="caption" align="center" color="textPrimary" gutterBottom>
+            {member.position}
+          </Typography>
+        </Grid>
+
+        <Grid
+          item
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+          className={classes.links}
+        >
+          {member.linkedin !== '' ? (
+            <Grid item>
+              <Link
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="primary"
+              >
+                <LinkedInIcon />
+              </Link>
+            </Grid>
+          ) : (
+            ''
+          )}
+          {member.website !== '' ? (
+            <Grid item>
+              <Link href={member.website} target="_blank" rel="noopener noreferrer" color="primary">
+                <LanguageIcon />
+              </Link>
+            </Grid>
+          ) : (
+            ''
+          )}
+        </Grid>
+      </Grid>
     </Container>
   );
 }

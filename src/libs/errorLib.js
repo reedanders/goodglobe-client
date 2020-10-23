@@ -1,13 +1,13 @@
-import * as Sentry from "@sentry/browser";
+import * as Sentry from '@sentry/browser';
 
-const isLocal = process.env.NODE_ENV === "development";
+const isLocal = process.env.NODE_ENV === 'development';
 
 export function initSentry() {
   if (isLocal) {
     return;
   }
 
-  Sentry.init({dsn: "https://6ce199c96caf43ab9ab83289bdab2184@o379411.ingest.sentry.io/5204236"});
+  Sentry.init({ dsn: 'https://6ce199c96caf43ab9ab83289bdab2184@o379411.ingest.sentry.io/5204236' });
 }
 
 export function logError(error, errorInfo = null) {
@@ -20,7 +20,6 @@ export function logError(error, errorInfo = null) {
     Sentry.captureException(error);
   });
 }
-
 
 export function onError(error) {
   let errorInfo = {};
@@ -37,7 +36,6 @@ export function onError(error) {
   }
 
   logError(error, errorInfo);
-  
-  return message
 
+  return message;
 }

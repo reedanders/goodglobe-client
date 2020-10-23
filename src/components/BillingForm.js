@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
-import { useFormFields } from "../libs/hooksLib";
-import "./BillingForm.css";
+import React, { useState } from 'react';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import { useFormFields } from '../libs/hooksLib';
+import './BillingForm.css';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const classes = useStyles();
   const [fields, handleFieldChange] = useFormFields({
-    name: "",
-    storage: ""
+    name: '',
+    storage: '',
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCardComplete, setIsCardComplete] = useState(false);
@@ -42,10 +42,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   isLoading = isProcessing || isLoading;
 
   function validateForm() {
-    return (
-      fields.name !== "" &&
-      isCardComplete
-    );
+    return fields.name !== '' && isCardComplete;
   }
 
   async function handleSubmitClick(event) {
@@ -64,42 +61,40 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
     <Container className="BillingForm, {classes.paper}" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Title>
-            Payment information
-        </Title>
+        <Title>Payment information</Title>
         <form className={classes.form} onSubmit={handleSubmitClick} noValidate>
-        <TextField
-          value={fields.name}
-          onChange={handleFieldChange}
-          variant="outlined"
-          margin="normal"
-          min="0"
-          type="text"
-          required
-          fullWidth
-          id="name"
-          label="Cardholder's name"
-          name="name"
-          autoComplete="name"
-          autoFocus
-        />
-        <CardElement
-          className="card-field"
-          onChange={e => setIsCardComplete(e.complete)}
-          style={{
-            base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' }
-          }}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          disabled={!validateForm()}
-        >
-          Save
-        </Button>
+          <TextField
+            value={fields.name}
+            onChange={handleFieldChange}
+            variant="outlined"
+            margin="normal"
+            min="0"
+            type="text"
+            required
+            fullWidth
+            id="name"
+            label="Cardholder's name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+          />
+          <CardElement
+            className="card-field"
+            onChange={(e) => setIsCardComplete(e.complete)}
+            style={{
+              base: { fontSize: '18px', fontFamily: '"Open Sans", sans-serif' },
+            }}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={!validateForm()}
+          >
+            Save
+          </Button>
         </form>
       </div>
     </Container>

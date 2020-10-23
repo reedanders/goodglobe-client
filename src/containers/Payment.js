@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { API } from "aws-amplify";
-import { onError } from "../libs/errorLib";
-import { Elements, StripeProvider } from "react-stripe-elements";
-import BillingForm from "../components/BillingForm";
-import config from "../config";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { API } from 'aws-amplify';
+import { onError } from '../libs/errorLib';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import BillingForm from '../components/BillingForm';
+import config from '../config';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSnackbar } from 'notistack';
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 936,
     margin: 'auto',
     overflow: 'hidden',
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
 }));
 
@@ -30,18 +30,18 @@ export default function Payment() {
 
   useEffect(() => {
     setStripe(window.Stripe(config.STRIPE_KEY));
-    enqueueSnackbar(message , {
-        variant: 'info',
-        anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-        },
-      });
-    }, [enqueueSnackbar]);
+    enqueueSnackbar(message, {
+      variant: 'info',
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center',
+      },
+    });
+  }, [enqueueSnackbar]);
 
   function billUser(details) {
-    return API.post("goodglobe", "/billing", {
-      body: details
+    return API.post('goodglobe', '/billing', {
+      body: details,
     });
   }
 
@@ -56,11 +56,11 @@ export default function Payment() {
     try {
       await billUser({
         storage,
-        source: token.id
+        source: token.id,
       });
 
-      alert("Your card has been charged successfully!");
-      history.push("/");
+      alert('Your card has been charged successfully!');
+      history.push('/');
     } catch (e) {
       onError(e);
       setIsLoading(false);
@@ -70,11 +70,11 @@ export default function Payment() {
   return (
     <div className="Payment">
       <Paper className={classes.paper}>
-      <StripeProvider stripe={stripe}>
-        <Elements>
-          <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
-        </Elements>
-      </StripeProvider>
+        <StripeProvider stripe={stripe}>
+          <Elements>
+            <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
+          </Elements>
+        </StripeProvider>
       </Paper>
     </div>
   );
