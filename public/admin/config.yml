@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master # Branch to update (optional; defaults to master)
+  branch: localize # Branch to update (optional; defaults to master)
 
 # These lines should *not* be indented
 media_folder: "public/images" # Media files will be stored in the repo under static/images/uploads
@@ -19,4 +19,11 @@ collections:
       - {label: "Author Image", name: "thumbnail", widget: "image"}
       - {label: "Cover Image", name: "cover", widget: "image"}
       - {label: "Cover Image Description", name: "cover_alt", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "about" # Used in routes, e.g., /admin/collections/blog
+    label: "About Page" # Used in the UI
+    folder: "src/pages/content" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
       - {label: "Body", name: "body", widget: "markdown"}

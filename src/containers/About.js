@@ -8,10 +8,13 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
 import LazyLoad from 'react-lazyload';
+import Markdown from "react-markdown";
 
 import AboutStepper from '../components/AboutStepper';
 import ideaPlant from '../assets/images/drawings/idea_plant.png';
 import needsDiagram from '../assets/images/needs_diagram.png';
+
+import aboutText from "../pages.json";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -93,6 +96,7 @@ export default function About() {
               </Typography>
             </Grid>
             <Grid item>
+              <Typography><Markdown source={aboutText[0].content} escapeHtml={false} /></Typography>
               <Typography variant="body1" align="left" gutterBottom>
               <p>Is there are need for GoodGlobe? In the below graphic we outline a few of our motivations. One benefit we see in this platform 
               is <i>fast</i> planning and action. Another need we hope to address is more discussion between people observing in the field and people 
