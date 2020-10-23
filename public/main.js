@@ -109,7 +109,6 @@ const getPages = () => {
       let page;
       fs.readFile(`${dirPathPages}/${file}`, 'utf8', (err, contents) => {
         page = {
-          title: 'Page Content',
           content: contents,
         };
         pagelist.push(page);
