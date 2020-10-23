@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const team = [
 
   { name: "Ingmar Staude",
-    position: "Lead Product Manager",
+    position: "Founder & Lead Product",
     website: "https://scholar.google.com/citations?user=K1SF44kAAAAJ&hl=en",
     linkedin: "",
     image: ingmar_profile
