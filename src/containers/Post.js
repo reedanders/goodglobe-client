@@ -88,7 +88,7 @@ export default function Post(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <LazyLoad height="70vh"><img src={fetchedPost.cover} alt="The endangered wolverine" className={!matches ? classes.coverImageMobile : classes.coverImage}/></LazyLoad>
+                <LazyLoad height="70vh"><img src={fetchedPost.cover} alt={fetchedPost.cover_alt} className={!matches ? classes.coverImageMobile : classes.coverImage}/></LazyLoad>
               </Grid>
               <Grid item>
                 <Typography variant="caption" color="textPrimary" gutterBottom>
