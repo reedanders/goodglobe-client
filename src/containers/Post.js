@@ -70,6 +70,7 @@ export default function Post(props) {
             fetchedPost.content = post.content ? post.content : "No content given"
             fetchedPost.thumbnail = post.thumbnail ? post.thumbnail : "No thumbnail given"
             fetchedPost.cover = post.cover ? post.cover : "No cover image given"
+            fetchedPost.cover_alt = post.cover_alt ? post.cover_alt : "No cover image given"
             postExists = true
         }
     })
@@ -92,7 +93,7 @@ export default function Post(props) {
               </Grid>
               <Grid item>
                 <Typography variant="caption" color="textPrimary" gutterBottom>
-                  The endangered Wolverine.
+                  {fetchedPost.cover_alt}
                 </Typography>
               </Grid>
             </Grid>
