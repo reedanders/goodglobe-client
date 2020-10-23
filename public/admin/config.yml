@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: localize # Branch to update (optional; defaults to master)
+  branch: master # Branch to update (optional; defaults to master)
 
 # These lines should *not* be indented
 media_folder: 'public/images' # Media files will be stored in the repo under static/images/uploads
