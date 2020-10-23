@@ -111,7 +111,7 @@ const getPages = () => {
             let page
             fs.readFile(`${dirPathPages}/${file}`, "utf8", (err, contents) => { 
                 page = {
-                    title: metadata.title ? metadata.title : "No title given",
+                    title: "Page Content",
                     content: contents
                 }
                 pagelist.push(page)
