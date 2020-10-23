@@ -6,8 +6,9 @@ import Markdown from "react-markdown"
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LazyLoad from 'react-lazyload';
 
 import PostAvatar from "../components/PostAvatar"
 import postlist from "../posts.json"
@@ -30,7 +31,14 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(4),
   },
   coverImage: {
-    height: "100vh"
+    objectFit: "cover",
+    width: "100%",
+    height: "70vh"
+  },
+  coverImageMobile: {
+    objectFit: "cover",
+    width: "100%",
+    height: "40vh"
   },
   publishDate: {
     paddingTop: theme.spacing(1)
@@ -43,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post(props) {
     const classes = useStyles();
+    const matches = useMediaQuery('(min-width:960px)');
 
     const validId = parseInt(props.match.params.id)
     if (!validId) {
@@ -79,7 +88,7 @@ export default function Post(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <LazyLoadImage width="100%" src={fetchedPost.cover} alt="" />
+                <LazyLoad height="70vh"><img src={fetchedPost.cover} alt="The endangered wolverine" className={!matches ? classes.coverImageMobile : classes.coverImage}/></LazyLoad>
               </Grid>
               <Grid item>
                 <Typography variant="caption" color="textPrimary" gutterBottom>

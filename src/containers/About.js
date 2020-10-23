@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LazyLoad from 'react-lazyload';
 
 import AboutStepper from '../components/AboutStepper';
 import ideaPlant from '../assets/images/drawings/idea_plant.png';
@@ -19,7 +19,13 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
   aboutImage: {
-    width: '100%'
+    objectFit: "cover",
+    width: "100%",
+    height: "50vh"
+  },
+  networkImage: {
+    objectFit: "cover",
+    width: "100%"
   },
   stepperPaper: {
     position: 'relative',
@@ -61,7 +67,7 @@ export default function About() {
             </Grid>
 	      	</Grid>
           <Grid item md={6}>
-            <LazyLoadImage height="100%" src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
+            <LazyLoad height={"50vh"} offset={100}><img src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} /></LazyLoad>
           </Grid>
 	      </Grid>
       </Container>
@@ -97,7 +103,7 @@ export default function About() {
             <Grid item container justify="space-between">
             <Grid item></Grid>
             <Grid item md={8}>
-              <img src={needsDiagram} alt="network showing interactions in conservation" className={classes.aboutImage}/>
+              <LazyLoad offset={200}><img src={needsDiagram} alt="network showing interactions in conservation" className={classes.networkImage} /></LazyLoad>
             </Grid>
             <Grid item></Grid>
             </Grid>
