@@ -1,1 +1,4 @@
-Is there are need for GoodGlobe? In the below graphic we outline a few of our motivations. One benefit we see in this platform is _fast_ planning and action. Another need we hope to address is more discussion between people observing in the field and people observing through data, which is somewhere in the _knowledge_ and _community_ bubbles. While this is just a sketch, we'd like to hear why you think GoodGlobe is (or isn't) needed in conservation.
+---
+title: About content
+---
+Is there are need for GoodGlobe? In the below graphic we outline a few of our motivations. One benefit we see in this platform is *fast* planning and action. Another need we hope to address is more discussion between people observing in the field and people observing through data, which is somewhere in the *knowledge* and *community* bubbles. While this is just a sketch, we'd like to hear why you think GoodGlobe is (or isn't) needed in conservation.
