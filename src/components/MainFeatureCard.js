@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainFeatureCard() {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:600px)');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <Card className={classes.root}>

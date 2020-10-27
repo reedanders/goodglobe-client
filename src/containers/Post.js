@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
 import Markdown from 'react-markdown';
 
@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post(props) {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:960px)');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   const validId = parseInt(props.match.params.id);
   if (!validId) {

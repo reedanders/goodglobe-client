@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
@@ -77,7 +77,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard(props) {
   const { project } = props;
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:960px)');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   const [isBiodiv, setIsBiodiv] = useState('');
   const [isHabitat, setIsHabitat] = useState('');

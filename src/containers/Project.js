@@ -5,7 +5,7 @@ import { API } from 'aws-amplify';
 
 import { Helmet } from 'react-helmet';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Project() {
   const classes = useStyles();
-  const matches = useMediaQuery('(min-width:960px)');
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
+  
   const { readableUrl } = useParams();
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

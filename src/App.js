@@ -25,7 +25,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,13 +94,15 @@ function Copyright() {
 
 function App() {
   const classes = useStyles();
+  const theme = useTheme();
   const history = useHistory();
   const anchorRef = useRef(null);
-  const matches = useMediaQuery('(min-width:600px)');
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [user, setUser] = useState('');
   const [open, setOpen] = useState(false);
+  console.log(theme.breakpoints.up("sm"));
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
