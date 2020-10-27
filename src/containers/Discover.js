@@ -218,23 +218,18 @@ export default function Discover() {
             className={classes.categoryGrid}
           >
             {icons.map((card) => (
-              <div className={classes.categoryButton}>
+              <nav className={classes.categoryButton}>
                 <Grid item key={card.title} className={classes.categoryButton}>
                   <DiscoverButton icon={card} />
                 </Grid>
-              </div>
+              </nav>
             ))}
           </Grid>
         </Paper>
       </Container>
 
       {icons.map((section) => (
-        <div key={section.title}>
-          <a
-            href={`/discover#${section.title}`}
-            name={section.title}
-            className={classes.customAnchor}
-          >
+        <div key={section.title} id={section.title}>
             <Container className={classes.cardGrid} maxWidth="md">
               {isLoading ? (
                 <Grid container justify="center" alignItems="center">
@@ -300,7 +295,6 @@ export default function Discover() {
                 </div>
               )}
             </Container>
-          </a>
         </div>
       ))}
     </div>
