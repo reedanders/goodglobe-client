@@ -58,7 +58,7 @@ export default function Landing() {
       <Paper className={classes.cardGridColor}>
         <Grid container direction="column" alignItems="center">
           <Grid item>
-            <Typography component="h2" variant="h4" align="center" gutterBottom>
+            <Typography component="h1" variant="h4" align="center" gutterBottom>
               Grassroots Funding for Conservation
             </Typography>
           </Grid>
