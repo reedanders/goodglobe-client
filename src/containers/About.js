@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   aboutImage: {
     objectFit: 'cover',
     width: '100%',
-    height: '50vh',
+    height: '100%',
   },
   networkImage: {
     objectFit: 'cover',
@@ -69,7 +69,7 @@ export default function About() {
             </Grid>
           </Grid>
           <Grid item md={6}>
-            <LazyLoad height={'50vh'} offset={100}>
+            <LazyLoad height={'50px'} offset={100}>
               <img src={ideaPlant} alt="idea watering plant" className={classes.aboutImage} />
             </LazyLoad>
           </Grid>

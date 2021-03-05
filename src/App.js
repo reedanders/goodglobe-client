@@ -102,7 +102,6 @@ function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [user, setUser] = useState('');
   const [open, setOpen] = useState(false);
-  console.log(theme.breakpoints.up("sm"));
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
