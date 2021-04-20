@@ -69,9 +69,11 @@ export default function ProjectCard(props) {
           <Typography gutterBottom variant="h6" component="h6">
             {project.title}
           </Typography>
+          { feature ? 
           <Typography gutterBottom variant="body2">
-          { feature ? (pitch.length > 50 ? `${pitch} ...` : pitch) : "" }
+          {pitch.length > 50 ? `${pitch} ...` : pitch} 
           </Typography>
+          : <Typography gutterBottom variant="body2"></Typography> }
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Grid container className={classes.cardActionGrid} direction="column">
