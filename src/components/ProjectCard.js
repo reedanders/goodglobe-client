@@ -69,7 +69,7 @@ export default function ProjectCard(props) {
           <Typography gutterBottom variant="h6" component="h6">
             {project.title}
           </Typography>
-          { feature ? 
+          { !feature ? 
           <Typography gutterBottom variant="body2">
           {pitch.length > 50 ? `${pitch} ...` : pitch} 
           </Typography>
