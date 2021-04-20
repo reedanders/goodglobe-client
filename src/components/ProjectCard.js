@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectCard(props) {
   const classes = useStyles();
-  const { project } = props;
+  const { project, feature } = props;
   const pitch = project.pitch.replace(/^(.{50}[^\s]*).*/, '$1');
 
   function setProgressValue(current, target) {
@@ -69,9 +69,11 @@ export default function ProjectCard(props) {
           <Typography gutterBottom variant="h6" component="h6">
             {project.title}
           </Typography>
+          { !feature ? 
           <Typography gutterBottom variant="body2">
-            {pitch.length > 50 ? `${pitch} ...` : pitch}
+          {pitch.length > 50 ? `${pitch} ...` : pitch} 
           </Typography>
+          : <Typography gutterBottom variant="body2"></Typography> }
         </CardContent>
         <CardActions className={classes.cardActions}>
           <Grid container className={classes.cardActionGrid} direction="column">

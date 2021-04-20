@@ -90,7 +90,7 @@ export default function MainFeaturedAlbum() {
       )}
       <Carousel itemClass={classes.cardCarousel} responsive={responsive}>
         {projects.map((project) => (
-          <ProjectCard className={classes.cardCarousel} project={project} />
+          <ProjectCard className={classes.cardCarousel} project={project} feature={true}/>
         ))}
       </Carousel>
     </Container>
