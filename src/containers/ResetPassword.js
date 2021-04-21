@@ -54,6 +54,7 @@ export default function ResetPassword() {
   });
   const [codeSent, setCodeSent] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
@@ -91,8 +92,10 @@ export default function ResetPassword() {
     try {
       await Auth.forgotPasswordSubmit(fields.email, fields.code, fields.password);
       setConfirmed(true);
+      setFailed(false);
     } catch (error) {
       onError(error);
+      setFailed(true);
       setIsConfirming(false);
     }
   }
@@ -112,7 +115,7 @@ export default function ResetPassword() {
           name="email"
           autoComplete="email"
           autoFocus
-          helperText="We'll attempt to send a reset email to this email address."
+          helperText={failed ? "Sorry, we didn't recognize that email." : "We'll attempt to send a reset email to this email address."}
         />
         <Button
           type="submit"
