@@ -78,8 +78,10 @@ export default function ResetPassword() {
     try {
       await Auth.forgotPassword(fields.email);
       setCodeSent(true);
+      setFailed(false);
     } catch (error) {
       onError(error);
+      setFailed(true);
       setIsSendingCode(false);
     }
   }
@@ -92,10 +94,8 @@ export default function ResetPassword() {
     try {
       await Auth.forgotPasswordSubmit(fields.email, fields.code, fields.password);
       setConfirmed(true);
-      setFailed(false);
     } catch (error) {
       onError(error);
-      setFailed(true);
       setIsConfirming(false);
     }
   }
