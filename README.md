@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This serverless React app was an MVP for the crowdfunding startup goodglobe.org and is now deprecated. 
 
 ## Available Scripts
 
