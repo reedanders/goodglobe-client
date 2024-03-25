@@ -1,5 +1,9 @@
 This serverless React app was an MVP for the crowdfunding startup goodglobe.org and is now deprecated. 
 
+## Deprecated DEMO
+
+This demo is no longer maintained: https://master--lucid-golick-8b9883.netlify.app/
+
 ## Available Scripts
 
 In the project directory, you can run:
